@@ -20,6 +20,13 @@ public class RobotMap {
 		public static final int ID_RIGHT_MIDDLE = 3; // 3, 12
 		public static final int ID_RIGHT_REAR = 9; // 9, 6
 
-    }
+	}
+	
+	public static class JoystickMap {
+		public static final int USB_LEFT = 0;
+		public static final int USB_RIGHT = 1;
+		public static final int USB_CONTROLLER =2;
+		
+	}
   
 }
