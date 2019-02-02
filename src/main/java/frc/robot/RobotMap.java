@@ -11,7 +11,8 @@ package frc.robot;
 public class RobotMap {
 
     public static class DriveMap {
-        // TALON/VICTOR ID'S (2018 bot, testbed)
+		// TALON/VICTOR ID'S (2018 bot, testbed)
+		// all front (masters) are talons, all slaves (rear/middle) are victors
 		public static final int ID_LEFT_FRONT = 8; // 2, 8
 		public static final int ID_LEFT_MIDDLE = 4;
 		public static final int ID_LEFT_REAR = 3;
@@ -41,6 +42,23 @@ public class RobotMap {
 		public static final int ID_ROLL_MOTOR = 12;
 
 		public static final double ROLL_SPEED = .5;
+
+		public static final double DISTANCE_PER_PULSE = 1.0;
+	}
+
+	public static class ElevatorMap {
+		public static final int DIO_LEFT_LIMIT = 0;
+		public static final int DIO_RIGHT_LIMIT = 1;
+	}
+
+	public static class CargoMap {
+		public static final int ID_CARGO_MOTOR = 5;
+
+		public static final int SOL_FWD = 0;
+		public static final int SOL_REV = 1;
+
+		public static final double SPEED_INTAKE = .5;
+		public static final double SPEED_EJECT = -.5;
 	}
   
 }
