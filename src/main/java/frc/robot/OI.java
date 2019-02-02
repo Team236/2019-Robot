@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import frc.robot.commands.pogo.PogoWithThumbstick;
 import lib.oi.LogitechF310;
 import lib.oi.Thrustmaster;
 
@@ -18,6 +19,8 @@ public class OI {
     leftStick = new Thrustmaster(RobotMap.JoystickMap.USB_LEFT);
     rightStick = new Thrustmaster(RobotMap.JoystickMap.USB_RIGHT);
     controller = new LogitechF310(RobotMap.JoystickMap.USB_CONTROLLER);
+
+    controller.back.whileHeld(new PogoWithThumbstick());
     
   }
   
