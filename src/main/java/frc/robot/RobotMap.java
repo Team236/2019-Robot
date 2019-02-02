@@ -12,16 +12,15 @@ public class RobotMap {
 
     public static class DriveMap {
         // TALON/VICTOR ID'S (2018 bot, testbed)
-		public static final int ID_LEFT_FRONT = 2; // 2, 8
+		public static final int ID_LEFT_FRONT = 8; // 2, 8
 		public static final int ID_LEFT_MIDDLE = 4;
 		public static final int ID_LEFT_REAR = 3;
 
-		public static final int ID_RIGHT_FRONT = 14; // 14, 7
+		public static final int ID_RIGHT_FRONT = 7; // 14, 7
 		public static final int ID_RIGHT_MIDDLE = 1;
 		public static final int ID_RIGHT_REAR = 2;
 
-
-		// old talons
+		// OLD TALON SRX FOLLOWER ID'S
 		// public static final int ID_LEFT_MIDDLE = 4; // 4, 11
 		// public static final int ID_LEFT_REAR = 10; // 10, 5
 
@@ -35,6 +34,13 @@ public class RobotMap {
 		public static final int USB_RIGHT = 1;
 		public static final int USB_CONTROLLER =2;
 		
+	}
+
+	public static class PogoMap {
+		public static final int ID_EXTEND_MOTOR = 6;
+		public static final int ID_ROLL_MOTOR = 12;
+
+		public static final double ROLL_SPEED = .5;
 	}
   
 }
