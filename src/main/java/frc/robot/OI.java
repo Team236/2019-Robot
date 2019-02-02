@@ -8,6 +8,7 @@
 package frc.robot;
 
 import frc.robot.commands.pogo.PogoWithThumbstick;
+import frc.robot.commands.pogo.Roll;
 import lib.oi.LogitechF310;
 import lib.oi.Thrustmaster;
 
@@ -21,6 +22,7 @@ public class OI {
     controller = new LogitechF310(RobotMap.JoystickMap.USB_CONTROLLER);
 
     controller.back.whileHeld(new PogoWithThumbstick());
+    controller.rb.whileHeld(new Roll());
     
   }
   
