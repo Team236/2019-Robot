@@ -39,6 +39,14 @@ public class Pogo extends Subsystem {
     setRollSpeed(0);
   }
 
+  public double getPogoDistance() {
+    return extendMotor.getSelectedSensorPosition(0) * RobotMap.PogoMap.DISTANCE_PER_PULSE;
+  }
+
+  public void resetEncoder() {
+    extendMotor.setSelectedSensorPosition(0, 0, 0);
+  }
+
   @Override
   public void initDefaultCommand() {
     
