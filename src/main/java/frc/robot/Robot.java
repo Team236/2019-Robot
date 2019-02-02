@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,6 +30,9 @@ public class Robot extends TimedRobot {
   public static Hatch hatch = new Hatch();
   public static Pogo pogo = new Pogo();
 
+  private Compressor compressor;
+  public PowerDistributionPanel pdp;
+
   public UsbCamera camera0;
   public UsbCamera camera1;
   public MjpegServer server0;
@@ -36,6 +41,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
+
+    compressor = new Compressor();
+    compressor.start();
 
     try {
       CameraServer inst0 = CameraServer.getInstance();
@@ -98,13 +106,16 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    
+    pogo.resetEncoder();
   }
 
   
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putNumber("pogo encoder", pogo.getPogoDistance());
+    SmartDashboard.putBoolean("left elevator limit", elevator.isLeftLimit());
+    SmartDashboard.putBoolean("right elevator limit", elevator.isRightLimit());
   }
 
   
