@@ -7,18 +7,43 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
 public class Cargo extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  public TalonSRX cargoMotor;
+  public DoubleSolenoid cargoSolenoid;
+
+  public Cargo() {
+    cargoMotor = new TalonSRX(RobotMap.CargoMap.ID_CARGO_MOTOR);
+    cargoSolenoid = new DoubleSolenoid(RobotMap.CargoMap.SOL_FWD, RobotMap.CargoMap.SOL_REV);
+  }
+
+  public void setSpeed(double speed) {
+    cargoMotor.set(ControlMode.PercentOutput, speed);;
+  }
+
+  public void stop() {
+    setSpeed(0);
+  }
+
+  public void extend() {
+    cargoSolenoid.set(Value.kForward);
+  }
+
+  public void retract() {
+    cargoSolenoid.set(Value.kReverse);
+  }
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 }
