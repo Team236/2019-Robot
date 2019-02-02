@@ -13,12 +13,20 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Cargo;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Hatch;
+import frc.robot.subsystems.Pogo;
 
 
 public class Robot extends TimedRobot {
   public static OI oi;
+  public static Cargo cargo = new Cargo();
   public static Drive drive = new Drive();
+  public static Elevator elevator = new Elevator();
+  public static Hatch hatch = new Hatch();
+  public static Pogo pogo = new Pogo();
 
   public UsbCamera camera0;
   public UsbCamera camera1;
