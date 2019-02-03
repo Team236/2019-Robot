@@ -41,20 +41,29 @@ public class RobotMap {
 		public static final int ID_EXTEND_MOTOR = 6;
 		public static final int ID_ROLL_MOTOR = 12;
 
+		public static final int DIO_TOP_LIMIT = 5;
+		public static final int DIO_BOTTOM_LIMIT = 6;
+
 		public static final double ROLL_SPEED = .5;
 
 		public static final double DISTANCE_PER_PULSE = 1.0;
 	}
 
 	public static class ElevatorMap {
+		// talon/victor ID's, master = talon, slave = victor
+		public static final int ID_LEFT_MASTER = 5;
+		public static final int ID_RIGHT_SLAVE = 6;
+
 		public static final int DIO_LEFT_LIMIT = 0;
 		public static final int DIO_RIGHT_LIMIT = 1;
+		public static final int DIO_TOP_LIMIT = 2;
+		public static final int DIO_BOTTOM_LIMIT = 3;
 	}
 
 	public static class CargoMap {
 		public static final int ID_CARGO_MOTOR = 5;
 
-		public static final int DIO_CARGO_LIMIT = 2;
+		public static final int DIO_CARGO_LIMIT = 4;
 
 		public static final int SOL_FWD = 0;
 		public static final int SOL_REV = 1;

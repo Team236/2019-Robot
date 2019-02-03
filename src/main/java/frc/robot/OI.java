@@ -7,6 +7,14 @@
 
 package frc.robot;
 
+import frc.robot.commands.cargo.CargoEject;
+import frc.robot.commands.cargo.CargoExtend;
+import frc.robot.commands.cargo.CargoIntake;
+import frc.robot.commands.cargo.CargoRetract;
+import frc.robot.commands.elevator.ElevatorWithThumbstick;
+import frc.robot.commands.hatch.HatchExtend;
+import frc.robot.commands.hatch.HatchRetract;
+import frc.robot.commands.hatch.HatchScore;
 import frc.robot.commands.pogo.PogoWithThumbstick;
 import frc.robot.commands.pogo.Roll;
 import lib.oi.LogitechF310;
@@ -23,7 +31,16 @@ public class OI {
 
     controller.back.whileHeld(new PogoWithThumbstick());
     controller.rb.whileHeld(new Roll());
-    
+
+    controller.a.whileHeld(new CargoIntake());
+    controller.b.whileHeld(new CargoEject());
+
+    // controller.x.whenPressed(new CargoExtend());
+    // controller.y.whenPressed(new CargoRetract());
+    controller.x.whileHeld(new HatchScore());
+
+    controller.back.whileHeld(new ElevatorWithThumbstick());
+
   }
   
 }
