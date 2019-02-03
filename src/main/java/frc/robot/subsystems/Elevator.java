@@ -12,13 +12,17 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+// import edu.wpi.first.wpilibj.PIDOutput;
+// import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import lib.pid.PIDOutput;
+import lib.pid.PIDSource;
 
 /**
  * Add your docs here.
  */
-public class Elevator extends Subsystem {
+public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   public TalonSRX leftMaster;
   public VictorSPX rightSlave;
   public DigitalInput leftLimit, rightLimit;
@@ -29,6 +33,8 @@ public class Elevator extends Subsystem {
     rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_RIGHT_SLAVE);
 
     rightSlave.follow(leftMaster);
+
+    leftMaster.setSensorPhase(false);
 
     topLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_TOP_LIMIT);
     bottomLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_BOTTOM_LIMIT);
@@ -54,6 +60,10 @@ public class Elevator extends Subsystem {
     return !bottomLimit.get();
   }
 
+  public void resetEncoder() {
+    leftMaster.setSelectedSensorPosition(0);
+  }
+
   public void stop() {
     leftMaster.set(ControlMode.PercentOutput, 0);
   }
@@ -65,6 +75,14 @@ public class Elevator extends Subsystem {
       speed = 0;
     } 
     leftMaster.set(ControlMode.PercentOutput, speed);
+  }
+
+  public void pidSet(double speed) {
+    leftMaster.set(ControlMode.PercentOutput, speed);
+  }
+
+  public double pidGet() {
+    return leftMaster.getSelectedSensorPosition();
   }
 
   @Override

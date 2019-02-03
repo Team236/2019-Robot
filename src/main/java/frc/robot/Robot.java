@@ -45,6 +45,10 @@ public class Robot extends TimedRobot {
     compressor = new Compressor();
     compressor.start();
 
+    elevator.resetEncoder();
+    pogo.resetEncoder();
+
+
     try {
       CameraServer inst0 = CameraServer.getInstance();
       UsbCamera camera0 = new UsbCamera("usb camera 0", 0);
@@ -106,7 +110,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    pogo.resetEncoder();
   }
 
   
@@ -116,6 +119,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("pogo encoder", pogo.getPogoDistance());
     SmartDashboard.putBoolean("left elevator limit", elevator.isLeftLimit());
     SmartDashboard.putBoolean("right elevator limit", elevator.isRightLimit());
+    SmartDashboard.putBoolean("elevator at top", elevator.atTop());
+    SmartDashboard.putBoolean("elevator at bottom", elevator.atBottom());
+    SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
   }
 
   

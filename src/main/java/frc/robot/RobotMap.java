@@ -58,6 +58,8 @@ public class RobotMap {
 		public static final int DIO_RIGHT_LIMIT = 1;
 		public static final int DIO_TOP_LIMIT = 2;
 		public static final int DIO_BOTTOM_LIMIT = 3;
+
+		public static final int PULSE_PER_ROTATION = 512;
 	}
 
 	public static class CargoMap {
