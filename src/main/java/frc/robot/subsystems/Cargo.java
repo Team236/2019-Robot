@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,10 +22,12 @@ import frc.robot.RobotMap;
 public class Cargo extends Subsystem {
   public TalonSRX cargoMotor;
   public DoubleSolenoid cargoSolenoid;
+  public DigitalInput cargoLimit;
 
   public Cargo() {
     cargoMotor = new TalonSRX(RobotMap.CargoMap.ID_CARGO_MOTOR);
     cargoSolenoid = new DoubleSolenoid(RobotMap.CargoMap.SOL_FWD, RobotMap.CargoMap.SOL_REV);
+    cargoLimit = new DigitalInput(RobotMap.CargoMap.DIO_CARGO_LIMIT);
   }
 
   public void setSpeed(double speed) {
