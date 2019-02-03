@@ -54,11 +54,20 @@ public class RobotMap {
 	public static class CargoMap {
 		public static final int ID_CARGO_MOTOR = 5;
 
+		public static final int DIO_CARGO_LIMIT = 2;
+
 		public static final int SOL_FWD = 0;
 		public static final int SOL_REV = 1;
 
 		public static final double SPEED_INTAKE = .5;
 		public static final double SPEED_EJECT = -.5;
+	}
+
+	public static class HatchMap {
+		public static final int SOL_FWD = 2;
+		public static final int SOL_REV = 3;
+		public static final int SCORE_SOL_FWD = 4;
+		public static final int SCORE_SOL_REV = 5;
 	}
   
 }
