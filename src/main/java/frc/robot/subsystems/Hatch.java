@@ -7,18 +7,39 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
  */
 public class Hatch extends Subsystem {
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
+  public DoubleSolenoid hatchSolenoid, hatchScoreSolenoid;
+
+  public Hatch() {
+    hatchSolenoid = new DoubleSolenoid(RobotMap.HatchMap.SOL_FWD, RobotMap.HatchMap.SOL_REV);
+    hatchScoreSolenoid = new DoubleSolenoid(RobotMap.HatchMap.SCORE_SOL_FWD, RobotMap.HatchMap.SCORE_SOL_REV);
+  }
+
+  public void Extend() {
+    hatchSolenoid.set(Value.kForward);
+  }
+
+  public void Retract() {
+    hatchSolenoid.set(Value.kReverse);
+  }
+
+  public void Eject() {
+    hatchScoreSolenoid.set(Value.kForward);
+  }
+
+  public void Return() {
+    hatchScoreSolenoid.set(Value.kReverse);
+  }
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
   }
 }
