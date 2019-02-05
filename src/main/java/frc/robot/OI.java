@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import frc.robot.commands.camera.TiltFrontCamera;
+import frc.robot.commands.camera.TiltRearCamera;
 import frc.robot.commands.cargo.CargoEject;
 import frc.robot.commands.cargo.CargoExtend;
 import frc.robot.commands.cargo.CargoIntake;
@@ -20,6 +22,8 @@ import frc.robot.commands.pogo.PogoWithThumbstick;
 import frc.robot.commands.pogo.Roll;
 import lib.oi.LogitechF310;
 import lib.oi.Thrustmaster;
+import lib.oi.triggers.JoystickPOV;
+import lib.oi.triggers.JoystickPOV.Direction;
 
 public class OI {
   public Thrustmaster leftStick, rightStick;
@@ -43,6 +47,15 @@ public class OI {
     controller.start.whileHeld(new ElevatorWithThumbstick());
 
     controller.lb.whenPressed(new HatchExtendAndRetract());
+
+    JoystickPOV raiseFrontCam = new JoystickPOV(rightStick, Direction.UP);
+    JoystickPOV lowerFrontCam = new JoystickPOV(rightStick, Direction.DOWN);
+    JoystickPOV raiseRearCam = new JoystickPOV(leftStick, Direction.UP);
+    JoystickPOV lowerRearCam = new JoystickPOV(leftStick, Direction.DOWN);
+    raiseFrontCam.whenPressed(new TiltFrontCamera(0.0));
+    lowerFrontCam.whenPressed(new TiltFrontCamera(1.0));
+    raiseRearCam.whenPressed(new TiltRearCamera(0.0));
+    lowerRearCam.whenPressed(new TiltRearCamera(1.0));
 
   }
 
