@@ -45,11 +45,11 @@ public class Drive extends Subsystem {
   }
 
   public void setLeftSpeed(double speed) {
-    leftMaster.set(ControlMode.PercentOutput, speed);
+    leftMaster.set(ControlMode.PercentOutput, -speed);
   }
 
   public void setRightSpeed(double speed) {
-    rightMaster.set(ControlMode.PercentOutput, speed);
+    rightMaster.set(ControlMode.PercentOutput, -speed);
   }
 
   public void stop() {
