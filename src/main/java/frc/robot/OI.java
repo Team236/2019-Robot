@@ -13,6 +13,7 @@ import frc.robot.commands.cargo.CargoIntake;
 import frc.robot.commands.cargo.CargoRetract;
 import frc.robot.commands.elevator.ElevatorWithThumbstick;
 import frc.robot.commands.hatch.HatchExtend;
+import frc.robot.commands.hatch.HatchExtendAndRetract;
 import frc.robot.commands.hatch.HatchRetract;
 import frc.robot.commands.hatch.HatchScore;
 import frc.robot.commands.pogo.PogoWithThumbstick;
@@ -39,7 +40,9 @@ public class OI {
     // controller.y.whenPressed(new CargoRetract());
     controller.x.whileHeld(new HatchScore());
 
-    controller.back.whileHeld(new ElevatorWithThumbstick());
+    controller.start.whileHeld(new ElevatorWithThumbstick());
+
+    controller.lb.whenPressed(new HatchExtendAndRetract());
 
   }
   
