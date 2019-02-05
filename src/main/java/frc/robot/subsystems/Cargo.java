@@ -20,6 +20,8 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Cargo extends Subsystem {
+  // TODO: logic to prevent extending cargo when elevator is up
+  // TODO: 1 button to extend and retract
   public TalonSRX cargoMotor;
   public DoubleSolenoid cargoSolenoid;
   public DigitalInput cargoLimit;
@@ -44,6 +46,10 @@ public class Cargo extends Subsystem {
 
   public void retract() {
     cargoSolenoid.set(Value.kReverse);
+  }
+
+  public boolean isLimit() {
+    return cargoLimit.get();
   }
 
   @Override
