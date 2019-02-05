@@ -21,12 +21,14 @@ public class CargoIntake extends Command {
 
   @Override
   protected void execute() {
+    if (!Robot.cargo.isLimit()){
     Robot.cargo.setSpeed(RobotMap.CargoMap.SPEED_INTAKE);
+    }
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.cargo.isLimit();
   }
 
   @Override
