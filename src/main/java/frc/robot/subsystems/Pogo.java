@@ -42,7 +42,7 @@ public class Pogo extends Subsystem {
       pogoSpeed = 0;
     } else if (atBottom() && pogoSpeed < 0) {
       pogoSpeed = 0;
-    } 
+    }
     extendMotor.set(ControlMode.PercentOutput, pogoSpeed);
   }
 
@@ -68,6 +68,6 @@ public class Pogo extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    
+
   }
 }

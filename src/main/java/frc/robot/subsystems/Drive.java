@@ -28,19 +28,20 @@ public class Drive extends Subsystem {
   public AHRS navx;
 
   public Drive() {
-      leftMaster = new TalonSRX(RobotMap.DriveMap.ID_LEFT_FRONT);
-      rightMaster = new TalonSRX(RobotMap.DriveMap.ID_RIGHT_FRONT);
-      leftMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_LEFT_MIDDLE);
-      leftRearSlave = new VictorSPX(RobotMap.DriveMap.ID_LEFT_REAR);
-      rightMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_RIGHT_MIDDLE);
-      rightRearSlave = new VictorSPX(RobotMap.DriveMap.ID_RIGHT_REAR);
+    leftMaster = new TalonSRX(RobotMap.DriveMap.ID_LEFT_FRONT);
+    rightMaster = new TalonSRX(RobotMap.DriveMap.ID_RIGHT_FRONT);
 
-      leftMiddleSlave.follow(leftMaster);
-      leftRearSlave.follow(leftMaster);
-      rightMiddleSlave.follow(rightMaster);
-      rightRearSlave.follow(rightMaster);
+    leftMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_LEFT_MIDDLE);
+    leftRearSlave = new VictorSPX(RobotMap.DriveMap.ID_LEFT_REAR);
+    rightMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_RIGHT_MIDDLE);
+    rightRearSlave = new VictorSPX(RobotMap.DriveMap.ID_RIGHT_REAR);
 
-      navx = new AHRS(SPI.Port.kMXP);
+    leftMiddleSlave.follow(leftMaster);
+    leftRearSlave.follow(leftMaster);
+    rightMiddleSlave.follow(rightMaster);
+    rightRearSlave.follow(rightMaster);
+
+    navx = new AHRS(SPI.Port.kMXP);
   }
 
   public void setLeftSpeed(double speed) {
@@ -55,8 +56,6 @@ public class Drive extends Subsystem {
     setLeftSpeed(0);
     setRightSpeed(0);
   }
-
-
 
   @Override
   public void initDefaultCommand() {

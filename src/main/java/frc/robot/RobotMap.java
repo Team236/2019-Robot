@@ -7,10 +7,14 @@
 
 package frc.robot;
 
+import lib.pid.PIDParameters;
 
 public class RobotMap {
 
-    public static class DriveMap {
+	public static final int PWM_SERVO_CAM_1 = 0;
+	public static final int PWM_SERVO_CAM_2 = 1;
+
+	public static class DriveMap {
 		// TALON/VICTOR ID'S (2018 bot, testbed)
 		// all front (masters) are talons, all slaves (rear/middle) are victors
 		public static final int ID_LEFT_FRONT = 8; // 2, 8
@@ -29,12 +33,12 @@ public class RobotMap {
 		// public static final int ID_RIGHT_REAR = 9; // 9, 6
 
 	}
-	
+
 	public static class JoystickMap {
 		public static final int USB_LEFT = 0;
 		public static final int USB_RIGHT = 1;
-		public static final int USB_CONTROLLER =2;
-		
+		public static final int USB_CONTROLLER = 2;
+
 	}
 
 	public static class PogoMap {
@@ -51,7 +55,7 @@ public class RobotMap {
 
 	public static class ElevatorMap {
 		// talon/victor ID's, master = talon, slave = victor
-		public static final int ID_LEFT_MASTER = 5;
+		public static final int ID_LEFT_MASTER = 20;
 		public static final int ID_RIGHT_SLAVE = 6;
 
 		public static final int DIO_LEFT_LIMIT = 0;
@@ -60,6 +64,11 @@ public class RobotMap {
 		public static final int DIO_BOTTOM_LIMIT = 3;
 
 		public static final int PULSE_PER_ROTATION = 512;
+		public static final double DISTANCE_PER_PULSE = 1.0;
+
+		public static final PIDParameters UP_PARAMS = new PIDParameters(0, 0, 0, 1 / 100.0);
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0, 0, 0, 1 / 100.0);
+		public static final double HEIGHT_MARGIN = 10;
 	}
 
 	public static class CargoMap {
@@ -80,5 +89,5 @@ public class RobotMap {
 		public static final int SCORE_SOL_FWD = 4;
 		public static final int SCORE_SOL_REV = 5;
 	}
-  
+
 }

@@ -45,5 +45,5 @@ public class OI {
     controller.lb.whenPressed(new HatchExtendAndRetract());
 
   }
-  
+
 }

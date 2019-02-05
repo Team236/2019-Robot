@@ -26,7 +26,7 @@ public class HatchExtendAndRetract extends Command {
 
   @Override
   protected void execute() {
-    
+
   }
 
   @Override

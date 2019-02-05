@@ -12,6 +12,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -20,7 +21,6 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Pogo;
-
 
 public class Robot extends TimedRobot {
   public static OI oi;
@@ -37,7 +37,11 @@ public class Robot extends TimedRobot {
   public UsbCamera camera1;
   public MjpegServer server0;
   public MjpegServer server1;
-  
+
+  public static Servo camServo1, camServo2;
+
+  public static boolean prevExtend, prevRetract;
+
   @Override
   public void robotInit() {
     oi = new OI();
@@ -48,6 +52,11 @@ public class Robot extends TimedRobot {
     elevator.resetEncoder();
     pogo.resetEncoder();
 
+    prevExtend = true;
+    prevRetract = true;
+
+    camServo1 = new Servo(RobotMap.PWM_SERVO_CAM_1);
+    camServo2 = new Servo(RobotMap.PWM_SERVO_CAM_2);
 
     try {
       CameraServer inst0 = CameraServer.getInstance();
@@ -78,15 +87,13 @@ public class Robot extends TimedRobot {
 
       SmartDashboard.putString("camera capture failed", "failed");
     }
-    
+
   }
 
-  
   @Override
   public void robotPeriodic() {
   }
 
-  
   @Override
   public void disabledInit() {
   }
@@ -96,13 +103,11 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
-  
   @Override
   public void autonomousInit() {
-    
+
   }
 
-  
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
@@ -112,7 +117,6 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
   }
 
-  
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
@@ -124,7 +128,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
   }
 
-  
   @Override
   public void testPeriodic() {
   }
