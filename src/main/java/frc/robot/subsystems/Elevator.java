@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 // import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.elevator.StopElevator;
 import lib.pid.PIDOutput;
 import lib.pid.PIDSource;
 
@@ -24,15 +25,19 @@ import lib.pid.PIDSource;
  */
 public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   public TalonSRX leftMaster;
-  public VictorSPX rightSlave;
-  public DigitalInput leftLimit, rightLimit;
-  public DigitalInput topLimit, bottomLimit;
+  public TalonSRX rightSlave;
+  // public VictorSPX rightSlave;
+  private DigitalInput leftLimit, rightLimit;
+  private DigitalInput topLimit, bottomLimit;
+  // TODO: switch right slave back to victor spx for final code
 
   public Elevator() {
     leftMaster = new TalonSRX(RobotMap.ElevatorMap.ID_LEFT_MASTER);
-    rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_RIGHT_SLAVE);
+    // rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_RIGHT_SLAVE);
+    rightSlave = new TalonSRX(12);
 
-    rightSlave.follow(leftMaster);
+    // rightSlave.follow(leftMaster);
+    rightSlave.set(ControlMode.Follower, leftMaster.getDeviceID());
 
     leftMaster.setSensorPhase(false);
 
@@ -60,6 +65,14 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
     return !bottomLimit.get();
   }
 
+  public int getEncoder() {
+    return leftMaster.getSelectedSensorPosition();
+  }
+
+  public double getHeight() {
+    return getEncoder() * RobotMap.ElevatorMap.DISTANCE_PER_PULSE;
+  }
+
   public void resetEncoder() {
     leftMaster.setSelectedSensorPosition(0);
   }
@@ -69,6 +82,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public void manualSetSpeed(double speed) {
+    // leftMaster.set(ControlMode.PercentOutput, speed);
     if (atTop() && speed > 0) {
       speed = 0;
     } else if (atBottom() && speed < 0) {
@@ -82,10 +96,11 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public double pidGet() {
-    return leftMaster.getSelectedSensorPosition();
+    return getHeight();
   }
 
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new StopElevator());
   }
 }
