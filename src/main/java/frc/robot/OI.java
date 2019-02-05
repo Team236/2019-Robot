@@ -34,20 +34,25 @@ public class OI {
     rightStick = new Thrustmaster(RobotMap.JoystickMap.USB_RIGHT);
     controller = new LogitechF310(RobotMap.JoystickMap.USB_CONTROLLER);
 
+    // POGO
     controller.back.whileHeld(new PogoWithThumbstick());
     controller.rb.whileHeld(new Roll());
 
+    // CARGO
     controller.a.whileHeld(new CargoIntake());
     controller.b.whileHeld(new CargoEject());
 
     // controller.x.whenPressed(new CargoExtend());
     // controller.y.whenPressed(new CargoRetract());
+
+    // HATCH
     controller.x.whileHeld(new HatchScore());
-
-    controller.start.whileHeld(new ElevatorWithThumbstick());
-
     controller.lb.whenPressed(new HatchExtendAndRetract());
 
+    // ELEVATOR
+    controller.start.whileHeld(new ElevatorWithThumbstick());
+
+    // CAMERA
     JoystickPOV raiseFrontCam = new JoystickPOV(rightStick, Direction.UP);
     JoystickPOV lowerFrontCam = new JoystickPOV(rightStick, Direction.DOWN);
     JoystickPOV raiseRearCam = new JoystickPOV(leftStick, Direction.UP);
