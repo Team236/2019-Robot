@@ -57,6 +57,27 @@ public class Drive extends Subsystem {
     setRightSpeed(0);
   }
 
+  public int getLeftEncoder() {
+    return leftMaster.getSelectedSensorPosition();
+  }
+
+  public int getRightEncoder() {
+    return rightMaster.getSelectedSensorPosition();
+  }
+
+  public double getLeftDist() {
+    return getLeftEncoder() * RobotMap.DriveMap.DISTANCE_PER_PULSE;
+  }
+
+  public double getRightDist() {
+    return getRightEncoder() * RobotMap.DriveMap.DISTANCE_PER_PULSE;
+  }
+
+  public void resetEncoders() {
+    leftMaster.setSelectedSensorPosition(0);
+    rightMaster.setSelectedSensorPosition(0);
+  }
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new DriveWithJoysticks());
