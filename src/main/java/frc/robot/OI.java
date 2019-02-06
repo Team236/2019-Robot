@@ -42,8 +42,8 @@ public class OI {
     controller.a.whileHeld(new CargoIntake());
     controller.b.whileHeld(new CargoEject());
 
-    // controller.x.whenPressed(new CargoExtend());
-    // controller.y.whenPressed(new CargoRetract());
+    controller.x.whenPressed(new CargoExtend());
+    controller.y.whenPressed(new CargoRetract());
 
     // HATCH
     controller.x.whileHeld(new HatchScore());

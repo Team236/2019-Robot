@@ -50,7 +50,7 @@ public class Cargo extends Subsystem {
   }
 
   public boolean isLimit() {
-    return cargoLimit.get();
+    return !cargoLimit.get();
   }
 
   @Override
