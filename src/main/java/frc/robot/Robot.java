@@ -121,11 +121,15 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     SmartDashboard.putNumber("pogo encoder", pogo.getPogoDistance());
-    SmartDashboard.putBoolean("left elevator limit", elevator.isLeftLimit());
-    SmartDashboard.putBoolean("right elevator limit", elevator.isRightLimit());
+    // SmartDashboard.putBoolean("left elevator limit", elevator.isLeftLimit());
+    // SmartDashboard.putBoolean("right elevator limit", elevator.isRightLimit());
     SmartDashboard.putBoolean("elevator at top", elevator.atTop());
     SmartDashboard.putBoolean("elevator at bottom", elevator.atBottom());
     SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
+
+    SmartDashboard.putNumber("gyro angle: ", drive.navx.getAngle());
+    SmartDashboard.putNumber("left dist: ", drive.getLeftDist());
+    SmartDashboard.putNumber("right dist: ", drive.getRightDist());
   }
 
   @Override
