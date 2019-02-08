@@ -11,15 +11,19 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class HatchExtendAndRetract extends Command {
+  public static boolean prevExtend, prevRetract;
+
   public HatchExtendAndRetract() {
+    prevExtend = true;
+    prevRetract = true;
     requires(Robot.elevator);
   }
 
   @Override
   protected void initialize() {
-    if (Robot.prevExtend) {
+    if (prevExtend) {
       Robot.hatch.Retract();
-    } else if (Robot.prevRetract) {
+    } else if (prevRetract) {
       Robot.hatch.Extend();
     }
   }

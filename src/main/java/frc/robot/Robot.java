@@ -40,8 +40,6 @@ public class Robot extends TimedRobot {
 
   public static Servo camServo1, camServo2;
 
-  public static boolean prevExtend, prevRetract;
-
   @Override
   public void robotInit() {
     oi = new OI();
@@ -51,9 +49,6 @@ public class Robot extends TimedRobot {
 
     elevator.resetEncoder();
     pogo.resetEncoder();
-
-    prevExtend = true;
-    prevRetract = true;
 
     camServo1 = new Servo(RobotMap.PWM_SERVO_CAM_1);
     camServo2 = new Servo(RobotMap.PWM_SERVO_CAM_2);
@@ -130,6 +125,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("gyro angle: ", drive.navx.getAngle());
     SmartDashboard.putNumber("left dist: ", drive.getLeftDist());
     SmartDashboard.putNumber("right dist: ", drive.getRightDist());
+
+    /* SmartDashboard.putNumber("pdp lf", pdp.getCurrent(3));
+    SmartDashboard.putNumber("pdp lm", pdp.getCurrent(1));
+    SmartDashboard.putNumber("pdp lr", pdp.getCurrent(0));
+
+    SmartDashboard.putNumber("pdp rf", pdp.getCurrent(13));
+    SmartDashboard.putNumber("pdp rm", pdp.getCurrent(12));
+    SmartDashboard.putNumber("pdp rr", pdp.getCurrent(2)); */
   }
 
   @Override
