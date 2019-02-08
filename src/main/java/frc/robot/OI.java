@@ -13,6 +13,7 @@ import frc.robot.commands.cargo.CargoEject;
 import frc.robot.commands.cargo.CargoExtend;
 import frc.robot.commands.cargo.CargoIntake;
 import frc.robot.commands.cargo.CargoRetract;
+import frc.robot.commands.drive.DriveWithThumbsticks;
 import frc.robot.commands.elevator.ElevatorWithThumbstick;
 import frc.robot.commands.hatch.HatchExtend;
 import frc.robot.commands.hatch.HatchExtendAndRetract;
@@ -34,20 +35,25 @@ public class OI {
     rightStick = new Thrustmaster(RobotMap.JoystickMap.USB_RIGHT);
     controller = new LogitechF310(RobotMap.JoystickMap.USB_CONTROLLER);
 
+    // DRIVE
+    controller.leftPress.whileHeld(new DriveWithThumbsticks());
+
     // POGO
     controller.back.whileHeld(new PogoWithThumbstick());
-    controller.rb.whileHeld(new Roll());
+    controller.lb.whileHeld(new Roll());
 
     // CARGO
-    controller.a.whileHeld(new CargoIntake());
-    controller.b.whileHeld(new CargoEject());
+    // controller.a.whileHeld(new CargoIntake());
+    // controller.b.whileHeld(new CargoEject());
 
-    controller.x.whenPressed(new CargoExtend());
-    controller.y.whenPressed(new CargoRetract());
+    controller.y.whenPressed(new CargoRetract()); // up
+    controller.x.whenPressed(new CargoExtend()); // down
 
     // HATCH
-    controller.x.whileHeld(new HatchScore());
-    controller.lb.whenPressed(new HatchExtendAndRetract());
+    // controller.x.whileHeld(new HatchScore());
+    // controller.rb.whenPressed(new HatchExtendAndRetract());
+    // controller.a.whenPressed(new HatchExtend());
+    // controller.b.whenPressed(new HatchRetract());
 
     // ELEVATOR
     controller.start.whileHeld(new ElevatorWithThumbstick());
