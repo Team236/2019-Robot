@@ -20,8 +20,7 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Cargo extends Subsystem {
-  // TODO: logic to prevent extending cargo when elevator is up
-  // TODO: 1 button to extend and retract
+  // TODO 1 button to extend and retract
   public TalonSRX cargoMotor;
   public DoubleSolenoid cargoSolenoid;
   public DigitalInput cargoLimit;

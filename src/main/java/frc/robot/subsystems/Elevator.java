@@ -24,12 +24,13 @@ import lib.pid.PIDSource;
  * Add your docs here.
  */
 public class Elevator extends Subsystem implements PIDSource, PIDOutput {
+  // TODO switch right slave back to victor spx for final code
+
   public TalonSRX leftMaster;
   public TalonSRX rightSlave;
   // public VictorSPX rightSlave;
   private DigitalInput leftLimit, rightLimit;
   private DigitalInput topLimit, bottomLimit;
-  // TODO: switch right slave back to victor spx for final code
 
   public Elevator() {
     leftMaster = new TalonSRX(RobotMap.ElevatorMap.ID_LEFT_MASTER);

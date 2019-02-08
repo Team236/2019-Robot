@@ -18,6 +18,9 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Pogo extends Subsystem {
+  // TODO add other side and logic for BOTH sides
+  // TODO change rollMotor to victorSPX
+
   public TalonSRX extendMotor, rollMotor;
   private DigitalInput topLimit, bottomLimit;
 
