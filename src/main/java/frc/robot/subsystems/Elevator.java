@@ -27,20 +27,18 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   // TODO switch right slave back to victor spx for final code
 
   public TalonSRX leftMaster;
-  public TalonSRX rightSlave;
-  // public VictorSPX rightSlave;
+  public VictorSPX rightSlave;
+
   private DigitalInput leftLimit, rightLimit;
   private DigitalInput topLimit, bottomLimit;
 
   public Elevator() {
     leftMaster = new TalonSRX(RobotMap.ElevatorMap.ID_LEFT_MASTER);
-    // rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_RIGHT_SLAVE);
-    rightSlave = new TalonSRX(12);
+    rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_RIGHT_SLAVE);
 
-    // rightSlave.follow(leftMaster);
-    rightSlave.set(ControlMode.Follower, leftMaster.getDeviceID());
+    rightSlave.follow(leftMaster);
 
-    leftMaster.setSensorPhase(false);
+    leftMaster.setSensorPhase(true);
 
     topLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_TOP_LIMIT);
     bottomLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_BOTTOM_LIMIT);
@@ -78,11 +76,17 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
     leftMaster.setSelectedSensorPosition(0);
   }
 
+  public void resetAtBottom() {
+    if (atBottom()) {
+      resetEncoder();
+    }
+  }
+
   public void stop() {
     leftMaster.set(ControlMode.PercentOutput, 0);
   }
 
-  public void manualSetSpeed(double speed) {
+  public void setSpeed(double speed) {
     // leftMaster.set(ControlMode.PercentOutput, speed);
     if (atTop() && speed > 0) {
       speed = 0;
