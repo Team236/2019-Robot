@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,17 +20,25 @@ import frc.robot.RobotMap;
  */
 public class Pogo extends Subsystem {
   // TODO add other side and logic for BOTH sides
-  // TODO change rollMotor to victorSPX
 
-  public TalonSRX extendMotor, rollMotor;
+  public TalonSRX leftExtendMotor, rightExtendMotor;
+  public VictorSPX leftRollMotor, rightRollMotor;
   private DigitalInput topLimit, bottomLimit;
+  public DigitalInput rollSensor;
 
   public Pogo() {
-    extendMotor = new TalonSRX(RobotMap.PogoMap.ID_EXTEND_MOTOR);
-    rollMotor = new TalonSRX(RobotMap.PogoMap.ID_ROLL_MOTOR); // switch to victor spx
+    leftExtendMotor = new TalonSRX(RobotMap.PogoMap.ID_LEFT_EXTEND_MOTOR);
+    rightExtendMotor = new TalonSRX(RobotMap.PogoMap.ID_RIGHT_EXTEND_MOTOR);
+    leftRollMotor = new VictorSPX(RobotMap.PogoMap.ID_LEFT_ROLL_MOTOR);
+    rightRollMotor = new VictorSPX(RobotMap.PogoMap.ID_RIGHT_ROLL_MOTOR);
 
     topLimit = new DigitalInput(RobotMap.PogoMap.DIO_TOP_LIMIT);
     bottomLimit = new DigitalInput(RobotMap.PogoMap.DIO_BOTTOM_LIMIT);
+
+    rollSensor = new DigitalInput(RobotMap.PogoMap.DIO_SENSOR);
+
+    leftExtendMotor.setSensorPhase(false);
+    rightExtendMotor.setSensorPhase(false);
   }
 
   public boolean atTop() {
@@ -43,10 +52,12 @@ public class Pogo extends Subsystem {
   public void setPogoSpeed(double pogoSpeed) {
     if (atTop() && pogoSpeed > 0) {
       pogoSpeed = 0;
+      resetEncoders();
     } else if (atBottom() && pogoSpeed < 0) {
       pogoSpeed = 0;
     }
-    extendMotor.set(ControlMode.PercentOutput, pogoSpeed);
+    leftExtendMotor.set(ControlMode.PercentOutput, pogoSpeed);
+    rightExtendMotor.set(ControlMode.PercentOutput, pogoSpeed);
   }
 
   public void stopPogo() {
@@ -54,19 +65,32 @@ public class Pogo extends Subsystem {
   }
 
   public void setRollSpeed(double rollSpeed) {
-    rollMotor.set(ControlMode.PercentOutput, rollSpeed);
+    leftRollMotor.set(ControlMode.PercentOutput, rollSpeed);
+    rightRollMotor.set(ControlMode.PercentOutput, rollSpeed);
   }
 
   public void stopRoll() {
     setRollSpeed(0);
   }
 
-  public double getPogoDistance() {
-    return extendMotor.getSelectedSensorPosition(0) * RobotMap.PogoMap.DISTANCE_PER_PULSE;
+  public double getLeftPogoDistance() {
+    return leftExtendMotor.getSelectedSensorPosition() * RobotMap.PogoMap.DISTANCE_PER_PULSE;
   }
 
-  public void resetEncoder() {
-    extendMotor.setSelectedSensorPosition(0, 0, 0);
+  public double getRightPogoDistance() {
+    return rightExtendMotor.getSelectedSensorPosition() * RobotMap.PogoMap.DISTANCE_PER_PULSE;
+  }
+
+  public void resetEncoders() {
+    leftExtendMotor.setSelectedSensorPosition(0);
+    rightExtendMotor.setSelectedSensorPosition(0);
+  }
+
+  public void resetEncodersAtTop() {
+    if (atTop()) {
+      leftExtendMotor.setSelectedSensorPosition(0);
+      rightExtendMotor.setSelectedSensorPosition(0);
+    }
   }
 
   @Override
