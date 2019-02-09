@@ -21,7 +21,7 @@ public class StopElevator extends Command {
 
   @Override
   protected void execute() {
-    Robot.elevator.manualSetSpeed(0);
+    Robot.elevator.setSpeed(0);
   }
 
   @Override
