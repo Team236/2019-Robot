@@ -27,11 +27,11 @@ public class ElevatorToHeight extends Command {
     this.height = _height;
     this.margin = _margin;
 
-    if (height > Robot.elevator.getHeight()) {
+    /* if (height > Robot.elevator.getHeight()) {
       _pid = UP_PARAMS;
     } else if (height <= Robot.elevator.getHeight()) {
       _pid = DOWN_PARAMS;
-    }
+    } */
 
     pid = new PID(Robot.elevator, Robot.elevator, _pid);
   }
@@ -45,12 +45,15 @@ public class ElevatorToHeight extends Command {
     pid.enable();
     
     pid.update();
+    System.out.println("elevatorToHeight starting");
   }
 
   @Override
   protected void execute() {
     heightError = pid.getError();
     SmartDashboard.putNumber("height error", heightError);
+    System.out.println("elevatorToHeight execute");
+
   }
 
   @Override
@@ -62,6 +65,8 @@ public class ElevatorToHeight extends Command {
   protected void end() {
     pid.disable();
     Robot.elevator.stop();
+    System.out.println("elevatorToHeight ending");
+
   }
 
   @Override
