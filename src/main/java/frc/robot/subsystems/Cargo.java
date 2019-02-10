@@ -20,7 +20,7 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Cargo extends Subsystem {
-  // TODO 1 button to extend and retract
+  // TODO: 1 button to extend and retract
   public TalonSRX cargoMotor;
   public DoubleSolenoid cargoSolenoid;
   public DigitalInput cargoLimit;

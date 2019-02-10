@@ -19,7 +19,7 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Pogo extends Subsystem {
-  // TODO add other side and logic for BOTH sides
+  // TODO: logic for BOTH sides
 
   public TalonSRX leftExtendMotor, rightExtendMotor;
   public VictorSPX leftRollMotor, rightRollMotor;
