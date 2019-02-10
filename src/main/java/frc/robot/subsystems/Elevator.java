@@ -25,19 +25,19 @@ import lib.pid.PIDSource;
  */
 public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
-  public TalonSRX leftMaster;
+  public TalonSRX leftMasterElevator;
   public VictorSPX rightSlave;
 
   private DigitalInput leftLimit, rightLimit;
   private DigitalInput topLimit, bottomLimit;
 
   public Elevator() {
-    leftMaster = new TalonSRX(RobotMap.ElevatorMap.ID_LEFT_MASTER);
+    leftMasterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_LEFT_MASTER);
     rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_RIGHT_SLAVE);
 
-    rightSlave.follow(leftMaster);
+    rightSlave.follow(leftMasterElevator);
 
-    leftMaster.setSensorPhase(true);
+    leftMasterElevator.setSensorPhase(true);
 
     topLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_TOP_LIMIT);
     bottomLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_BOTTOM_LIMIT);
@@ -64,7 +64,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public int getEncoder() {
-    return leftMaster.getSelectedSensorPosition();
+    return leftMasterElevator.getSelectedSensorPosition();
   }
 
   public double getHeight() {
@@ -72,7 +72,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public void resetEncoder() {
-    leftMaster.setSelectedSensorPosition(0);
+    leftMasterElevator.setSelectedSensorPosition(0);
   }
 
   public void resetAtBottom() {
@@ -82,7 +82,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public void stop() {
-    leftMaster.set(ControlMode.PercentOutput, 0);
+    leftMasterElevator.set(ControlMode.PercentOutput, 0);
   }
 
   public void setSpeed(double speed) {
@@ -92,11 +92,11 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
     } else if (atBottom() && speed < 0) {
       speed = 0;
     } 
-    leftMaster.set(ControlMode.PercentOutput, speed);
+    leftMasterElevator.set(ControlMode.PercentOutput, speed);
   }
 
   public void pidSet(double speed) {
-    leftMaster.set(ControlMode.PercentOutput, speed);
+    leftMasterElevator.set(ControlMode.PercentOutput, speed);
   }
 
   public double pidGet() {
