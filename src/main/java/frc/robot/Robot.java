@@ -10,8 +10,10 @@ package frc.robot;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -40,6 +42,12 @@ public class Robot extends TimedRobot {
 
   public static Servo camServo1, camServo2;
 
+  public AnalogInput pressureSensor;
+
+  Preferences prefs;
+
+  public static double elevatorP;
+
   @Override
   public void robotInit() {
     oi = new OI();
@@ -48,10 +56,15 @@ public class Robot extends TimedRobot {
     compressor.start();
 
     elevator.resetEncoder();
-    pogo.resetEncoder();
+    pogo.resetEncodersAtTop();;
 
     camServo1 = new Servo(RobotMap.PWM_SERVO_CAM_1);
     camServo2 = new Servo(RobotMap.PWM_SERVO_CAM_2);
+
+    pressureSensor = new AnalogInput(RobotMap.ANALOG_PRESSURE_SENSOR);
+
+    prefs = Preferences.getInstance();
+    elevatorP = prefs.getDouble("elevator P", 0.0);
 
     try {
       CameraServer inst0 = CameraServer.getInstance();
@@ -110,21 +123,34 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    pogo.resetEncodersAtTop();
+    // elevator.resetAtBottom();
+    elevator.resetEncoder();
+    // elevatorP = SmartDashboard.getNumber("elevator P", 0.0);
+
   }
 
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("pogo encoder", pogo.getPogoDistance());
+    // SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoDistance());
+    // SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoDistance());
+    // SmartDashboard.putBoolean("top pogo limit", pogo.atTop());
+    // SmartDashboard.putBoolean("bottom pogo limit", pogo.atBottom());
+    // SmartDashboard.putBoolean("pogo sensor", pogo.rollSensor.get());
     // SmartDashboard.putBoolean("left elevator limit", elevator.isLeftLimit());
     // SmartDashboard.putBoolean("right elevator limit", elevator.isRightLimit());
     SmartDashboard.putBoolean("elevator at top", elevator.atTop());
     SmartDashboard.putBoolean("elevator at bottom", elevator.atBottom());
-    SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
+    SmartDashboard.putNumber("elevator encoder", elevator.getEncoder());
+    SmartDashboard.putNumber("elevator height", elevator.getHeight());
+    // SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
 
-    SmartDashboard.putNumber("gyro angle: ", drive.navx.getAngle());
-    SmartDashboard.putNumber("left dist: ", drive.getLeftDist());
-    SmartDashboard.putNumber("right dist: ", drive.getRightDist());
+    SmartDashboard.putNumber("gyro angle", drive.navx.getAngle());
+    SmartDashboard.putNumber("left dist", drive.getLeftDist());
+    SmartDashboard.putNumber("right dist", drive.getRightDist());
+
+    SmartDashboard.putNumber("air pressure", pressureSensor.getAverageVoltage() * (110.0 / 2.75));
 
     /* SmartDashboard.putNumber("pdp lf", pdp.getCurrent(3));
     SmartDashboard.putNumber("pdp lm", pdp.getCurrent(1));
