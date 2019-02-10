@@ -33,7 +33,6 @@ public class Cargo extends Subsystem {
 
   public void setSpeed(double speed) {
     cargoMotor.set(ControlMode.PercentOutput, speed);
-    ;
   }
 
   public void stop() {
