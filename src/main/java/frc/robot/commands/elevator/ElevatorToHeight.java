@@ -58,7 +58,7 @@ public class ElevatorToHeight extends Command {
 
   @Override
   protected boolean isFinished() {
-    return (Math.abs(heightError) < margin);
+    return (Math.abs(heightError) < margin) || Robot.elevator.atTop() || Robot.elevator.atBottom();
   }
 
   @Override
