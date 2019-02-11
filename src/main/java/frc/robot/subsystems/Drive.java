@@ -41,15 +41,18 @@ public class Drive extends Subsystem {
     rightMiddleSlave.follow(rightMaster);
     rightRearSlave.follow(rightMaster);
 
+    leftMaster.setSensorPhase(true);
+    rightMaster.setSensorPhase(false);
+
     navx = new AHRS(SPI.Port.kMXP);
   }
 
   public void setLeftSpeed(double speed) {
-    leftMaster.set(ControlMode.PercentOutput, -speed);
+    leftMaster.set(ControlMode.PercentOutput, speed);
   }
 
   public void setRightSpeed(double speed) {
-    rightMaster.set(ControlMode.PercentOutput, -speed);
+    rightMaster.set(ControlMode.PercentOutput, speed);
   }
 
   public void stop() {
