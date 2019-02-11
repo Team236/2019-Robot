@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -17,14 +18,20 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.auto.GyroDrive;
+import frc.robot.commands.elevator.ElevatorToHeight;
 import frc.robot.subsystems.Cargo;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Pogo;
+import lib.pid.PIDParameters;
 
 public class Robot extends TimedRobot {
+  // TODO: test pdp.get
   public static OI oi;
   public static Cargo cargo = new Cargo();
   public static Drive drive = new Drive();
@@ -44,9 +51,11 @@ public class Robot extends TimedRobot {
 
   public AnalogInput pressureSensor;
 
-  Preferences prefs;
-
   public static double elevatorP;
+  public static double elevatorI;
+  public static double elevatorD;
+
+  public static double gyroP;
 
   @Override
   public void robotInit() {
@@ -63,11 +72,16 @@ public class Robot extends TimedRobot {
 
     pressureSensor = new AnalogInput(RobotMap.ANALOG_PRESSURE_SENSOR);
 
-    prefs = Preferences.getInstance();
-    elevatorP = prefs.getDouble("elevator P", 0.0);
+    // USED FOR TUNING CONSTANTS
+    SmartDashboard.putNumber("Elevator P", 0.0);
+    SmartDashboard.putNumber("Elevator I", 0.0);
+    SmartDashboard.putNumber("Elevator D", 0.0);
+    SmartDashboard.putNumber("Gyro P", 0.0);
 
     try {
-      CameraServer inst0 = CameraServer.getInstance();
+      camera0 = CameraServer.getInstance().startAutomaticCapture(0);
+      camera1 = CameraServer.getInstance().startAutomaticCapture(1);
+      /*CameraServer inst0 = CameraServer.getInstance();
       UsbCamera camera0 = new UsbCamera("usb camera 0", 0);
       inst0.addCamera(camera0);
       server0 = inst0.addServer("serve_USB Camera 0");
@@ -76,18 +90,18 @@ public class Robot extends TimedRobot {
       server0.getProperty("default_compression").set(50);
       server0.getProperty("width").set(320);
       server0.getProperty("height").set(240);
-      camera0.setResolution(320, 240);
+      camera0.setResolution(320, 240); 
 
       CameraServer inst1 = CameraServer.getInstance();
       UsbCamera camera1 = new UsbCamera("usb camera 1", 1);
       inst1.addCamera(camera1);
       server1 = inst1.addServer("serve_USB Camera 1");
       server1.setSource(camera1);
-      server1.getProperty("compression").set(50);
-      server1.getProperty("default_compression").set(50);
+      server1.getProperty("compression").set(20);
+      server1.getProperty("default_compression").set(20);
       server1.getProperty("width").set(320);
       server1.getProperty("height").set(240);
-      camera1.setResolution(320, 240);
+      camera1.setResolution(320, 240); */
 
     } catch (Exception e) {
       System.out.println("camera capture failed");
@@ -100,6 +114,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    Shuffleboard.getTab("SmartDashboard")
+      .add("gyro", drive.navx.getAngle())
+      .withWidget(BuiltInWidgets.kGyro)
+      .getEntry();
   }
 
   @Override
@@ -109,11 +127,18 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    // USED FOR ELEVATOR TUNING
+    elevatorP = (double) SmartDashboard.getNumber("Elevator P", 0.0);
+    elevatorI = (double) SmartDashboard.getNumber("Elevator I", 0.0);
+    elevatorD = (double) SmartDashboard.getNumber("Elevator D", 0.0);
+    gyroP = (double) SmartDashboard.getNumber("Gyro P", 0.0);
   }
 
   @Override
   public void autonomousInit() {
-
+    // USE THIS TO TUNE ELEVATOR FROM DASHBOARD
+    // new ElevatorToHeight(28, 3, new PIDParameters(elevatorP, elevatorI, elevatorD, 1 / 100.0)).start();
+    // new GyroDrive(gyroP, 120, .5).start();
   }
 
   @Override
@@ -124,10 +149,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     pogo.resetEncodersAtTop();
-    // elevator.resetAtBottom();
-    elevator.resetEncoder();
-    // elevatorP = SmartDashboard.getNumber("elevator P", 0.0);
-
+    elevator.resetAtBottom();
+    drive.resetEncoders();
   }
 
   @Override
@@ -138,17 +161,16 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putBoolean("top pogo limit", pogo.atTop());
     // SmartDashboard.putBoolean("bottom pogo limit", pogo.atBottom());
     // SmartDashboard.putBoolean("pogo sensor", pogo.rollSensor.get());
-    // SmartDashboard.putBoolean("left elevator limit", elevator.isLeftLimit());
-    // SmartDashboard.putBoolean("right elevator limit", elevator.isRightLimit());
     SmartDashboard.putBoolean("elevator at top", elevator.atTop());
     SmartDashboard.putBoolean("elevator at bottom", elevator.atBottom());
-    SmartDashboard.putNumber("elevator encoder", elevator.getEncoder());
+    // SmartDashboard.putNumber("elevator encoder", elevator.getEncoder());
     SmartDashboard.putNumber("elevator height", elevator.getHeight());
     // SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
 
     SmartDashboard.putNumber("gyro angle", drive.navx.getAngle());
     SmartDashboard.putNumber("left dist", drive.getLeftDist());
     SmartDashboard.putNumber("right dist", drive.getRightDist());
+    // SmartDashboard.putData(pdp.get);
 
     SmartDashboard.putNumber("air pressure", pressureSensor.getAverageVoltage() * (110.0 / 2.75));
 
@@ -163,5 +185,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
+    teleopPeriodic();
   }
 }
