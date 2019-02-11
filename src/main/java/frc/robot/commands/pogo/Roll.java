@@ -29,7 +29,7 @@ public class Roll extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.pogo.atPlatform();
   }
 
   @Override
