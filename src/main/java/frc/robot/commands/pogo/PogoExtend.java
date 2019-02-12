@@ -22,7 +22,7 @@ public class PogoExtend extends Command {
 
   @Override
   protected void execute() {
-    Robot.pogo.setPogoSpeed(RobotMap.PogoMap.EXTEND_SPEED);
+    Robot.pogo.setPogoSpeed(RobotMap.PogoMap.EXTEND_SPEED, RobotMap.PogoMap.EXTEND_SPEED);
   }
 
   @Override

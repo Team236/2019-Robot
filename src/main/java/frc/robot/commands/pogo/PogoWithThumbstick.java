@@ -24,7 +24,7 @@ public class PogoWithThumbstick extends Command {
   protected void execute() {
     double speed = Robot.oi.controller.getRightY();
 
-    Robot.pogo.setPogoSpeed(-speed);
+    Robot.pogo.setPogoSpeed(-speed, -speed);
   }
 
   @Override

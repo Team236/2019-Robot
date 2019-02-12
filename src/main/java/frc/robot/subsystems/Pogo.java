@@ -19,9 +19,6 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Pogo extends Subsystem {
-  // TODO: test new logic to stop each side when it hits the limit
-  // TODO: figure out what top and bottom is and if used in right places
-
   public TalonSRX leftExtendMotor, rightExtendMotor;
   public VictorSPX leftRollMotor, rightRollMotor;
   private DigitalInput leftTopLimit, rightToplimit, leftBottomLimit, rightBottomLimit;
@@ -40,7 +37,7 @@ public class Pogo extends Subsystem {
 
     rollSensor = new DigitalInput(RobotMap.PogoMap.DIO_SENSOR);
 
-    leftExtendMotor.setSensorPhase(false);
+    leftExtendMotor.setSensorPhase(true);
     rightExtendMotor.setSensorPhase(false);
   }
 
@@ -72,18 +69,17 @@ public class Pogo extends Subsystem {
     return rollSensor.get();
   }
 
-  public void setPogoSpeed(double pogoSpeed) {
-    double leftSpeed = pogoSpeed;
-    double rightSpeed = pogoSpeed;
-
+  public void setPogoSpeed(double leftSpeed, double rightSpeed) {
     if (leftAtTop() && leftSpeed > 0) {
       leftSpeed = 0;
       resetLeftEncoder();
-    } else if (rightAtTop() && rightSpeed > 0) {
-      rightSpeed = 0;
-      resetRightEncoder();
     } else if (leftAtBottom() && leftSpeed < 0) {
       leftSpeed = 0;
+    }
+
+    if (rightAtTop() && rightSpeed > 0) {
+      rightSpeed = 0;
+      resetRightEncoder();
     } else if (rightAtBottom() && rightSpeed < 0) {
       rightSpeed = 0;
     }
@@ -93,7 +89,7 @@ public class Pogo extends Subsystem {
   }
 
   public void stopPogo() {
-    setPogoSpeed(0);
+    setPogoSpeed(0, 0);
   }
 
   public void setRollSpeed(double rollSpeed) {

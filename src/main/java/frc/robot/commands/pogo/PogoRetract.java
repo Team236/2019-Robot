@@ -22,7 +22,7 @@ public class PogoRetract extends Command {
 
   @Override
   protected void execute() {
-    Robot.pogo.setPogoSpeed(RobotMap.PogoMap.RETRACT_SPEED);
+    Robot.pogo.setPogoSpeed(RobotMap.PogoMap.RETRACT_SPEED, RobotMap.PogoMap.RETRACT_SPEED);
   }
 
   @Override
