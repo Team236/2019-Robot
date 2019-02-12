@@ -22,12 +22,12 @@ public class RobotMap {
 	public static class DriveMap {
 		// TALON/VICTOR ID'S (2019 bot, testbed)
 		// all front (masters) are talons, all slaves (rear/middle) are victors
-		public static final int ID_LEFT_FRONT = 8; // 20, 8
+		public static final int ID_LEFT_FRONT = 877; // 20, 8
 		public static final int ID_LEFT_MIDDLE = 4; // 9, 4
 		public static final int ID_LEFT_REAR = 3; // 10, 3
 
 		public static final int ID_RIGHT_FRONT = 7; // 21, 7
-		public static final int ID_RIGHT_MIDDLE = 1; // 11, 1
+		public static final int ID_RIGHT_MIDDLE = 177; // 11, 1
 		public static final int ID_RIGHT_REAR = 2; //  12, 2
 
 		public static final double DIAMETER = 3.96; // wheel diameter in inches
@@ -47,8 +47,8 @@ public class RobotMap {
 	}
 
 	public static class PogoMap {
-		public static final int ID_LEFT_EXTEND_MOTOR = 6; // 22
-		public static final int ID_RIGHT_EXTEND_MOTOR = 12; // 23
+		public static final int ID_LEFT_EXTEND_MOTOR = 22; // 22
+		public static final int ID_RIGHT_EXTEND_MOTOR = 23; // 23
 		public static final int ID_LEFT_ROLL_MOTOR = 5; // 5
 		public static final int ID_RIGHT_ROLL_MOTOR = 6; // 6
 
@@ -68,23 +68,25 @@ public class RobotMap {
 
 	public static class ElevatorMap {
 		// talon/victor ID's, master = talon, slave = victor
-		public static final int ID_LEFT_MASTER = 6; // 10, 6, were using 8 for testing on testbed w/ drive wheels
-		public static final int ID_RIGHT_SLAVE = 12; // 7, 12, 1 for testing
+		public static final int ID_LEFT_MASTER = 8; // 10, 6, were using 8 for testing on testbed w/ drive wheels
+		public static final int ID_RIGHT_SLAVE = 1; // 7, 12, 1 for testing
 
 		public static final int DIO_TOP_LIMIT = 0;
 		public static final int DIO_BOTTOM_LIMIT = 1;
 
+		public static final double DIAMETER = 1.6; // inches
+		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
 		public static final int PULSE_PER_ROTATION = 512;
-		public static final double DISTANCE_PER_PULSE = 0.0243;
+		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
 
 		// public static final PIDParameters UP_PARAMS = new PIDParameters(0.1, 0, 0, 1 / 100.0);
 		public static final PIDParameters UP_PARAMS = new PIDParameters(0.5, 0, 0, 1 / 100.0);
-		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0, 0, 0, 1 / 100.0);
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.5, 0, 0, 1 / 100.0);
 		public static final double HEIGHT_MARGIN = 10;
 	}
 
 	public static class CargoMap {
-		public static final int ID_CARGO_MOTOR = 5; // 13(talon)
+		public static final int ID_CARGO_MOTOR = 577; // 13(talon)
 
 		public static final int DIO_CARGO_LIMIT = 2;
 

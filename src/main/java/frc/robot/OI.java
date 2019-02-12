@@ -21,18 +21,23 @@ import frc.robot.commands.hatch.HatchExtend;
 import frc.robot.commands.hatch.HatchExtendAndRetract;
 import frc.robot.commands.hatch.HatchRetract;
 import frc.robot.commands.hatch.HatchScore;
+import frc.robot.commands.pogo.PogoExtend;
+import frc.robot.commands.pogo.PogoRetract;
 import frc.robot.commands.pogo.PogoWithThumbstick;
 import frc.robot.commands.pogo.Roll;
 import lib.oi.LogitechF310;
 import lib.oi.Thrustmaster;
 import lib.oi.triggers.JoystickPOV;
 import lib.oi.triggers.JoystickPOV.Direction;
+import lib.pid.PIDParameters;
 
 public class OI {
   public Thrustmaster leftStick, rightStick;
   public LogitechF310 controller;
 
   public OI() {
+    // TODO: "FINALIZE" BUTTONS
+    
     leftStick = new Thrustmaster(RobotMap.JoystickMap.USB_LEFT);
     rightStick = new Thrustmaster(RobotMap.JoystickMap.USB_RIGHT);
     controller = new LogitechF310(RobotMap.JoystickMap.USB_CONTROLLER);
@@ -42,6 +47,8 @@ public class OI {
 
     // POGO
     // controller.back.whileHeld(new PogoWithThumbstick());
+    // controller.y.whenPressed(new PogoExtend());
+    // controller.b.whenPressed(new PogoRetract());
     // controller.lb.whileHeld(new Roll());
 
     // CARGO
@@ -52,14 +59,16 @@ public class OI {
     // controller.x.whenPressed(new CargoExtend()); // down
 
     // HATCH
-    controller.x.whileHeld(new HatchScore());
+    // controller.x.whileHeld(new HatchScore());
     // controller.rb.whenPressed(new HatchExtendAndRetract());
-    controller.a.whenPressed(new HatchExtend());
-    controller.b.whenPressed(new HatchRetract());
+    // controller.a.whenPressed(new HatchExtend());
+    // controller.b.whenPressed(new HatchRetract());
 
     // ELEVATOR
     controller.start.whileHeld(new ElevatorWithThumbstick());
-    // controller.x.whenPressed(new ElevatorToHeight(28, 1, RobotMap.ElevatorMap.UP_PARAMS));
+    controller.x.whenPressed(new ElevatorToHeight(56, 3, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    controller.y.whenPressed(new ElevatorToHeight(28, 3, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+
 
     // CAMERA
     JoystickPOV raiseFrontCam = new JoystickPOV(rightStick, Direction.UP);
