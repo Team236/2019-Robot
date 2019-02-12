@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
     compressor = new Compressor();
     compressor.start();
 
-    elevator.resetEncoder();
+    elevator.resetAtBottom();
     pogo.resetEncodersAtTop();;
 
     camServo1 = new Servo(RobotMap.PWM_SERVO_CAM_1);
@@ -73,10 +73,10 @@ public class Robot extends TimedRobot {
     pressureSensor = new AnalogInput(RobotMap.ANALOG_PRESSURE_SENSOR);
 
     // USED FOR TUNING CONSTANTS
-    SmartDashboard.putNumber("Elevator P", 0.0);
-    SmartDashboard.putNumber("Elevator I", 0.0);
-    SmartDashboard.putNumber("Elevator D", 0.0);
-    SmartDashboard.putNumber("Gyro P", 0.0);
+    // SmartDashboard.putNumber("Elevator P", 0.0);
+    // SmartDashboard.putNumber("Elevator I", 0.0);
+    // SmartDashboard.putNumber("Elevator D", 0.0);
+    // SmartDashboard.putNumber("Gyro P", 0.0);
 
     try {
       camera0 = CameraServer.getInstance().startAutomaticCapture(0);
@@ -114,10 +114,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    Shuffleboard.getTab("SmartDashboard")
+    /* Shuffleboard.getTab("SmartDashboard")
       .add("gyro", drive.navx.getAngle())
       .withWidget(BuiltInWidgets.kGyro)
-      .getEntry();
+      .getEntry(); */
   }
 
   @Override
@@ -128,16 +128,17 @@ public class Robot extends TimedRobot {
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
     // USED FOR ELEVATOR TUNING
-    elevatorP = (double) SmartDashboard.getNumber("Elevator P", 0.0);
-    elevatorI = (double) SmartDashboard.getNumber("Elevator I", 0.0);
-    elevatorD = (double) SmartDashboard.getNumber("Elevator D", 0.0);
-    gyroP = (double) SmartDashboard.getNumber("Gyro P", 0.0);
+    // elevatorP = (double) SmartDashboard.getNumber("Elevator P", 0.0);
+    // elevatorI = (double) SmartDashboard.getNumber("Elevator I", 0.0);
+    // elevatorD = (double) SmartDashboard.getNumber("Elevator D", 0.0);
+    // gyroP = (double) SmartDashboard.getNumber("Gyro P", 0.0);
   }
 
   @Override
   public void autonomousInit() {
     // USE THIS TO TUNE ELEVATOR FROM DASHBOARD
-    // new ElevatorToHeight(28, 3, new PIDParameters(elevatorP, elevatorI, elevatorD, 1 / 100.0)).start();
+    // new ElevatorToHeight(28, 3, new PIDParameters(elevatorP, elevatorI, elevatorD, 1 / 100.0), RobotMap.ElevatorMap.DOWN_PARAMS).start();
+    // new ElevatorToHeight(28, 3, RobotMap.ElevatorMap.UP_PARAMS, new PIDParameters(elevatorP, elevatorI, elevatorD, 1 / 100.0)).start();
     // new GyroDrive(gyroP, 120, .5).start();
   }
 
@@ -158,12 +159,15 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
     // SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoDistance());
     // SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoDistance());
+    // SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
+    // SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
     // SmartDashboard.putBoolean("top pogo limit", pogo.atTop());
+    // SmartDashboard.putBoolean("roll sensor", pogo.atPlatform());
     // SmartDashboard.putBoolean("bottom pogo limit", pogo.atBottom());
     // SmartDashboard.putBoolean("pogo sensor", pogo.rollSensor.get());
     SmartDashboard.putBoolean("elevator at top", elevator.atTop());
     SmartDashboard.putBoolean("elevator at bottom", elevator.atBottom());
-    // SmartDashboard.putNumber("elevator encoder", elevator.getEncoder());
+    SmartDashboard.putNumber("elevator encoder", elevator.getEncoder());
     SmartDashboard.putNumber("elevator height", elevator.getHeight());
     // SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
 
