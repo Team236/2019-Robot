@@ -25,10 +25,10 @@ public class Pogo extends Subsystem {
   public DigitalInput rollSensor;
 
   public Pogo() {
-    leftExtendMotor = new TalonSRX(RobotMap.PogoMap.ID_LEFT_EXTEND_MOTOR);
-    rightExtendMotor = new TalonSRX(RobotMap.PogoMap.ID_RIGHT_EXTEND_MOTOR);
-    leftRollMotor = new VictorSPX(RobotMap.PogoMap.ID_LEFT_ROLL_MOTOR);
-    rightRollMotor = new VictorSPX(RobotMap.PogoMap.ID_RIGHT_ROLL_MOTOR);
+    leftExtendMotor = new TalonSRX(RobotMap.PogoMap.ID_T_LEFT_EXTEND_MOTOR);
+    rightExtendMotor = new TalonSRX(RobotMap.PogoMap.ID_T_RIGHT_EXTEND_MOTOR);
+    leftRollMotor = new VictorSPX(RobotMap.PogoMap.ID_V_LEFT_ROLL_MOTOR);
+    rightRollMotor = new VictorSPX(RobotMap.PogoMap.ID_V_RIGHT_ROLL_MOTOR);
 
     leftTopLimit = new DigitalInput(RobotMap.PogoMap.DIO_LEFT_TOP_LIMIT);
     rightToplimit = new DigitalInput(RobotMap.PogoMap.DIO_RIGHT_TOP_LIMIT);

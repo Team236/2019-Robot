@@ -31,8 +31,8 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   private DigitalInput topLimit, bottomLimit;
 
   public Elevator() {
-    leftMasterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_LEFT_MASTER);
-    rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_RIGHT_SLAVE);
+    leftMasterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_V_LEFT_MASTER);
+    rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_V_RIGHT_SLAVE);
 
     rightSlave.follow(leftMasterElevator);
 

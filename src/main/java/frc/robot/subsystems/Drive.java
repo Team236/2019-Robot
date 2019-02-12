@@ -28,13 +28,13 @@ public class Drive extends Subsystem {
   public AHRS navx;
 
   public Drive() {
-    leftMaster = new TalonSRX(RobotMap.DriveMap.ID_LEFT_FRONT);
-    rightMaster = new TalonSRX(RobotMap.DriveMap.ID_RIGHT_FRONT);
+    leftMaster = new TalonSRX(RobotMap.DriveMap.ID_T_LEFT_FRONT);
+    rightMaster = new TalonSRX(RobotMap.DriveMap.ID_T_RIGHT_FRONT);
 
-    leftMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_LEFT_MIDDLE);
-    leftRearSlave = new VictorSPX(RobotMap.DriveMap.ID_LEFT_REAR);
-    rightMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_RIGHT_MIDDLE);
-    rightRearSlave = new VictorSPX(RobotMap.DriveMap.ID_RIGHT_REAR);
+    leftMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_V_LEFT_MIDDLE);
+    leftRearSlave = new VictorSPX(RobotMap.DriveMap.ID_V_LEFT_REAR);
+    rightMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_V_RIGHT_MIDDLE);
+    rightRearSlave = new VictorSPX(RobotMap.DriveMap.ID_V_RIGHT_REAR);
 
     leftMiddleSlave.follow(leftMaster);
     leftRearSlave.follow(leftMaster);

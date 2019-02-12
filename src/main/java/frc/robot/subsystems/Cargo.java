@@ -26,7 +26,7 @@ public class Cargo extends Subsystem {
   public DigitalInput cargoLimit;
 
   public Cargo() {
-    cargoMotor = new TalonSRX(RobotMap.CargoMap.ID_CARGO_MOTOR);
+    cargoMotor = new TalonSRX(RobotMap.CargoMap.ID_T_CARGO_MOTOR);
     cargoSolenoid = new DoubleSolenoid(RobotMap.CargoMap.SOL_FWD, RobotMap.CargoMap.SOL_REV);
     cargoLimit = new DigitalInput(RobotMap.CargoMap.DIO_CARGO_LIMIT);
   }
