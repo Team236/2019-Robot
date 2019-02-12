@@ -24,7 +24,9 @@ public class Roll extends Command {
 
   @Override
   protected void execute() {
+    if (!Robot.pogo.atPlatform()){
     Robot.pogo.setRollSpeed(RobotMap.PogoMap.ROLL_SPEED);
+    }
   }
 
   @Override
