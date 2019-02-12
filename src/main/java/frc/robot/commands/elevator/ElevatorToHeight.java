@@ -20,27 +20,24 @@ public class ElevatorToHeight extends Command {
   private double margin;
   private double heightError;
 
-  public static PIDParameters UP_PARAMS, DOWN_PARAMS;
-
-  public ElevatorToHeight(double _height, double _margin, PIDParameters _pid) {
+  public ElevatorToHeight(double _height, double _margin, PIDParameters _upPid, PIDParameters _downPid) {
     requires(Robot.elevator);
     this.height = _height;
     this.margin = _margin;
 
-    /* if (height > Robot.elevator.getHeight()) {
-      _pid = UP_PARAMS;
-    } else if (height <= Robot.elevator.getHeight()) {
-      _pid = DOWN_PARAMS;
-    } */
-
-    pid = new PID(Robot.elevator, Robot.elevator, _pid);
+    if (height >= Robot.elevator.getHeight()) {
+      pid = new PID(Robot.elevator, Robot.elevator, _upPid);
+    } else if (height < Robot.elevator.getHeight()) {
+      pid = new PID(Robot.elevator, Robot.elevator, _downPid);
+    }
+    // pid = new PID(Robot.elevator, Robot.elevator, _pid);
   }
 
   @Override
   protected void initialize() {
     pid.setSetpoint(height);
 
-    Robot.elevator.resetEncoder();
+    Robot.elevator.resetAtBottom();
     
     pid.enable();
     
