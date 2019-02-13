@@ -14,6 +14,7 @@ public class AutoEndGame extends CommandGroup {
    * Add your docs here.
    */
   public AutoEndGame() {
+    // TODO: add cargo/elevator part
     addSequential(new PogoExtend());
 
     addSequential(new Roll());

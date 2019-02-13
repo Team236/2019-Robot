@@ -32,6 +32,7 @@ import lib.pid.PIDParameters;
 
 public class Robot extends TimedRobot {
   // TODO: test pdp.get
+  // TODO: organize SmartDashboard
   public static OI oi;
   public static Cargo cargo = new Cargo();
   public static Drive drive = new Drive();
