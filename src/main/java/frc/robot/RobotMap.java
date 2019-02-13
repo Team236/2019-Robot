@@ -19,7 +19,6 @@ public class RobotMap {
 
 	public static class DriveMap {
 		// TALON/VICTOR ID'S (2019 bot, testbed)
-		// all front (masters) are talons, all slaves (rear/middle) are victors
 		public static final int ID_T_LEFT_FRONT = 877; // 20, 8
 		public static final int ID_V_LEFT_MIDDLE = 4; // 9, 4
 		public static final int ID_V_LEFT_REAR = 3; // 10, 3
@@ -65,7 +64,7 @@ public class RobotMap {
 	}
 
 	public static class ElevatorMap {
-		// talon/victor ID's, master = talon, slave = victor
+		// talon/victor ID's
 		public static final int ID_V_LEFT_MASTER = 8; // 10, 6, were using 8 for testing on testbed w/ drive wheels
 		public static final int ID_V_RIGHT_SLAVE = 1; // 7, 12, 1 for testing
 
@@ -81,6 +80,8 @@ public class RobotMap {
 		public static final PIDParameters UP_PARAMS = new PIDParameters(0.5, 0, 0, 1 / 100.0);
 		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.5, 0, 0, 1 / 100.0);
 		public static final double HEIGHT_MARGIN = 10;
+
+		public static final double CARGO_OFFSET = 9; // amount from elevator position 0 to Cargo lvl1 (inches)
 	}
 
 	public static class CargoMap {

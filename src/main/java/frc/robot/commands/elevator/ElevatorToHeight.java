@@ -10,6 +10,7 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import lib.pid.PID;
 import lib.pid.PIDParameters;
 
@@ -22,7 +23,12 @@ public class ElevatorToHeight extends Command {
 
   public ElevatorToHeight(double _height, double _margin, PIDParameters _upPid, PIDParameters _downPid) {
     requires(Robot.elevator);
-    this.height = _height;
+    // this.height = _height;
+    if (Robot.oi.controller.start.get()) {
+      this.height = _height + RobotMap.ElevatorMap.CARGO_OFFSET;
+    } else if (!Robot.oi.controller.start.get()) {
+      this.height = _height;
+    }
     this.margin = _margin;
 
     if (height >= Robot.elevator.getHeight()) {
@@ -42,15 +48,14 @@ public class ElevatorToHeight extends Command {
     pid.enable();
     
     pid.update();
-    System.out.println("elevatorToHeight starting");
+    // System.out.println("elevatorToHeight starting");
   }
 
   @Override
   protected void execute() {
     heightError = pid.getError();
     SmartDashboard.putNumber("height error", heightError);
-    System.out.println("elevatorToHeight execute");
-
+    // System.out.println("elevatorToHeight execute");
   }
 
   @Override
@@ -62,8 +67,7 @@ public class ElevatorToHeight extends Command {
   protected void end() {
     pid.disable();
     Robot.elevator.stop();
-    System.out.println("elevatorToHeight ending");
-
+    // System.out.println("elevatorToHeight ending");
   }
 
   @Override
