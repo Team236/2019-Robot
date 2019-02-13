@@ -23,8 +23,10 @@ public class PogoWithThumbstick extends Command {
   @Override
   protected void execute() {
     double speed = Robot.oi.controller.getRightY();
-
     Robot.pogo.setPogoSpeed(-speed, -speed);
+
+    double rollSpeed = Robot.oi.controller.getRightX();
+    Robot.pogo.setRollSpeed(rollSpeed);
   }
 
   @Override
@@ -35,6 +37,7 @@ public class PogoWithThumbstick extends Command {
   @Override
   protected void end() {
     Robot.pogo.stopPogo();
+    Robot.pogo.stopRoll();
   }
 
   @Override
