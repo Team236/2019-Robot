@@ -5,28 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.hatch;
+package frc.robot.commands.cargo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class HatchExtendAndRetract extends Command {
-  // public static boolean prevExtend, prevRetract;
-
-  public HatchExtendAndRetract() {
-    // may not want requires statement (might prevent scoring in 1 position)
-    // also will have to decide which goes in init vs end (may want to flip them)
-    // requires(Robot.hatch);
+public class CargoExtendAndRetract extends Command {
+  public CargoExtendAndRetract() {
+    // requires(Robot.cargo);
   }
 
   @Override
   protected void initialize() {
-    Robot.hatch.Extend();
+    Robot.cargo.extend();
   }
 
   @Override
   protected void execute() {
-
   }
 
   @Override
@@ -36,7 +31,7 @@ public class HatchExtendAndRetract extends Command {
 
   @Override
   protected void end() {
-    Robot.hatch.Retract();
+    Robot.cargo.retract();
   }
 
   @Override
