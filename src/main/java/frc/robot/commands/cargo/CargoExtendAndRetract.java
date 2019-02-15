@@ -17,7 +17,9 @@ public class CargoExtendAndRetract extends Command {
 
   @Override
   protected void initialize() {
-    Robot.cargo.extend();
+    if (Robot.elevator.atBottom() || Robot.oi.controller.back.get()) {
+      Robot.cargo.extend();
+    }
   }
 
   @Override
