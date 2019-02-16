@@ -31,7 +31,6 @@ import frc.robot.subsystems.Pogo;
 import lib.pid.PIDParameters;
 
 public class Robot extends TimedRobot {
-  // TODO: test pdp.get
   // TODO: organize SmartDashboard
   public static OI oi;
   public static Cargo cargo = new Cargo();
@@ -138,7 +137,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     // USE THIS TO TUNE ELEVATOR FROM DASHBOARD
-    // new ElevatorToHeight(28, 3, new PIDParameters(elevatorP, elevatorI, elevatorD, 1 / 100.0), RobotMap.ElevatorMap.DOWN_PARAMS).start();
+    // new ElevatorToHeight(28, 3, new PIDParameters(elevatorP, 0, 0, 1 / 100.0), RobotMap.ElevatorMap.DOWN_PARAMS).start();
     // new ElevatorToHeight(28, 3, RobotMap.ElevatorMap.UP_PARAMS, new PIDParameters(elevatorP, elevatorI, elevatorD, 1 / 100.0)).start();
     // new GyroDrive(gyroP, 120, .5).start();
   }
@@ -158,34 +157,24 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    // SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoDistance());
-    // SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoDistance());
-    // SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
-    // SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
-    // SmartDashboard.putBoolean("top pogo limit", pogo.atTop());
-    // SmartDashboard.putBoolean("roll sensor", pogo.atPlatform());
-    // SmartDashboard.putBoolean("bottom pogo limit", pogo.atBottom());
-    // SmartDashboard.putBoolean("pogo sensor", pogo.rollSensor.get());
+    SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoDistance());
+    SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoDistance());
+    SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
+    SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
+    SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
+    SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
+    SmartDashboard.putBoolean("roll sensor", pogo.atPlatform());
     SmartDashboard.putBoolean("elevator at top", elevator.atTop());
     SmartDashboard.putBoolean("elevator at bottom", elevator.atBottom());
     SmartDashboard.putNumber("elevator encoder", elevator.getEncoder());
     SmartDashboard.putNumber("elevator height", elevator.getHeight());
-    // SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
+    SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
 
     SmartDashboard.putNumber("gyro angle", drive.navx.getAngle());
     SmartDashboard.putNumber("left dist", drive.getLeftDist());
     SmartDashboard.putNumber("right dist", drive.getRightDist());
-    // SmartDashboard.putData(pdp.get);
 
     SmartDashboard.putNumber("air pressure", pressureSensor.getAverageVoltage() * (110.0 / 2.75));
-
-    /* SmartDashboard.putNumber("pdp lf", pdp.getCurrent(3));
-    SmartDashboard.putNumber("pdp lm", pdp.getCurrent(1));
-    SmartDashboard.putNumber("pdp lr", pdp.getCurrent(0));
-
-    SmartDashboard.putNumber("pdp rf", pdp.getCurrent(13));
-    SmartDashboard.putNumber("pdp rm", pdp.getCurrent(12));
-    SmartDashboard.putNumber("pdp rr", pdp.getCurrent(2)); */
   }
 
   @Override
