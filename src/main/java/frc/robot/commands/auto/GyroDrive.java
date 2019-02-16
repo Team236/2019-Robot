@@ -28,6 +28,7 @@ public class GyroDrive extends Command {
   protected void initialize() {
     Robot.drive.navx.reset();
     Robot.drive.resetEncoders();
+    // System.out.println("gyro drive init");
   }
 
   @Override
@@ -42,6 +43,7 @@ public class GyroDrive extends Command {
 
     Robot.drive.setLeftSpeed(leftSpeed);
     Robot.drive.setRightSpeed(rightSpeed);
+    // System.out.println("gyro drive exec");
   }
 
   @Override
