@@ -42,11 +42,11 @@ public class Pogo extends Subsystem {
   }
 
   public boolean leftAtTop() {
-    return !leftTopLimit.get();
+    return leftTopLimit.get();
   }
 
   public boolean rightAtTop() {
-    return !rightToplimit.get();
+    return rightToplimit.get();
   }
 
   public boolean atTop() {
@@ -54,11 +54,11 @@ public class Pogo extends Subsystem {
   }
 
   public boolean leftAtBottom() {
-    return !leftBottomLimit.get();
+    return leftBottomLimit.get();
   }
 
   public boolean rightAtBottom() {
-    return !rightBottomLimit.get();
+    return rightBottomLimit.get();
   }
 
   public boolean atBottom() {
@@ -69,23 +69,31 @@ public class Pogo extends Subsystem {
     return rollSensor.get();
   }
 
-  public void setPogoSpeed(double leftSpeed, double rightSpeed) {
-    if (leftAtTop() && leftSpeed > 0) {
+  public void setLeftPogoSpeed(double leftSpeed) {
+    // || getLeftPogoDistance() < 0
+    if ((leftAtTop() || getLeftPogoDistance() < 0) && leftSpeed < 0) {
       leftSpeed = 0;
       resetLeftEncoder();
-    } else if (leftAtBottom() && leftSpeed < 0) {
+    } else if ((leftAtBottom() || getLeftPogoDistance() >= 1500) && leftSpeed > 0) {
       leftSpeed = 0;
     }
+    leftExtendMotor.set(ControlMode.PercentOutput, leftSpeed);
+  }
 
-    if (rightAtTop() && rightSpeed > 0) {
+  public void setRightSpeed(double rightSpeed) {
+    if ((rightAtTop() || getRightPogoDistance() < 0) && rightSpeed < 0) {
       rightSpeed = 0;
       resetRightEncoder();
-    } else if (rightAtBottom() && rightSpeed < 0) {
+    } else if (rightAtBottom() && rightSpeed > 0) {
       rightSpeed = 0;
     }
-
-    leftExtendMotor.set(ControlMode.PercentOutput, leftSpeed);
     rightExtendMotor.set(ControlMode.PercentOutput, rightSpeed);
+  }
+
+  public void setPogoSpeed(double leftSpeed, double rightSpeed) {
+    setLeftPogoSpeed(leftSpeed);
+    setRightSpeed(rightSpeed);
+
   }
 
   public void stopPogo() {
@@ -102,11 +110,11 @@ public class Pogo extends Subsystem {
   }
 
   public double getLeftPogoDistance() {
-    return leftExtendMotor.getSelectedSensorPosition() * RobotMap.PogoMap.DISTANCE_PER_PULSE;
+    return leftExtendMotor.getSelectedSensorPosition();
   }
 
   public double getRightPogoDistance() {
-    return rightExtendMotor.getSelectedSensorPosition() * RobotMap.PogoMap.DISTANCE_PER_PULSE;
+    return rightExtendMotor.getSelectedSensorPosition();
   }
 
   public void resetLeftEncoder() {
@@ -124,8 +132,7 @@ public class Pogo extends Subsystem {
 
   public void resetEncodersAtTop() {
     if (atTop()) {
-      leftExtendMotor.setSelectedSensorPosition(0);
-      rightExtendMotor.setSelectedSensorPosition(0);
+      resetEncoders();
     }
   }
 
