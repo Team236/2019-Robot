@@ -9,6 +9,7 @@ package frc.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DriveWithJoysticks extends Command {
   public DriveWithJoysticks() {
@@ -21,7 +22,7 @@ public class DriveWithJoysticks extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.elevator.getHeight() < 50) {
+    if (Robot.elevator.getHeight() <= RobotMap.ElevatorMap.SPEED_LIMIT_1) {
       if (Robot.oi.leftStick.left.get()) {
         Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY());
         Robot.drive.setRightSpeed(Robot.oi.rightStick.getY());
@@ -29,13 +30,22 @@ public class DriveWithJoysticks extends Command {
         Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY());
         Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY());
       }
-    } else {
+    } else if (Robot.elevator.getHeight() <= RobotMap.ElevatorMap.SPEED_LIMIT_2
+        && Robot.elevator.getHeight() > RobotMap.ElevatorMap.SPEED_LIMIT_1) {
       if (Robot.oi.leftStick.left.get()) {
-        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .3);
-        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY() * .3);
+        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .4);
+        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY() * .4);
       } else {
-        Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY() * .3);
-        Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY() * .3);
+        Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY() * .4);
+        Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY() * .4);
+      }
+    } else if (Robot.elevator.getHeight() > RobotMap.ElevatorMap.SPEED_LIMIT_2) {
+      if (Robot.oi.leftStick.left.get()) {
+        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .25);
+        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY() * .25);
+      } else {
+        Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY() * .25);
+        Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY() * .25);
       }
     }
   }
