@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 // import edu.wpi.first.wpilibj.PIDOutput;
 // import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.elevator.StopElevator;
 import lib.pid.PIDOutput;
@@ -78,7 +79,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
       speed = 0;
     } else if (atBottom() && speed < 0) {
       speed = 0;
-    } 
+    }
     leftMasterElevator.set(ControlMode.PercentOutput, speed);
   }
 
