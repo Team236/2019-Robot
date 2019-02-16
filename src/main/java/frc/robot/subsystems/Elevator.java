@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 // import edu.wpi.first.wpilibj.PIDOutput;
 // import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.elevator.StopElevator;
 import lib.pid.PIDOutput;

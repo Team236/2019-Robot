@@ -9,7 +9,6 @@ package frc.robot.commands.pogo;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Pogo;
 
 public class PogoWithThumbstick extends Command {
   public PogoWithThumbstick() {
