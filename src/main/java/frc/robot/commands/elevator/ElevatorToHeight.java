@@ -23,12 +23,7 @@ public class ElevatorToHeight extends Command {
 
   public ElevatorToHeight(double _height, double _margin, PIDParameters _upPid, PIDParameters _downPid) {
     requires(Robot.elevator);
-    // this.height = _height;
-    if (Robot.oi.controller.start.get()) {
-      this.height = _height + RobotMap.ElevatorMap.CARGO_OFFSET;
-    } else if (!Robot.oi.controller.start.get()) {
-      this.height = _height;
-    }
+    this.height = _height;
     this.margin = _margin;
 
     if (height >= Robot.elevator.getHeight()) {
@@ -36,7 +31,6 @@ public class ElevatorToHeight extends Command {
     } else if (height < Robot.elevator.getHeight()) {
       pid = new PID(Robot.elevator, Robot.elevator, _downPid);
     }
-    // pid = new PID(Robot.elevator, Robot.elevator, _pid);
   }
 
   @Override
@@ -44,30 +38,38 @@ public class ElevatorToHeight extends Command {
     pid.setSetpoint(height);
 
     Robot.elevator.resetAtBottom();
-    
+
     pid.enable();
-    
+
     pid.update();
-    // System.out.println("elevatorToHeight starting");
+    System.out.println("elevatorToHeight starting");
   }
 
   @Override
   protected void execute() {
     heightError = pid.getError();
     SmartDashboard.putNumber("height error", heightError);
-    // System.out.println("elevatorToHeight execute");
+    System.out.println("elevatorToHeight execute");
   }
 
   @Override
   protected boolean isFinished() {
-    return (Math.abs(heightError) < margin) || Robot.elevator.atTop() || Robot.elevator.atBottom();
+    if (Math.abs(heightError) < margin) {
+      return true;
+    } else if (Robot.elevator.atTop() && height > Robot.elevator.getHeight()) {
+      return true;
+    } else if (Robot.elevator.atBottom() && height < Robot.elevator.getHeight()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override
   protected void end() {
     pid.disable();
     Robot.elevator.stop();
-    // System.out.println("elevatorToHeight ending");
+    System.out.println("elevatorToHeight ending");
   }
 
   @Override
