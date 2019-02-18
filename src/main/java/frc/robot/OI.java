@@ -19,6 +19,7 @@ import frc.robot.commands.cargo.CargoRetract;
 import frc.robot.commands.drive.DriveWithThumbsticks;
 import frc.robot.commands.elevator.ElevatorToHeight;
 import frc.robot.commands.elevator.ElevatorWithThumbstick;
+import frc.robot.commands.elevator.IncrementUp;
 import frc.robot.commands.hatch.HatchExtend;
 import frc.robot.commands.hatch.HatchExtendAndRetract;
 import frc.robot.commands.hatch.HatchRetract;
@@ -44,12 +45,13 @@ public class OI {
     controller = new LogitechF310(RobotMap.JoystickMap.USB_CONTROLLER);
 
     // DRIVE
-    controller.rb.whileHeld(new DriveWithThumbsticks());
+    TwoButton thumbDrive = new TwoButton(controller.lb, controller.rb);
+    thumbDrive.whileHeld(new DriveWithThumbsticks());
     rightStick.right.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .25));
 
     // POGO
     // TODO: button for auto endgame
-    // controller.back.whileHeld(new PogoWithThumbstick()); // right is forward
+    controller.back.whileHeld(new PogoWithThumbstick()); // right is forward
     // controller.y.whileHeld(new PogoExtend());
     // controller.b.whileHeld(new PogoRetract());
     // controller.a.whileHeld(new Roll());
@@ -60,13 +62,11 @@ public class OI {
     controller.lb.toggleWhenPressed(new CargoExtendAndRetract());
 
     // HATCH
-    rightStick.trigger.whenPressed(new HatchScore());
-    // controller.a.whenPressed(new HatchExtend());
-    // controller.b.whenPressed(new HatchRetract());
+    rightStick.trigger.whileHeld(new HatchScore());
     controller.rb.toggleWhenPressed(new HatchExtendAndRetract());
 
     // ELEVATOR
-    // controller.start.whileHeld(new ElevatorWithThumbstick());
+    controller.start.whileHeld(new ElevatorWithThumbstick());
     TwoButton cargo1 = new TwoButton(controller.start, controller.a);
     TwoButton cargo2 = new TwoButton(controller.start, controller.x);
     TwoButton cargo3 = new TwoButton(controller.start, controller.y);
@@ -81,6 +81,7 @@ public class OI {
     // H3, C3 in cargo mode
     cargo3.whenPressed(new ElevatorToHeight(56 + RobotMap.ElevatorMap.CARGO_OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     controller.y.whenPressed(new ElevatorToHeight(56, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    controller.leftPress.whenPressed(new IncrementUp(RobotMap.ElevatorMap.CARGO_OFFSET));
 
     // CAMERA - rotating on servo
     JoystickPOV raiseFrontCam = new JoystickPOV(rightStick, Direction.UP);
