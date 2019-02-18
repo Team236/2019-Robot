@@ -67,21 +67,26 @@ public class OI {
 
     // ELEVATOR
     controller.start.whileHeld(new ElevatorWithThumbstick());
-    TwoButton cargo1 = new TwoButton(controller.start, controller.a);
-    TwoButton cargo2 = new TwoButton(controller.start, controller.x);
-    TwoButton cargo3 = new TwoButton(controller.start, controller.y);
+    // TwoButton cargo1 = new TwoButton(controller.start, controller.a);
+    JoystickPOV cargo1 = new JoystickPOV(controller, Direction.DOWN);
+    JoystickPOV cargoShip = new JoystickPOV(controller, Direction.LEFT);
+    // TwoButton cargo2 = new TwoButton(controller.start, controller.x);
+    JoystickPOV cargo2 = new JoystickPOV(controller, Direction.RIGHT);
+    // TwoButton cargo3 = new TwoButton(controller.start, controller.y);
+    JoystickPOV cargo3 = new JoystickPOV(controller, Direction.UP);
     // H1, cargo intake, C1 (rocket) in cargo mode
     cargo1.whenPressed(new ElevatorToHeight(0 + RobotMap.ElevatorMap.CARGO_OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     controller.a.whenPressed(new ElevatorToHeight(0, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // only used in cargo mode, C1.5 (cargo ship)
-    controller.b.whenPressed(new ElevatorToHeight(12.5, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    // controller.b.whenPressed(new ElevatorToHeight(12.5, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    cargoShip.whenPressed(new ElevatorToHeight(12.5, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // H2, C2 in cargo mode
     cargo2.whenPressed(new ElevatorToHeight(28 + RobotMap.ElevatorMap.CARGO_OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     controller.x.whenPressed(new ElevatorToHeight(28, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // H3, C3 in cargo mode
     cargo3.whenPressed(new ElevatorToHeight(56 + RobotMap.ElevatorMap.CARGO_OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     controller.y.whenPressed(new ElevatorToHeight(56, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
-    controller.leftPress.whenPressed(new IncrementUp(RobotMap.ElevatorMap.CARGO_OFFSET));
+    controller.b.whenPressed(new IncrementUp(RobotMap.ElevatorMap.CARGO_OFFSET));
 
     // CAMERA - rotating on servo
     JoystickPOV raiseFrontCam = new JoystickPOV(rightStick, Direction.UP);
