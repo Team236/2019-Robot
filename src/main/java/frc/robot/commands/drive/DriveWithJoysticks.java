@@ -22,15 +22,15 @@ public class DriveWithJoysticks extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.elevator.getHeight() <= RobotMap.ElevatorMap.SPEED_LIMIT_1) {
+    if (Robot.elevator.getHeight() >= RobotMap.ElevatorMap.SPEED_LIMIT_2) {
       if (Robot.oi.leftStick.left.get()) {
-        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY());
-        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY());
+        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .25);
+        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY() * .25);
       } else {
-        Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY());
-        Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY());
+        Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY() * .25);
+        Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY() * .25);
       }
-    } else if (Robot.elevator.getHeight() <= RobotMap.ElevatorMap.SPEED_LIMIT_2
+    } else if (Robot.elevator.getHeight() < RobotMap.ElevatorMap.SPEED_LIMIT_2
         && Robot.elevator.getHeight() > RobotMap.ElevatorMap.SPEED_LIMIT_1) {
       if (Robot.oi.leftStick.left.get()) {
         Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .4);
@@ -39,13 +39,13 @@ public class DriveWithJoysticks extends Command {
         Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY() * .4);
         Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY() * .4);
       }
-    } else if (Robot.elevator.getHeight() > RobotMap.ElevatorMap.SPEED_LIMIT_2) {
+    } else {
       if (Robot.oi.leftStick.left.get()) {
-        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .25);
-        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY() * .25);
+        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY());
+        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY());
       } else {
-        Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY() * .25);
-        Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY() * .25);
+        Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY());
+        Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY());
       }
     }
   }
