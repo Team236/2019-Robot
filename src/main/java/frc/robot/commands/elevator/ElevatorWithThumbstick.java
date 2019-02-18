@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class ElevatorWithThumbstick extends Command {
   public ElevatorWithThumbstick() {
-    requires(Robot.elevator);
+    // requires(Robot.elevator);
   }
 
   @Override

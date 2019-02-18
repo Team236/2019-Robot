@@ -13,14 +13,17 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class IncrementUp extends Command {
-  public IncrementUp() {
+  private double increment;
+  
+  public IncrementUp(double _increment) {
     requires(Robot.elevator);
+    this.increment = _increment;
   }
 
   @Override
   protected void initialize() {
-    double height = Robot.elevator.getHeight() + RobotMap.ElevatorMap.CARGO_OFFSET;
-    // Scheduler.getInstance().add(new ElevatorToHeight(height, 10, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    double height = Robot.elevator.getHeight() + increment;
+    Scheduler.getInstance().add(new ElevatorToHeight(height, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
   }
 
   @Override

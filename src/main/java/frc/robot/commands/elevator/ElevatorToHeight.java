@@ -10,6 +10,7 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 import lib.pid.PID;
 import lib.pid.PIDParameters;
 
@@ -55,7 +56,7 @@ public class ElevatorToHeight extends Command {
   protected boolean isFinished() {
     if (Math.abs(heightError) < margin) {
       return true;
-    } else if (Robot.elevator.atTop() && height > Robot.elevator.getHeight()) {
+    } else if ((Robot.elevator.atTop() || Robot.elevator.getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT) && height > Robot.elevator.getHeight()) {
       return true;
     } else if (Robot.elevator.atBottom() && height < Robot.elevator.getHeight()) {
       return true;
@@ -69,6 +70,7 @@ public class ElevatorToHeight extends Command {
     pid.disable();
     Robot.elevator.stop();
     System.out.println("elevatorToHeight ending");
+    SmartDashboard.putNumber("finished height", Robot.elevator.getHeight());
   }
 
   @Override
