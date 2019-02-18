@@ -20,7 +20,6 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Cargo extends Subsystem {
-  // TODO: implement 1 button extend and retract
   // TODO: test logic to prevent extending when not at bottom or climbing
   public TalonSRX cargoMotor;
   public DoubleSolenoid cargoSolenoid;

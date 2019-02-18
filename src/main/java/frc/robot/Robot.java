@@ -47,9 +47,9 @@ public class Robot extends TimedRobot {
 
   public AnalogInput pressureSensor;
 
-  public static double elevatorP;
-  public static double elevatorI;
-  public static double elevatorD;
+  // public static double elevatorP;
+  // public static double elevatorI;
+  // public static double elevatorD;
 
   public static double gyroP;
 

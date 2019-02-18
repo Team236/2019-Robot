@@ -20,12 +20,12 @@ public class RobotMap {
 	public static class DriveMap {
 		// TALON/VICTOR ID'S (2019 bot, testbed)
 		public static final int ID_T_LEFT_FRONT = 877; // 20, 8
-		public static final int ID_V_LEFT_MIDDLE = 4; // 9, 4
-		public static final int ID_V_LEFT_REAR = 3; // 10, 3
+		public static final int ID_V_LEFT_MIDDLE = 774; // 9, 4
+		public static final int ID_V_LEFT_REAR = 773; // 10, 3
 
-		public static final int ID_T_RIGHT_FRONT = 7; // 21, 7
+		public static final int ID_T_RIGHT_FRONT = 777; // 21, 7
 		public static final int ID_V_RIGHT_MIDDLE = 177; // 11, 1
-		public static final int ID_V_RIGHT_REAR = 2; // 12, 2
+		public static final int ID_V_RIGHT_REAR = 2777; // 12, 2
 
 		public static final double DIAMETER = 3.96; // wheel diameter in inches
 		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
@@ -81,21 +81,19 @@ public class RobotMap {
 		public static final int PULSE_PER_ROTATION = 512;
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
 
-		// public static final PIDParameters UP_PARAMS = new PIDParameters(0.1, 0, 0, 1
-		// / 100.0);
-		public static final PIDParameters UP_PARAMS = new PIDParameters(0.5, 0, 0, 1 / 100.0);
-		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.5, 0, 0, 1 / 100.0);
+		public static final PIDParameters UP_PARAMS = new PIDParameters(0.05, 0, 0, 1 / 100.0);
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.05, 0, 0, 1 / 100.0);
 		public static final double HEIGHT_MARGIN = 3;
 
 		public static final double CARGO_OFFSET = 10; // amount from elevator position 0 to Cargo lvl1 (inches)
-		public static final double TOP_HEIGHT = 66;
+		public static final double TOP_HEIGHT = 70;
 
-		public static final double SPEED_LIMIT_1 = 25;
-		public static final double SPEED_LIMIT_2 = 50;
+		public static final double SPEED_LIMIT_1 = 24; // (inches) lower
+		public static final double SPEED_LIMIT_2 = 40;
 	}
 
 	public static class CargoMap {
-		public static final int ID_T_CARGO_MOTOR = 577; // 13
+		public static final int ID_T_CARGO_MOTOR = 5; // 13
 
 		public static final int DIO_CARGO_LIMIT = 2;
 
