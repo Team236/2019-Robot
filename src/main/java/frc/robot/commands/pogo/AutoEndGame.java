@@ -8,6 +8,8 @@
 package frc.robot.commands.pogo;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotMap;
+import frc.robot.commands.elevator.SetElevatorSpeed;
 
 public class AutoEndGame extends CommandGroup {
   /**
@@ -15,7 +17,10 @@ public class AutoEndGame extends CommandGroup {
    */
   public AutoEndGame() {
     // TODO: add cargo/elevator part
-    addSequential(new PogoExtend());
+    // addSequential(new PogoExtend());
+
+    addParallel(new GyroPogo(RobotMap.PogoMap.KP, RobotMap.PogoMap.SPEED));
+    addSequential(new SetElevatorSpeed(.5));
 
     addSequential(new Roll());
 
