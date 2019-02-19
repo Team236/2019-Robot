@@ -41,8 +41,8 @@ public class Drive extends Subsystem {
     rightMiddleSlave.follow(rightMaster);
     rightRearSlave.follow(rightMaster);
 
-    leftMaster.setSensorPhase(true);
-    rightMaster.setSensorPhase(false);
+    leftMaster.setSensorPhase(false);
+    rightMaster.setSensorPhase(true);
 
     navx = new AHRS(SPI.Port.kMXP);
   }
