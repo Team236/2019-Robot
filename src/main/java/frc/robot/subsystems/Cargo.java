@@ -43,6 +43,10 @@ public class Cargo extends Subsystem {
     cargoSolenoid.set(Value.kForward);
   }
 
+  public boolean isExtended() {
+    return cargoSolenoid.get() == Value.kForward;
+  }
+
   public void retract() {
     cargoSolenoid.set(Value.kReverse);
   }

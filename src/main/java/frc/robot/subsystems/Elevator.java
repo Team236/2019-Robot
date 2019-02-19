@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.elevator.StopElevator;
 import lib.pid.PIDOutput;
@@ -41,11 +42,11 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public boolean atTop() {
-    return !topLimit.get();
+    return topLimit.get();
   }
 
   public boolean atBottom() {
-    return !bottomLimit.get();
+    return bottomLimit.get();
   }
 
   public int getEncoder() {
@@ -73,7 +74,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   public void setSpeed(double speed) {
     // leftMaster.set(ControlMode.PercentOutput, speed);
     // || getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT
-    if ((atTop() || getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT) && speed > 0) {
+    if ((atTop() || getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT || Robot.cargo.isExtended()) && speed > 0) {
       speed = 0;
     } else if (atBottom() && speed < 0) {
       speed = 0;
