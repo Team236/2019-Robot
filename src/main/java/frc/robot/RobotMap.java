@@ -19,13 +19,13 @@ public class RobotMap {
 
 	public static class DriveMap {
 		// TALON/VICTOR ID'S (2019 bot, testbed)
-		public static final int ID_T_LEFT_FRONT = 877; // 20, 8
-		public static final int ID_V_LEFT_MIDDLE = 774; // 9, 4
-		public static final int ID_V_LEFT_REAR = 773; // 10, 3
+		public static final int ID_T_LEFT_FRONT = 20; // 20, 8
+		public static final int ID_V_LEFT_MIDDLE = 9; // 9, 4
+		public static final int ID_V_LEFT_REAR = 10; // 10, 3
 
-		public static final int ID_T_RIGHT_FRONT = 777; // 21, 7
-		public static final int ID_V_RIGHT_MIDDLE = 177; // 11, 1
-		public static final int ID_V_RIGHT_REAR = 2777; // 12, 2
+		public static final int ID_T_RIGHT_FRONT = 21; // 21, 7
+		public static final int ID_V_RIGHT_MIDDLE = 11; // 11, 1
+		public static final int ID_V_RIGHT_REAR = 12; // 12, 2
 
 		public static final double DIAMETER = 3.96; // wheel diameter in inches
 		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
@@ -45,8 +45,8 @@ public class RobotMap {
 	}
 
 	public static class PogoMap {
-		public static final int ID_T_LEFT_EXTEND_MOTOR = 6; // 22, 6
-		public static final int ID_T_RIGHT_EXTEND_MOTOR = 12; // 23, 12
+		public static final int ID_T_LEFT_EXTEND_MOTOR = 22; // 22, 6
+		public static final int ID_T_RIGHT_EXTEND_MOTOR = 23; // 23, 12
 		public static final int ID_V_LEFT_ROLL_MOTOR = 5; // 5, 5
 		public static final int ID_V_RIGHT_ROLL_MOTOR = 6; // 6
 
@@ -64,14 +64,17 @@ public class RobotMap {
 		public static final double ROLL_SPEED = .5;
 
 		public static final double DISTANCE_PER_PULSE = 1.0;
-		public static final double MAX_COUNT = 2278;
+		public static final double MAX_COUNT = 2278; // 1500?
 		public static final double MIN_COUNT = 100;
+
+		public static final double KP = 0;
+		public static final double SPEED = .3;
 	}
 
 	public static class ElevatorMap {
 		// talon/victor ID's
-		public static final int ID_T_LEFT_MASTER = 8; // 10, 6, were using 8 for testing on testbed w/ drive wheels
-		public static final int ID_V_RIGHT_SLAVE = 1; // 7, 12, 1 for testing
+		public static final int ID_T_LEFT_MASTER = 10; // 10, 6, were using 8 for testing on testbed w/ drive wheels
+		public static final int ID_V_RIGHT_SLAVE = 7; // 7, 12, 1 for testing
 
 		public static final int DIO_TOP_LIMIT = 0;
 		public static final int DIO_BOTTOM_LIMIT = 1;
@@ -81,8 +84,8 @@ public class RobotMap {
 		public static final int PULSE_PER_ROTATION = 512;
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
 
-		public static final PIDParameters UP_PARAMS = new PIDParameters(0.05, 0, 0, 1 / 100.0);
-		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.05, 0, 0, 1 / 100.0);
+		public static final PIDParameters UP_PARAMS = new PIDParameters(0.03, 0, 0, 1 / 100.0);
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.03, 0, 0, 1 / 100.0);
 		public static final double HEIGHT_MARGIN = 3;
 
 		public static final double CARGO_OFFSET = 10; // amount from elevator position 0 to Cargo lvl1 (inches)
@@ -93,7 +96,7 @@ public class RobotMap {
 	}
 
 	public static class CargoMap {
-		public static final int ID_T_CARGO_MOTOR = 5; // 13
+		public static final int ID_T_CARGO_MOTOR = 13; // 13, 5
 
 		public static final int DIO_CARGO_LIMIT = 2;
 
