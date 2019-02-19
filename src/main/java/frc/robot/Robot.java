@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.auto.GyroDrive;
 import frc.robot.commands.elevator.ElevatorToHeight;
@@ -47,10 +49,9 @@ public class Robot extends TimedRobot {
 
   public AnalogInput pressureSensor;
 
-  // public static double elevatorP;
-  // public static double elevatorI;
-  // public static double elevatorD;
-
+  public static double elevatorP;
+  public static double elevatorI;
+  public static double elevatorD;
   public static double gyroP;
 
   @Override
@@ -69,9 +70,9 @@ public class Robot extends TimedRobot {
     pressureSensor = new AnalogInput(RobotMap.ANALOG_PRESSURE_SENSOR);
 
     // USED FOR TUNING CONSTANTS
-    // SmartDashboard.putNumber("Elevator P", 0.0);
-    // SmartDashboard.putNumber("Elevator I", 0.0);
-    // SmartDashboard.putNumber("Elevator D", 0.0);
+    // SmartDashboard.putNumber("P", 0.0);
+    // SmartDashboard.putNumber("I", 0.0);
+    // SmartDashboard.putNumber("D", 0.0);
     // SmartDashboard.putNumber("Gyro P", 0.0);
 
     try {
@@ -110,10 +111,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    /* Shuffleboard.getTab("SmartDashboard")
-      .add("gyro", drive.navx.getAngle())
-      .withWidget(BuiltInWidgets.kGyro)
-      .getEntry(); */
   }
 
   @Override
@@ -123,7 +120,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-    // USED FOR ELEVATOR TUNING
+    // USED FOR TUNING
     // elevatorP = (double) SmartDashboard.getNumber("Elevator P", 0.0);
     // elevatorI = (double) SmartDashboard.getNumber("Elevator I", 0.0);
     // elevatorD = (double) SmartDashboard.getNumber("Elevator D", 0.0);
@@ -132,7 +129,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    // USE THIS TO TUNE ELEVATOR FROM DASHBOARD
+    // USE THIS TO TUNE FROM DASHBOARD
     // new ElevatorToHeight(28, 3, new PIDParameters(elevatorP, 0, 0, 1 / 100.0), RobotMap.ElevatorMap.DOWN_PARAMS).start();
     // new ElevatorToHeight(28, 3, RobotMap.ElevatorMap.UP_PARAMS, new PIDParameters(elevatorP, elevatorI, elevatorD, 1 / 100.0)).start();
     // new GyroDrive(gyroP, 120, .5).start();
@@ -153,24 +150,24 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoDistance());
-    SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoDistance());
-    SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
-    SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
-    SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
-    SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
-    SmartDashboard.putBoolean("roll sensor", pogo.atPlatform());
-    SmartDashboard.putBoolean("elevator at top", elevator.atTop());
-    SmartDashboard.putBoolean("elevator at bottom", elevator.atBottom());
-    SmartDashboard.putNumber("elevator encoder", elevator.getEncoder());
-    SmartDashboard.putNumber("elevator height", elevator.getHeight());
-    SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
+    // SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoDistance());
+    // SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoDistance());
+    // SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
+    // SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
+    // SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
+    // SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
+    // SmartDashboard.putBoolean("roll sensor", pogo.atPlatform());
+    SmartDashboard.putBoolean("at top", elevator.atTop());
+    SmartDashboard.putBoolean("at bottom", elevator.atBottom());
+    // SmartDashboard.putNumber("elevator raw encoder", elevator.getEncoder());
+    SmartDashboard.putNumber("height", elevator.getHeight());
+    // SmartDashboard.putBoolean("cargo limit", cargo.isLimit());
 
-    SmartDashboard.putNumber("gyro angle", drive.navx.getAngle());
+    SmartDashboard.putNumber("angle", drive.navx.getAngle());
     SmartDashboard.putNumber("left dist", drive.getLeftDist());
     SmartDashboard.putNumber("right dist", drive.getRightDist());
 
-    SmartDashboard.putNumber("air pressure", pressureSensor.getAverageVoltage() * (110.0 / 2.75));
+    SmartDashboard.putNumber("pressure", pressureSensor.getAverageVoltage() * (110.0 / 2.75));
   }
 
   @Override
