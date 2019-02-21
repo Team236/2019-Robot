@@ -74,7 +74,7 @@ public class Pogo extends Subsystem {
     if ((leftAtTop() || getLeftPogoDistance() < 0) && leftSpeed < 0) {
       leftSpeed = 0;
       resetLeftEncoder();
-    } else if ((leftAtBottom() || getLeftPogoDistance() >= 1500) && leftSpeed > 0) {
+    } else if ((leftAtBottom() || getLeftPogoDistance() >= RobotMap.PogoMap.MAX_COUNT) && leftSpeed > 0) {
       leftSpeed = 0;
     }
     leftExtendMotor.set(ControlMode.PercentOutput, leftSpeed);
