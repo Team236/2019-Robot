@@ -22,8 +22,8 @@ import frc.robot.commands.drive.DriveWithJoysticks;
  */
 public class Drive extends Subsystem {
   public TalonSRX leftMaster, rightMaster;
-  public VictorSPX leftMiddleSlave, leftRearSlave;
-  public VictorSPX rightMiddleSlave, rightRearSlave;
+  public VictorSPX leftMiddleSlave; // , leftRearSlave;
+  public VictorSPX rightMiddleSlave; // , rightRearSlave;
 
   public AHRS navx;
 
@@ -32,14 +32,14 @@ public class Drive extends Subsystem {
     rightMaster = new TalonSRX(RobotMap.DriveMap.ID_T_RIGHT_FRONT);
 
     leftMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_V_LEFT_MIDDLE);
-    leftRearSlave = new VictorSPX(RobotMap.DriveMap.ID_V_LEFT_REAR);
+    // leftRearSlave = new VictorSPX(RobotMap.DriveMap.ID_V_LEFT_REAR);
     rightMiddleSlave = new VictorSPX(RobotMap.DriveMap.ID_V_RIGHT_MIDDLE);
-    rightRearSlave = new VictorSPX(RobotMap.DriveMap.ID_V_RIGHT_REAR);
+    // rightRearSlave = new VictorSPX(RobotMap.DriveMap.ID_V_RIGHT_REAR);
 
     leftMiddleSlave.follow(leftMaster);
-    leftRearSlave.follow(leftMaster);
+    // leftRearSlave.follow(leftMaster);
     rightMiddleSlave.follow(rightMaster);
-    rightRearSlave.follow(rightMaster);
+    // rightRearSlave.follow(rightMaster);
 
     leftMaster.setSensorPhase(false);
     rightMaster.setSensorPhase(true);
