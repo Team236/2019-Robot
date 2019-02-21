@@ -70,7 +70,7 @@ public class ElevatorToHeight extends Command {
     pid.disable();
     Robot.elevator.stop();
     System.out.println("elevatorToHeight ending");
-    SmartDashboard.putNumber("finished height", Robot.elevator.getHeight());
+    // SmartDashboard.putNumber("finished height", Robot.elevator.getHeight());
   }
 
   @Override

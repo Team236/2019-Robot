@@ -35,7 +35,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
     rightSlave.follow(leftMasterElevator);
 
-    leftMasterElevator.setSensorPhase(true);
+    leftMasterElevator.setSensorPhase(false);
 
     topLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_TOP_LIMIT);
     bottomLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_BOTTOM_LIMIT);
@@ -73,7 +73,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
   public void setSpeed(double speed) {
     // leftMaster.set(ControlMode.PercentOutput, speed);
-    // || getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT
+    // || getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT 
     if ((atTop() || getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT || Robot.cargo.isExtended()) && speed > 0) {
       speed = 0;
     } else if (atBottom() && speed < 0) {
