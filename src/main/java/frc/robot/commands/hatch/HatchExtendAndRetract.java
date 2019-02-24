@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class HatchExtendAndRetract extends Command {
-  // public static boolean prevExtend, prevRetract;
 
   public HatchExtendAndRetract() {
     // may not want requires statement (might prevent scoring in 1 position)

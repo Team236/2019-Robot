@@ -73,8 +73,8 @@ public class RobotMap {
 
 	public static class ElevatorMap {
 		// talon/victor ID's
-		public static final int ID_T_LEFT_MASTER = 11; // 10, 6, were using 8 for testing on testbed w/ drive wheels
-		public static final int ID_V_RIGHT_SLAVE = 7; // 7, 12, 1 for testing
+		public static final int ID_T_LEFT_MASTER = 11; // 11 (was 10 -- broken) (8 for testing on testbed w/ drive wheels)
+		public static final int ID_V_RIGHT_SLAVE = 7; // 7 (1 for testing()
 
 		public static final int DIO_TOP_LIMIT = 0;
 		public static final int DIO_BOTTOM_LIMIT = 1;
@@ -85,13 +85,14 @@ public class RobotMap {
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
 
 		public static final PIDParameters UP_PARAMS = new PIDParameters(0.06, 0, 0, 1 / 100.0);
-		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.01, 0, 0, 1 / 100.0); // for climbing
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.001, 0, 0, 1 / 100.0);
+		public static final PIDParameters CLIMB_PARAMS = new PIDParameters(0.01, 0, 0, 1 / 100.0); // for climbing
 		public static final double HEIGHT_MARGIN = 1;
 
 		public static final double CARGO_OFFSET = 6.75; // amount from elevator position 0 to Cargo lvl1 (inches)
 		public static final double TOP_HEIGHT = 65;
 
-		public static final double SPEED_LIMIT_1 = 24; // (inches) lower
+		public static final double SPEED_LIMIT_1 = 24; // lower limit (inches)
 		public static final double SPEED_LIMIT_2 = 40;
 	}
 

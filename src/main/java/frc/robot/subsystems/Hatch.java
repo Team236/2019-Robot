@@ -16,7 +16,6 @@ import frc.robot.RobotMap;
  * Add your docs here.
  */
 public class Hatch extends Subsystem {
-  // TODO: test extend and retract w/ 1 button
   public DoubleSolenoid hatchSolenoid, hatchScoreSolenoid;
 
   public Hatch() {

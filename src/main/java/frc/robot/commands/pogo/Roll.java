@@ -22,14 +22,15 @@ public class Roll extends Command {
 
   @Override
   protected void execute() {
-    if (!Robot.pogo.atPlatform()){
+    // if (!Robot.pogo.atPlatform()){
     Robot.pogo.setRollSpeed(RobotMap.PogoMap.ROLL_SPEED);
-    }
+    // }
   }
 
   @Override
   protected boolean isFinished() {
-    return Robot.pogo.atPlatform();
+    // return Robot.pogo.atPlatform();
+    return false;
   }
 
   @Override

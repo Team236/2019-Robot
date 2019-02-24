@@ -72,8 +72,6 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public void setSpeed(double speed) {
-    // leftMaster.set(ControlMode.PercentOutput, speed);
-    // || getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT 
     if ((atTop() || getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT || Robot.cargo.isExtended()) && speed > 0) {
       speed = 0;
     } else if (atBottom() && speed < 0) {
