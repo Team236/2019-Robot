@@ -51,7 +51,7 @@ public class Cargo extends Subsystem {
     cargoSolenoid.set(Value.kReverse);
   }
 
-  public boolean isLimit() {
+  public boolean haveCargo() {
     return !cargoLimit.get();
   }
 
