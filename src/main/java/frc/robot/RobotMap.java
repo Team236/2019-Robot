@@ -85,7 +85,7 @@ public class RobotMap {
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
 
 		public static final PIDParameters UP_PARAMS = new PIDParameters(0.06, 0, 0, 1 / 100.0);
-		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.001, 0, 0, 1 / 100.0);
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.000, 0, 0, 1 / 100.0);
 		public static final PIDParameters CLIMB_PARAMS = new PIDParameters(0.01, 0, 0, 1 / 100.0); // for climbing
 		public static final double HEIGHT_MARGIN = 1;
 
@@ -94,6 +94,9 @@ public class RobotMap {
 
 		public static final double SPEED_LIMIT_1 = 24; // lower limit (inches)
 		public static final double SPEED_LIMIT_2 = 40;
+
+		public static final double ENDGAME_SPEED = -.5;
+		public static final int ENDGAME_POSITION = 2200;
 	}
 
 	public static class CargoMap {
