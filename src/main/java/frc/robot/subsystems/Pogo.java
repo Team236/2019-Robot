@@ -37,8 +37,8 @@ public class Pogo extends Subsystem {
 
     rollSensor = new DigitalInput(RobotMap.PogoMap.DIO_SENSOR);
 
-    leftExtendMotor.setSensorPhase(true);
-    rightExtendMotor.setSensorPhase(false);
+    leftExtendMotor.setSensorPhase(false);
+    rightExtendMotor.setSensorPhase(true);
   }
 
   public boolean leftAtTop() {
@@ -71,17 +71,17 @@ public class Pogo extends Subsystem {
 
   public void setLeftPogoSpeed(double leftSpeed) {
     // || getLeftPogoDistance() < 0
-    if ((leftAtTop() || getLeftPogoDistance() < 0) && leftSpeed < 0) {
+    if ((leftAtTop() || getLeftPogoEncoder() > 0) && leftSpeed < 0) {
       leftSpeed = 0;
       resetLeftEncoder();
-    } else if ((leftAtBottom() || getLeftPogoDistance() >= RobotMap.PogoMap.MAX_COUNT) && leftSpeed > 0) {
+    } else if ((leftAtBottom() || getLeftPogoEncoder() >= RobotMap.PogoMap.MAX_COUNT) && leftSpeed > 0) {
       leftSpeed = 0;
     }
     leftExtendMotor.set(ControlMode.PercentOutput, leftSpeed);
   }
 
   public void setRightSpeed(double rightSpeed) {
-    if ((rightAtTop() || getRightPogoDistance() < 0) && rightSpeed < 0) {
+    if ((rightAtTop() || getRightPogoEncoder() > 0) && rightSpeed < 0) {
       rightSpeed = 0;
       resetRightEncoder();
     } else if (rightAtBottom() && rightSpeed > 0) {
@@ -109,11 +109,11 @@ public class Pogo extends Subsystem {
     setRollSpeed(0);
   }
 
-  public double getLeftPogoDistance() {
+  public int getLeftPogoEncoder() {
     return leftExtendMotor.getSelectedSensorPosition();
   }
 
-  public double getRightPogoDistance() {
+  public int getRightPogoEncoder() {
     return rightExtendMotor.getSelectedSensorPosition();
   }
 
