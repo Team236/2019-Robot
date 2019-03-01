@@ -15,20 +15,23 @@ public class CargoIntake extends Command {
   public CargoIntake() {
     requires(Robot.cargo);
   }
+
   @Override
   protected void initialize() {
   }
 
   @Override
   protected void execute() {
-    if (!Robot.cargo.isLimit()){
-    Robot.cargo.setSpeed(RobotMap.CargoMap.SPEED_INTAKE);
+    if (!Robot.cargo.haveCargo()) {
+      Robot.cargo.setSpeed(RobotMap.CargoMap.SPEED_INTAKE);
+    } else if (Robot.cargo.haveCargo()) {
+      Robot.cargo.retract();
     }
   }
 
   @Override
   protected boolean isFinished() {
-    return Robot.cargo.isLimit();
+    return Robot.cargo.haveCargo();
   }
 
   @Override
