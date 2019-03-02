@@ -16,11 +16,13 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.drive.DriveWithJoysticks;
+import lib.pid.PIDOutput;
+import lib.pid.PIDSource;
 
 /**
  * 
  */
-public class Drive extends Subsystem {
+public class Drive extends Subsystem implements PIDSource, PIDOutput {
   public TalonSRX leftMaster, rightMaster;
   public VictorSPX leftMiddleSlave; // , leftRearSlave;
   public VictorSPX rightMiddleSlave; // , rightRearSlave;
@@ -79,6 +81,16 @@ public class Drive extends Subsystem {
   public void resetEncoders() {
     leftMaster.setSelectedSensorPosition(0);
     rightMaster.setSelectedSensorPosition(0);
+  }
+
+  public void pidSet(double speed) {
+    setLeftSpeed(speed);
+    setRightSpeed(-speed);
+  }
+
+  @Override
+  public double pidGet() {
+    return navx.getAngle();
   }
 
   @Override
