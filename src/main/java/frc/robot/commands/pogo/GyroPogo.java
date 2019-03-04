@@ -48,8 +48,8 @@ public class GyroPogo extends Command {
 
   @Override
   protected boolean isFinished() {
-    boolean isLeftFinished = Math.abs(Robot.pogo.getLeftPogoDistance() - dist) < 10;
-    boolean isRightFinished = Math.abs(Robot.pogo.getRightPogoDistance() - dist) < 10;
+    boolean isLeftFinished = Math.abs(Robot.pogo.getLeftPogoEncoder() - dist) < 10;
+    boolean isRightFinished = Math.abs(Robot.pogo.getRightPogoEncoder() - dist) < 10;
     return isLeftFinished && isRightFinished;
   }
 
