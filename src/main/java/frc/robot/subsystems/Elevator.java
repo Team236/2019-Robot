@@ -24,18 +24,18 @@ import lib.pid.PIDSource;
  */
 public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
-  public TalonSRX leftMasterElevator;
-  public VictorSPX rightSlave;
+  public TalonSRX masterElevator;
+  public VictorSPX slaveElevator;
 
   private DigitalInput topLimit, bottomLimit;
 
   public Elevator() {
-    leftMasterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_T_LEFT_MASTER);
-    rightSlave = new VictorSPX(RobotMap.ElevatorMap.ID_V_RIGHT_SLAVE);
+    masterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_T_LEFT_MASTER);
+    slaveElevator = new VictorSPX(RobotMap.ElevatorMap.ID_V_RIGHT_SLAVE);
 
-    rightSlave.follow(leftMasterElevator);
+    slaveElevator.follow(masterElevator);
 
-    leftMasterElevator.setSensorPhase(false);
+    masterElevator.setSensorPhase(false);
 
     topLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_TOP_LIMIT);
     bottomLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_BOTTOM_LIMIT);
@@ -50,7 +50,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public int getEncoder() {
-    return leftMasterElevator.getSelectedSensorPosition();
+    return masterElevator.getSelectedSensorPosition();
   }
 
   public double getHeight() {
@@ -58,7 +58,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public void resetEncoder() {
-    leftMasterElevator.setSelectedSensorPosition(0);
+    masterElevator.setSelectedSensorPosition(0);
   }
 
   public void resetAtBottom() {
@@ -68,7 +68,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public void stop() {
-    leftMasterElevator.set(ControlMode.PercentOutput, 0);
+    masterElevator.set(ControlMode.PercentOutput, 0);
   }
 
   public void setSpeed(double speed) {
@@ -77,15 +77,50 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
     } else if (atBottom() && speed < 0) {
       speed = 0;
     }
-    leftMasterElevator.set(ControlMode.PercentOutput, speed);
+    masterElevator.set(ControlMode.PercentOutput, speed);
   }
 
   public void pidSet(double speed) {
-    leftMasterElevator.set(ControlMode.PercentOutput, speed);
+    masterElevator.set(ControlMode.PercentOutput, speed);
   }
 
   public double pidGet() {
     return getHeight();
+  }
+
+  public void setkP(double _kP) {
+    masterElevator.config_kP(0, _kP, 0);
+  }
+
+  public void setkI(double _kI) {
+    masterElevator.config_kI(0, _kI, 0);
+  }
+
+  public void setkD(double _kD) {
+    masterElevator.config_kD(0, _kD, 0);
+  }
+
+  public void setkF(double _kF) {
+    masterElevator.config_kF(0, _kF, 0);
+  }
+
+  public void setMotnParams(double _kP, double _kI, double _kD, double _kF) {
+    setkP(_kP);
+    setkI(_kI);
+    setkD(_kD);
+    setkF(_kF);
+  }
+
+  public void setCV(int cruiseVel) {
+    masterElevator.configMotionCruiseVelocity(cruiseVel, 0);
+  }
+
+  public void setAccel(int accel) {
+    masterElevator.configMotionAcceleration(accel, 0);
+  }
+
+  public void setDistMotnMagic(double dist) {
+    masterElevator.set(ControlMode.MotionMagic, dist);
   }
 
   @Override
