@@ -24,6 +24,8 @@ import frc.robot.commands.hatch.HatchExtend;
 import frc.robot.commands.hatch.HatchExtendAndRetract;
 import frc.robot.commands.hatch.HatchRetract;
 import frc.robot.commands.hatch.HatchScore;
+import frc.robot.commands.pogo.AutoEndGame;
+import frc.robot.commands.pogo.GyroPogo;
 import frc.robot.commands.pogo.PogoExtend;
 import frc.robot.commands.pogo.PogoRetract;
 import frc.robot.commands.pogo.PogoWithThumbstick;
@@ -53,9 +55,11 @@ public class OI {
     // extends when go up on controller
     // TODO: button for auto endgame
     controller.back.whileHeld(new PogoWithThumbstick()); // right is forward
+    rightStick.left.whileHeld(new GyroPogo(RobotMap.PogoMap.KP, 1000, .3)); // 1000 native units should be about 10 in
     // controller.y.whileHeld(new PogoExtend());
     // controller.b.whileHeld(new PogoRetract());
     // controller.a.whileHeld(new Roll());
+    controller.rightPress.whileHeld(new AutoEndGame());
 
     // CARGO
     leftStick.middle.whileHeld(new CargoIntake());
@@ -78,7 +82,7 @@ public class OI {
     // H1, cargo floor intake (bottom)
     controller.a.whileHeld(new ElevatorToHeight(0, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // CARGO SHIP
-    cargoShip.whileHeld(new ElevatorToHeight(19, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    cargoShip.whileHeld(new ElevatorToHeight(25, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // C2
     cargo2.whileHeld(new ElevatorToHeight(33 + RobotMap.ElevatorMap.CARGO_OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // H2
@@ -88,18 +92,19 @@ public class OI {
     // H3
     controller.y.whileHeld(new ElevatorToHeight(62, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // Increment up by cargo offset
-    controller.b.whileHeld(new IncrementUp(RobotMap.ElevatorMap.CARGO_OFFSET));
-    // controller.b.whileHeld(new ElevatorToHeight(6, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+    // controller.b.whileHeld(new IncrementUp(RobotMap.ElevatorMap.CARGO_OFFSET));
+    // ENDGAME ELEVATOR POSITION
+    controller.b.whileHeld(new ElevatorToHeight(6, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
 
     // CAMERA - rotating on servo
     JoystickPOV raiseFrontCam = new JoystickPOV(rightStick, Direction.UP);
     JoystickPOV lowerFrontCam = new JoystickPOV(rightStick, Direction.DOWN);
     JoystickPOV raiseRearCam = new JoystickPOV(leftStick, Direction.UP);
     JoystickPOV lowerRearCam = new JoystickPOV(leftStick, Direction.DOWN);
-    raiseFrontCam.whenPressed(new TiltFrontCamera(0.0));
-    lowerFrontCam.whenPressed(new TiltFrontCamera(1.0));
-    raiseRearCam.whenPressed(new TiltRearCamera(0.0));
-    lowerRearCam.whenPressed(new TiltRearCamera(1.0));
+    // raiseFrontCam.whenPressed(new TiltFrontCamera(0.0));
+    // lowerFrontCam.whenPressed(new TiltFrontCamera(1.0));
+    // raiseRearCam.whenPressed(new TiltRearCamera(0.0));
+    // lowerRearCam.whenPressed(new TiltRearCamera(1.0));
 
   }
 
