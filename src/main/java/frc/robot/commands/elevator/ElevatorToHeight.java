@@ -35,28 +35,35 @@ public class ElevatorToHeight extends Command {
 
   @Override
   protected void initialize() {
-    pid.setSetpoint(height);
+    // TODO: test logic below to prevent going up w/ cargo extended
+    // if (Robot.cargo.isExtended()) {
+      // Robot.elevator.stop();
+    // } else {
+      pid.setSetpoint(height);
 
-    Robot.elevator.resetAtBottom();
+      Robot.elevator.resetAtBottom();
 
-    pid.enable();
+      pid.enable();
 
-    pid.update();
-    System.out.println("elevatorToHeight starting");
+      pid.update();
+    // System.out.println("elevatorToHeight starting");
+
+    // }
   }
 
   @Override
   protected void execute() {
     heightError = pid.getError();
     SmartDashboard.putNumber("height error", heightError);
-    System.out.println("elevatorToHeight execute");
+    // System.out.println("elevatorToHeight execute");
   }
 
   @Override
   protected boolean isFinished() {
     if (Math.abs(heightError) < margin) {
       return true;
-    } else if ((Robot.elevator.atTop() || Robot.elevator.getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT) && height > Robot.elevator.getHeight()) {
+    } else if ((Robot.elevator.atTop() || Robot.elevator.getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT)
+        && height > Robot.elevator.getHeight()) {
       return true;
     } else if (Robot.elevator.atBottom() && height < Robot.elevator.getHeight()) {
       return true;
@@ -69,8 +76,8 @@ public class ElevatorToHeight extends Command {
   protected void end() {
     pid.disable();
     Robot.elevator.stop();
-    System.out.println("elevatorToHeight ending");
-    // SmartDashboard.putNumber("finished height", Robot.elevator.getHeight());
+    Robot.elevator.resetAtBottom();
+    // System.out.println("elevatorToHeight ending");
   }
 
   @Override
