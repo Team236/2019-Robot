@@ -19,12 +19,12 @@ public class AutoEndGame extends CommandGroup {
     // TODO: add cargo/elevator part
     // addSequential(new PogoExtend());
 
-    addParallel(new GyroPogo(RobotMap.PogoMap.KP, RobotMap.PogoMap.SPEED));
-    addSequential(new SetElevatorSpeed(.5));
+    addParallel(new PogoExtend());
+    addSequential(new SetElevatorSpeed(RobotMap.ElevatorMap.ENDGAME_SPEED));
 
-    addSequential(new Roll());
+    // addSequential(new Roll());
 
-    addSequential(new PogoRetract());
+    // addSequential(new PogoRetract());
 
     //TODO: want to drive straight to get farther on platform?
     
