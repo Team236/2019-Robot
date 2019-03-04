@@ -71,22 +71,25 @@ public class Pogo extends Subsystem {
 
   public void setLeftPogoSpeed(double leftSpeed) {
     // || getLeftPogoDistance() < 0
-    if ((leftAtTop() || getLeftPogoEncoder() > 0) && leftSpeed < 0) {
+    //  || getLeftPogoEncoder() > 0
+    if ((leftAtTop()) && leftSpeed < 0) {
       leftSpeed = 0;
       resetLeftEncoder();
-    } else if ((leftAtBottom() || getLeftPogoEncoder() >= RobotMap.PogoMap.MAX_COUNT) && leftSpeed > 0) {
+    } else if (leftAtBottom() && leftSpeed > 0) {
       leftSpeed = 0;
     }
     leftExtendMotor.set(ControlMode.PercentOutput, leftSpeed);
   }
 
   public void setRightSpeed(double rightSpeed) {
-    if ((rightAtTop() || getRightPogoEncoder() > 0) && rightSpeed < 0) {
+    //  || getRightPogoEncoder() > 0
+    if ((rightAtTop()) && rightSpeed < 0) {
       rightSpeed = 0;
       resetRightEncoder();
     } else if (rightAtBottom() && rightSpeed > 0) {
       rightSpeed = 0;
     }
+    System.out.println("right pogo extend: " + rightSpeed);
     rightExtendMotor.set(ControlMode.PercentOutput, rightSpeed);
   }
 
@@ -118,11 +121,15 @@ public class Pogo extends Subsystem {
   }
 
   public void resetLeftEncoder() {
-    leftExtendMotor.setSelectedSensorPosition(0);
+    if (leftAtTop()) {
+      leftExtendMotor.setSelectedSensorPosition(0);
+    }   
   }
 
   public void resetRightEncoder() {
-    rightExtendMotor.setSelectedSensorPosition(0);
+    if (rightAtTop()) {
+      rightExtendMotor.setSelectedSensorPosition(0);
+    }
   }
 
   public void resetEncoders() {
@@ -134,6 +141,48 @@ public class Pogo extends Subsystem {
     if (atTop()) {
       resetEncoders();
     }
+  }
+
+  public void setkP(double _kP) {
+    leftExtendMotor.config_kP(0, _kP, 0);
+    rightExtendMotor.config_kP(0, _kP, 0);
+  }
+
+  public void setkI(double _kI) {
+    leftExtendMotor.config_kI(0, _kI, 0);
+    rightExtendMotor.config_kI(0, _kI, 0);
+  }
+
+  public void setkD(double _kD) {
+    leftExtendMotor.config_kD(0, _kD, 0);
+    rightExtendMotor.config_kD(0, _kD, 0);
+  }
+
+  public void setkF(double _kF_L, double _kF_R) {
+    leftExtendMotor.config_kF(0, _kF_L, 0);
+    rightExtendMotor.config_kF(0, _kF_R, 0);
+  }
+
+  public void setMotnParams(double _kP, double _kI, double _kD, double _kF_L, double _kF_R) {
+    setkP(_kP);
+    setkI(_kI);
+    setkD(_kD);
+    setkF(_kF_L, _kF_R);
+  }
+
+  public void setCV(int cruiseVelocity) {
+    leftExtendMotor.configMotionCruiseVelocity(cruiseVelocity, 0);
+    rightExtendMotor.configMotionCruiseVelocity(cruiseVelocity, 0);
+  }
+
+  public void setAccel(int accel) {
+    leftExtendMotor.configMotionAcceleration(accel, 0);
+    rightExtendMotor.configMotionAcceleration(accel, 0);
+  }
+
+  public void setDistMotnMagic(double dist) {
+    leftExtendMotor.set(ControlMode.MotionMagic, dist);
+    rightExtendMotor.set(ControlMode.MotionMagic, dist);
   }
 
   @Override
