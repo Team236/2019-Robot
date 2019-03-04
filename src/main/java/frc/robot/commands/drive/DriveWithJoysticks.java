@@ -24,8 +24,8 @@ public class DriveWithJoysticks extends Command {
   protected void execute() {
     if (Robot.elevator.getHeight() >= RobotMap.ElevatorMap.SPEED_LIMIT_2) {
       if (Robot.oi.leftStick.left.get()) {
-        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .25);
-        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY() * .25);
+        Robot.drive.setLeftSpeed(Robot.oi.rightStick.getY() * .25);
+        Robot.drive.setRightSpeed(Robot.oi.leftStick.getY() * .25);
       } else {
         Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY() * .25);
         Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY() * .25);
@@ -33,16 +33,16 @@ public class DriveWithJoysticks extends Command {
     } else if (Robot.elevator.getHeight() < RobotMap.ElevatorMap.SPEED_LIMIT_2
         && Robot.elevator.getHeight() > RobotMap.ElevatorMap.SPEED_LIMIT_1) {
       if (Robot.oi.leftStick.left.get()) {
-        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .4);
-        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY() * .4);
+        Robot.drive.setLeftSpeed(Robot.oi.rightStick.getY() * .4);
+        Robot.drive.setRightSpeed(Robot.oi.leftStick.getY() * .4);
       } else {
         Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY() * .4);
         Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY() * .4);
       }
     } else {
       if (Robot.oi.leftStick.left.get()) {
-        Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY());
-        Robot.drive.setRightSpeed(Robot.oi.rightStick.getY());
+        Robot.drive.setLeftSpeed(Robot.oi.rightStick.getY());
+        Robot.drive.setRightSpeed(Robot.oi.leftStick.getY());
       } else {
         Robot.drive.setLeftSpeed(-Robot.oi.leftStick.getY());
         Robot.drive.setRightSpeed(-Robot.oi.rightStick.getY());
