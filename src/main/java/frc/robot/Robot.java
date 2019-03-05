@@ -43,8 +43,6 @@ public class Robot extends TimedRobot {
 
   public UsbCamera camera0;
   public UsbCamera camera1;
-  // public MjpegServer server0;
-  // public MjpegServer server1;
 
   public static Servo camServo1, camServo2;
 
@@ -81,28 +79,6 @@ public class Robot extends TimedRobot {
     try {
       camera0 = CameraServer.getInstance().startAutomaticCapture(0);
       camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-      /*CameraServer inst0 = CameraServer.getInstance();
-      UsbCamera camera0 = new UsbCamera("usb camera 0", 0);
-      inst0.addCamera(camera0);
-      server0 = inst0.addServer("serve_USB Camera 0");
-      server0.setSource(camera0);
-      server0.getProperty("compression").set(50);
-      server0.getProperty("default_compression").set(50);
-      server0.getProperty("width").set(320);
-      server0.getProperty("height").set(240);
-      camera0.setResolution(320, 240); 
-
-      CameraServer inst1 = CameraServer.getInstance();
-      UsbCamera camera1 = new UsbCamera("usb camera 1", 1);
-      inst1.addCamera(camera1);
-      server1 = inst1.addServer("serve_USB Camera 1");
-      server1.setSource(camera1);
-      server1.getProperty("compression").set(20);
-      server1.getProperty("default_compression").set(20);
-      server1.getProperty("width").set(320);
-      server1.getProperty("height").set(240);
-      camera1.setResolution(320, 240); */
-
     } catch (Exception e) {
       System.out.println("camera capture failed");
       System.out.println(e.getStackTrace());
@@ -146,28 +122,6 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
     teleopPeriodic();
-    /*if (isDebug) {
-      SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
-      SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
-      SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
-      SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
-
-      SmartDashboard.putBoolean("cargo extended", cargo.isExtended());
-      
-      SmartDashboard.putBoolean("at top", elevator.atTop());
-      SmartDashboard.putBoolean("at bottom", elevator.atBottom());  
-    }
-
-    SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoEncoder());
-    SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoEncoder());
-    SmartDashboard.putNumber("height", elevator.getHeight());
-    SmartDashboard.putBoolean("cargo limit", cargo.haveCargo());
-
-    SmartDashboard.putNumber("angle", drive.navx.getAngle());
-    SmartDashboard.putNumber("left dist", drive.getLeftDist());
-    SmartDashboard.putNumber("right dist", drive.getRightDist());
-
-    SmartDashboard.putNumber("match time", DriverStation.getInstance().getMatchTime()); */
   }
 
   @Override
