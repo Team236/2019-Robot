@@ -11,15 +11,21 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class CargoExtendAndRetract extends Command {
+  // TODO: new logic needs to be tested
   public CargoExtendAndRetract() {
-    // requires(Robot.cargo);
+    requires(Robot.cargo);
   }
 
   @Override
   protected void initialize() {
-    if (Robot.elevator.atBottom() || Robot.oi.controller.back.get()) {
-      Robot.cargo.extend();
+    if (Robot.cargo.isExtended()) {
+      Robot.cargo.retract();
+    } else if (!Robot.cargo.isExtended()) {
+      if (Robot.elevator.atBottom() || Robot.oi.controller.back.get()) {
+        Robot.cargo.extend();
+      }
     }
+    
   }
 
   @Override
@@ -33,7 +39,7 @@ public class CargoExtendAndRetract extends Command {
 
   @Override
   protected void end() {
-    Robot.cargo.retract();
+    // Robot.cargo.retract();
   }
 
   @Override

@@ -56,15 +56,13 @@ public class OI {
     // TODO: button for auto endgame
     controller.back.whileHeld(new PogoWithThumbstick()); // right is forward
     rightStick.left.whileHeld(new GyroPogo(RobotMap.PogoMap.KP, 1000, .3)); // 1000 native units should be about 10 in
-    // controller.y.whileHeld(new PogoExtend());
-    // controller.b.whileHeld(new PogoRetract());
-    // controller.a.whileHeld(new Roll());
     controller.rightPress.whileHeld(new AutoEndGame());
 
     // CARGO
     leftStick.middle.whileHeld(new CargoIntake());
     leftStick.trigger.whileHeld(new CargoEject());
-    controller.lb.toggleWhenPressed(new CargoExtendAndRetract());
+    // controller.lb.toggleWhenPressed(new CargoExtendAndRetract());
+    controller.lb.whenPressed(new CargoExtendAndRetract());
 
     // HATCH
     rightStick.trigger.whileHeld(new HatchScore());
@@ -92,7 +90,6 @@ public class OI {
     // H3
     controller.y.whileHeld(new ElevatorToHeight(62, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // Increment up by cargo offset
-    // controller.b.whileHeld(new IncrementUp(RobotMap.ElevatorMap.CARGO_OFFSET));
     // ENDGAME ELEVATOR POSITION
     controller.b.whileHeld(new ElevatorToHeight(6, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
 
@@ -105,7 +102,6 @@ public class OI {
     // lowerFrontCam.whenPressed(new TiltFrontCamera(1.0));
     // raiseRearCam.whenPressed(new TiltRearCamera(0.0));
     // lowerRearCam.whenPressed(new TiltRearCamera(1.0));
-
   }
 
 }
