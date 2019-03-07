@@ -120,6 +120,18 @@ public class Pogo extends Subsystem {
     return rightExtendMotor.getSelectedSensorPosition();
   }
 
+  public double getLeftPogoDistance() {
+    return getLeftPogoEncoder() * RobotMap.PogoMap.DISTANCE_PER_PULSE;
+  }
+
+  public double getRightPogoDistance() {
+    return getRightPogoEncoder() * RobotMap.PogoMap.DISTANCE_PER_PULSE;
+  }
+
+  public double getAvgDist() {
+    return getLeftPogoDistance() + getRightPogoDistance() / 2;
+  }
+
   public void resetLeftEncoder() {
     if (leftAtTop()) {
       leftExtendMotor.setSelectedSensorPosition(0);

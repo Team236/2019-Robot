@@ -63,7 +63,7 @@ public class RobotMap {
 		public static final double RIGHT_RETRACT_SPEED = -.6;
 		public static final double ROLL_SPEED = .5;
 
-		public static final double DISTANCE_PER_PULSE = 1.0;
+		public static final double DISTANCE_PER_PULSE = 0.00881;
 		public static final double MAX_COUNT = 2278; // 1500?
 		public static final double MIN_COUNT = 100;
 

@@ -12,7 +12,7 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class PogoAndElevator extends Command {
-  int leftPosition, rightPosition, elevatorPosition;
+  double leftPosition, rightPosition, elevatorPosition;
   double leftSpeed, rightSpeed, elevatorSpeed;
 
   public PogoAndElevator() {
@@ -35,9 +35,9 @@ public class PogoAndElevator extends Command {
 
   @Override
   protected void execute() {
-    leftPosition = Math.abs(Robot.pogo.getLeftPogoEncoder());
-    rightPosition = Math.abs(Robot.pogo.getRightPogoEncoder());
-    elevatorPosition = Math.abs(Robot.elevator.getEncoder());
+    leftPosition = Math.abs(Robot.pogo.getLeftPogoDistance());
+    rightPosition = Math.abs(Robot.pogo.getRightPogoDistance());
+    elevatorPosition = Math.abs(Robot.elevator.getHeight());
 
     if (leftPosition > rightPosition) {
       leftSpeed = 0;
@@ -45,12 +45,13 @@ public class PogoAndElevator extends Command {
       rightSpeed = 0;
     }
 
-    if (elevatorPosition > leftPosition || elevatorPosition > rightPosition) {
+    // > leftPosition || elevatorPosition > rightPosition
+    if (elevatorPosition > Robot.pogo.getAvgDist()) {
       elevatorSpeed = 0;
     }
 
     Robot.pogo.setPogoSpeed(leftSpeed, rightSpeed);
-    Robot.elevator.setSpeed(elevatorSpeed);
+    // Robot.elevator.setSpeed(elevatorSpeed);
   }
 
   @Override
