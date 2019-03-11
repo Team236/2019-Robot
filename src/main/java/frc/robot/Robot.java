@@ -104,6 +104,27 @@ public class Robot extends TimedRobot {
     // elevatorI = (double) SmartDashboard.getNumber("Elevator I", 0.0);
     // elevatorD = (double) SmartDashboard.getNumber("Elevator D", 0.0);
     // gyroP = (double) SmartDashboard.getNumber("Gyro P", 0.0);
+    if (isDebug) {
+      SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
+      SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
+      SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
+      SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
+
+      SmartDashboard.putBoolean("cargo extended", cargo.isExtended());
+      
+      SmartDashboard.putBoolean("at top", elevator.atTop());
+      SmartDashboard.putBoolean("at bottom", elevator.atBottom());  
+    }
+
+    SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoEncoder());
+    SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoEncoder());
+    SmartDashboard.putNumber("height", elevator.getHeight());
+    SmartDashboard.putBoolean("cargo limit", cargo.haveCargo());
+
+    SmartDashboard.putNumber("angle", drive.navx.getAngle());
+    SmartDashboard.putNumber("left dist", drive.getLeftDist());
+    SmartDashboard.putNumber("right dist", drive.getRightDist());
+
   }
 
   @Override
@@ -155,7 +176,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("left dist", drive.getLeftDist());
     SmartDashboard.putNumber("right dist", drive.getRightDist());
 
-    SmartDashboard.putNumber("match time", DriverStation.getInstance().getMatchTime());
+    // SmartDashboard.putNumber("match time", DriverStation.getInstance().getMatchTime());
 
     // SmartDashboard.putNumber("pressure", pressureSensor.getAverageVoltage() * (110.0 / 2.75));
   }
