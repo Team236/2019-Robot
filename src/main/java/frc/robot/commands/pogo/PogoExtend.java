@@ -24,6 +24,7 @@ public class PogoExtend extends Command {
   protected void execute() {
     Robot.pogo.setLeftPogoSpeed(RobotMap.PogoMap.LEFT_EXTEND_SPEED);
     Robot.pogo.setRightSpeed(RobotMap.PogoMap.RIGHT_EXTEND_SPEED);
+    // System.out.println("pogo extending");
   }
 
   @Override

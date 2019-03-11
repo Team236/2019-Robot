@@ -17,6 +17,7 @@ public class HatchScore extends Command {
 
   @Override
   protected void initialize() {
+    // Robot.hatch.Extend();
     Robot.hatch.Eject();
   }
 
