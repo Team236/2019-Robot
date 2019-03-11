@@ -17,20 +17,22 @@ import lib.pid.PIDParameters;
 public class ElevatorToHeight extends Command {
 
   private PID pid;
+  private PID up_pid, down_pid;
   private double height;
   private double margin;
   private double heightError;
+
 
   public ElevatorToHeight(double _height, double _margin, PIDParameters _upPid, PIDParameters _downPid) {
     requires(Robot.elevator);
     this.height = _height;
     this.margin = _margin;
+    // this.up_pid = _upPid;
+    up_pid = new PID(Robot.elevator, Robot.elevator, _upPid);
+    down_pid = new PID(Robot.elevator, Robot.elevator, _downPid);
 
-    if (height >= Robot.elevator.getHeight()) {
-      pid = new PID(Robot.elevator, Robot.elevator, _upPid);
-    } else if (height < Robot.elevator.getHeight()) {
-      pid = new PID(Robot.elevator, Robot.elevator, _downPid);
-    }
+    // TODO: troubleshooting not using the right down params, may need to move this chunk to init?
+    
   }
 
   @Override
@@ -39,6 +41,13 @@ public class ElevatorToHeight extends Command {
     // if (Robot.cargo.isExtended()) {
       // Robot.elevator.stop();
     // } else {
+      if (height >= Robot.elevator.getHeight()) {
+        pid = up_pid;
+        // System.out.println("setting up params");
+      } else if (height < Robot.elevator.getHeight()) {
+        pid = down_pid;
+        // System.out.println("setting down params");
+      }
       pid.setSetpoint(height);
 
       Robot.elevator.resetAtBottom();
