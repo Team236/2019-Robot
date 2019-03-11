@@ -57,8 +57,8 @@ public class RobotMap {
 
 		public static final int DIO_SENSOR = 7;
 
-		public static final double LEFT_EXTEND_SPEED = .9;
-		public static final double RIGHT_EXTEND_SPEED = .96;
+		public static final double LEFT_EXTEND_SPEED = 1.0;
+		public static final double RIGHT_EXTEND_SPEED = 1.0;
 		public static final double LEFT_RETRACT_SPEED = -.6;
 		public static final double RIGHT_RETRACT_SPEED = -.6;
 		public static final double ROLL_SPEED = .5;
@@ -85,17 +85,18 @@ public class RobotMap {
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
 
 		public static final PIDParameters UP_PARAMS = new PIDParameters(0.06, 0, 0, 1 / 100.0);
-		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.000, 0, 0, 1 / 100.0);
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.035, 0, 0, 1 / 100.0);
 		public static final PIDParameters CLIMB_PARAMS = new PIDParameters(0.01, 0, 0, 1 / 100.0); // for climbing
 		public static final double HEIGHT_MARGIN = 1;
 
 		public static final double CARGO_OFFSET = 6.75; // amount from elevator position 0 to Cargo lvl1 (inches)
+		public static final double OFFSET = -1;
 		public static final double TOP_HEIGHT = 70;
 
 		public static final double SPEED_LIMIT_1 = 24; // lower limit (inches)
 		public static final double SPEED_LIMIT_2 = 40;
 
-		public static final double ENDGAME_SPEED = -.2;
+		public static final double ENDGAME_SPEED = -.25;
 		public static final int ENDGAME_POSITION = 2200;
 	}
 
