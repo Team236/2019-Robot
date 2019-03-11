@@ -24,12 +24,13 @@ public class SetElevatorSpeed extends Command {
 
   @Override
   protected void execute() {
+    // might need to add elevator bottom limit logic here
     Robot.elevator.setSpeed(speed);
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.elevator.atBottom() || Robot.elevator.getHeight() < 4;
   }
 
   @Override
