@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class PogoWithThumbstick extends Command {
   public PogoWithThumbstick() {
-    requires(Robot.pogo);
+    // requires(Robot.pogo);
   }
 
   @Override
