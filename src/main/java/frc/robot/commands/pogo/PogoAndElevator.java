@@ -25,9 +25,6 @@ public class PogoAndElevator extends Command {
     Robot.pogo.resetEncodersAtTop();
     Robot.elevator.resetEncoder();;
 
-    leftSpeed = RobotMap.PogoMap.LEFT_EXTEND_SPEED;
-    rightSpeed = RobotMap.PogoMap.RIGHT_EXTEND_SPEED;
-    elevatorSpeed = RobotMap.ElevatorMap.ENDGAME_SPEED;
 
     // Robot.pogo.setPogoSpeed(leftSpeed, rightSpeed);
     // Robot.elevator.setSpeed(elevatorSpeed);
@@ -39,19 +36,25 @@ public class PogoAndElevator extends Command {
     rightPosition = Math.abs(Robot.pogo.getRightPogoDistance());
     elevatorPosition = Math.abs(Robot.elevator.getHeight());
 
-    if (leftPosition > rightPosition) {
+    if (leftPosition > (rightPosition + 1)) {
       leftSpeed = 0;
-    } else if (rightPosition > leftPosition) {
+    } else {
+      leftSpeed = RobotMap.PogoMap.LEFT_EXTEND_SPEED;
+    } if (rightPosition > (leftPosition + 1)) {
       rightSpeed = 0;
+    } else {
+      rightSpeed = RobotMap.PogoMap.RIGHT_EXTEND_SPEED;
     }
 
     // > leftPosition || elevatorPosition > rightPosition
-    if (elevatorPosition > Robot.pogo.getAvgDist()) {
+    if (elevatorPosition > (Robot.pogo.getAvgDist() + 1)) {
       elevatorSpeed = 0;
+    } else {
+      elevatorSpeed = RobotMap.ElevatorMap.ENDGAME_SPEED;
     }
 
     Robot.pogo.setPogoSpeed(leftSpeed, rightSpeed);
-    // Robot.elevator.setSpeed(elevatorSpeed);
+    Robot.elevator.setSpeed(elevatorSpeed);
   }
 
   @Override
