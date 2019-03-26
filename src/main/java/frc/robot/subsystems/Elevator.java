@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -25,17 +27,22 @@ import lib.pid.PIDSource;
 public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
   public TalonSRX masterElevator;
-  public VictorSPX slaveElevator;
+  public VictorSPX slaveElevator1, slaveElevator2;
+  public DoubleSolenoid pogoClutch;
 
   private DigitalInput topLimit, bottomLimit;
 
   public Elevator() {
-    masterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_T_LEFT_MASTER);
-    slaveElevator = new VictorSPX(RobotMap.ElevatorMap.ID_V_RIGHT_SLAVE);
+    masterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_T_MASTER);
+    slaveElevator1 = new VictorSPX(RobotMap.ElevatorMap.ID_V_SLAVE_1);
+    slaveElevator2 = new VictorSPX(RobotMap.ElevatorMap.ID_V_SLAVE_2);
 
-    slaveElevator.follow(masterElevator);
+    slaveElevator1.follow(masterElevator);
+    slaveElevator2.follow(masterElevator);
 
     masterElevator.setSensorPhase(false);
+
+    pogoClutch = new DoubleSolenoid(RobotMap.ElevatorMap.SOL_FWD, RobotMap.ElevatorMap.SOL_REV);
 
     topLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_TOP_LIMIT);
     bottomLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_BOTTOM_LIMIT);
@@ -121,6 +128,14 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
   public void setDistMotnMagic(double dist) {
     masterElevator.set(ControlMode.MotionMagic, dist);
+  }
+
+  public void engageClutch() {
+    pogoClutch.set(Value.kForward);
+  }
+
+  public void disengageClutch() {
+    pogoClutch.set(Value.kReverse);
   }
 
   @Override
