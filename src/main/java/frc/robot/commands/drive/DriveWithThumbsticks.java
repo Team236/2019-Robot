@@ -21,8 +21,8 @@ public class DriveWithThumbsticks extends Command {
 
   @Override
   protected void execute() {
-    Robot.drive.setLeftSpeed(-Math.pow(Robot.oi.controller.getLeftY(), 3));
-    Robot.drive.setRightSpeed(-Math.pow(Robot.oi.controller.getRightY(), 3));
+    Robot.drive.setLeftSpeed(Math.pow(Robot.oi.controller.getLeftY(), 3));
+    Robot.drive.setRightSpeed(Math.pow(Robot.oi.controller.getRightY(), 3));
     // Robot.drive.setLeftSpeed(Robot.oi.controller.getLeftY());
     // Robot.drive.setRightSpeed(Robot.oi.controller.getRightY());
   }

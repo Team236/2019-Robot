@@ -50,12 +50,12 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public void setLeftSpeed(double speed) {
-    leftMaster.set(ControlMode.PercentOutput, speed);
+    leftMaster.set(ControlMode.PercentOutput, -speed);
     // leftMiddleSlave.set(ControlMode.PercentOutput, speed);
   }
 
   public void setRightSpeed(double speed) {
-    rightMaster.set(ControlMode.PercentOutput, speed);
+    rightMaster.set(ControlMode.PercentOutput, -speed);
     // rightMiddleSlave.set(ControlMode.PercentOutput, speed);
   }
 
