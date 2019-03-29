@@ -62,6 +62,8 @@ public class Robot extends TimedRobot {
     compressor = new Compressor();
     compressor.start();
 
+    pdp = new PowerDistributionPanel();
+
     elevator.resetAtBottom();
     pogo.resetEncodersAtTop();;
 
@@ -125,6 +127,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("left dist", drive.getLeftDist());
     SmartDashboard.putNumber("right dist", drive.getRightDist());
 
+    double current = pdp.getCurrent(1);
+    SmartDashboard.putNumber("current 1", current);
+
   }
 
   @Override
@@ -137,6 +142,8 @@ public class Robot extends TimedRobot {
     // elevator.resetAtBottom();
     // drive.resetEncoders();
     teleopInit();
+    // hatch.Extend();
+    
   }
 
   @Override
@@ -150,6 +157,11 @@ public class Robot extends TimedRobot {
     pogo.resetEncodersAtTop();
     elevator.resetAtBottom();
     drive.resetEncoders();
+    // hatch.Retract();
+
+    // double current = pdp.getCurrent(1);
+    // SmartDashboard.putNumber("current 1", current);
+
   }
 
   @Override
