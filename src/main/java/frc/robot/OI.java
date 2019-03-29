@@ -50,7 +50,7 @@ public class OI {
     TwoButton thumbDrive = new TwoButton(controller.lb, controller.rb);
     thumbDrive.whileHeld(new DriveWithThumbsticks());
     // TODO: tune GyroDrive (last yr kP was .04)
-    leftStick.left.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .5));
+    // leftStick.left.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .5));
 
     // POGO
     // extends when go up on controller
@@ -68,7 +68,9 @@ public class OI {
     // HATCH
     rightStick.trigger.whileHeld(new HatchScore());
     controller.rb.toggleWhenPressed(new HatchExtendAndRetract());
+    // rightStick.middle.toggleWhenPressed(new HatchExtendAndRetract());
     rightStick.middle.toggleWhenPressed(new HatchExtendAndRetract());
+    controller.start.toggleWhenPressed(new HatchScore());
 
     // ELEVATOR
     controller.start.whileHeld(new ElevatorWithThumbstick());
