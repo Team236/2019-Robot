@@ -75,7 +75,7 @@ public class RobotMap {
 		// talon/victor ID's
 		public static final int ID_T_MASTER = 11; // 11 (was 10 -- broken) (8 for testing on testbed w/ drive wheels)
 		public static final int ID_V_SLAVE_1 = 7; // 7 (1 for testing()
-		public static final int ID_V_SLAVE_2 = 777;
+		public static final int ID_V_SLAVE_2 = 12; // 12
 
 		public static final int DIO_TOP_LIMIT = 0;
 		public static final int DIO_BOTTOM_LIMIT = 1;
