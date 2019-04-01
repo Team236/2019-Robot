@@ -17,6 +17,7 @@ import frc.robot.commands.cargo.CargoExtendAndRetract;
 import frc.robot.commands.cargo.CargoIntake;
 import frc.robot.commands.cargo.CargoRetract;
 import frc.robot.commands.drive.DriveWithThumbsticks;
+import frc.robot.commands.drive.DriveWithVision;
 import frc.robot.commands.elevator.ElevatorToHeight;
 import frc.robot.commands.elevator.ElevatorWithThumbstick;
 import frc.robot.commands.elevator.IncrementUp;
@@ -49,6 +50,7 @@ public class OI {
     // DRIVE
     TwoButton thumbDrive = new TwoButton(controller.lb, controller.rb);
     thumbDrive.whileHeld(new DriveWithThumbsticks());
+    controller.b.whileHeld(new DriveWithVision());
     // TODO: tune GyroDrive (last yr kP was .04)
     // leftStick.left.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .5));
 
@@ -95,7 +97,7 @@ public class OI {
     controller.y.whileHeld(new ElevatorToHeight(62 + RobotMap.ElevatorMap.OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // Increment up by cargo offset
     // ENDGAME ELEVATOR POSITION
-    controller.b.whileHeld(new ElevatorToHeight(6 + RobotMap.ElevatorMap.OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+    // controller.b.whileHeld(new ElevatorToHeight(6 + RobotMap.ElevatorMap.OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
 
     // CAMERA - rotating on servo
     // JoystickPOV raiseFrontCam = new JoystickPOV(rightStick, Direction.UP);
