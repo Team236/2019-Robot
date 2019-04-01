@@ -26,6 +26,7 @@ import frc.robot.subsystems.Cargo;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hatch;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Pogo;
 import lib.pid.PIDParameters;
 
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
   public static Elevator elevator = new Elevator();
   public static Hatch hatch = new Hatch();
   public static Pogo pogo = new Pogo();
+  public static Limelight limelight = new Limelight();
 
   private Compressor compressor;
   public PowerDistributionPanel pdp;
