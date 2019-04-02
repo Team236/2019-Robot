@@ -138,6 +138,10 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
     pogoClutch.set(Value.kReverse);
   }
 
+  public boolean isClutch() {
+    return pogoClutch.get() == Value.kForward;
+  }
+
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new StopElevator());
