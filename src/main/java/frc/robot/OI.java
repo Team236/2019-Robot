@@ -51,6 +51,7 @@ public class OI {
     TwoButton thumbDrive = new TwoButton(controller.lb, controller.rb);
     thumbDrive.whileHeld(new DriveWithThumbsticks());
     controller.b.whileHeld(new DriveWithVision());
+    rightStick.right.whileHeld(new DriveWithVision());
     // TODO: tune GyroDrive (last yr kP was .04)
     // leftStick.left.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .5));
 

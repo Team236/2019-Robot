@@ -22,10 +22,10 @@ public class DriveWithJoysticks extends Command {
 
   @Override
   protected void execute() {
-    if (Robot.oi.rightStick.right.get()) {
+    /*if (Robot.oi.rightStick.right.get()) {
       Robot.drive.setLeftSpeed(-Robot.oi.rightStick.getY());
       Robot.drive.setRightSpeed(-Robot.oi.leftStick.getY());
-    } else if (Robot.oi.leftStick.left.get()) {
+    } else */ if (Robot.oi.leftStick.left.get()) {
       Robot.drive.setLeftSpeed(Robot.oi.leftStick.getY() * .5);
       Robot.drive.setRightSpeed(Robot.oi.rightStick.getY() * .5);
       // Robot.drive.setLeftSpeed(Math.pow(Robot.oi.leftStick.getY(), 3));
