@@ -50,6 +50,12 @@ public class RobotMap {
 		public static final int ID_V_LEFT_ROLL_MOTOR = 5; // 5, 5
 		public static final int ID_V_RIGHT_ROLL_MOTOR = 6; // 6
 
+		public static final double HEIGHT_OFFSET = 1.5;
+		public static final double LV3_START = 0;
+		public static final double LV2_START = 0;
+		public static final double LV3_END = LV3_START - HEIGHT_OFFSET - 20;
+		public static final double LV2_END = LV2_START - HEIGHT_OFFSET - 7;
+
 		public static final int DIO_LEFT_TOP_LIMIT = 3;
 		public static final int DIO_RIGHT_TOP_LIMIT = 5;
 		public static final int DIO_LEFT_BOTTOM_LIMIT = 4;
