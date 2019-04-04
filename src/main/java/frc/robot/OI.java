@@ -17,7 +17,8 @@ import frc.robot.commands.cargo.CargoExtendAndRetract;
 import frc.robot.commands.cargo.CargoIntake;
 import frc.robot.commands.cargo.CargoRetract;
 import frc.robot.commands.drive.DriveWithThumbsticks;
-import frc.robot.commands.drive.DriveWithVision;
+// import frc.robot.commands.drive.DriveWithVision;
+import frc.robot.commands.drive.DriveVisionWithP;
 import frc.robot.commands.elevator.ElevatorToHeight;
 import frc.robot.commands.elevator.ElevatorWithThumbstick;
 import frc.robot.commands.elevator.IncrementUp;
@@ -50,9 +51,13 @@ public class OI {
     // DRIVE
     TwoButton thumbDrive = new TwoButton(controller.lb, controller.rb);
     thumbDrive.whileHeld(new DriveWithThumbsticks());
-    controller.b.whileHeld(new DriveWithVision());
+    // 2 speed Vision option  "DriveVisionWithP"used instead
+    //  controller.b.whileHeld(new DriveWithVision());
+    controller.b.whileHeld(new DriveVisionWithP());
+    
     // TODO: tune GyroDrive (last yr kP was .04)
     // leftStick.left.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .5));
+    
 
     // POGO
     // extends when go up on controller
