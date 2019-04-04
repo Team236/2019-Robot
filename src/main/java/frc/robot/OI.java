@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.auto.GyroDrive;
+import frc.robot.commands.auto.LimelightDrive;
 import frc.robot.commands.camera.TiltFrontCamera;
 import frc.robot.commands.camera.TiltRearCamera;
 import frc.robot.commands.cargo.CargoEject;
@@ -20,6 +21,7 @@ import frc.robot.commands.drive.DriveWithThumbsticks;
 import frc.robot.commands.drive.DriveWithVision;
 import frc.robot.commands.elevator.ElevatorToHeight;
 import frc.robot.commands.elevator.ElevatorWithThumbstick;
+import frc.robot.commands.elevator.EngageClutch;
 import frc.robot.commands.elevator.IncrementUp;
 import frc.robot.commands.hatch.HatchExtend;
 import frc.robot.commands.hatch.HatchExtendAndRetract;
@@ -50,7 +52,7 @@ public class OI {
     // DRIVE
     TwoButton thumbDrive = new TwoButton(controller.lb, controller.rb);
     thumbDrive.whileHeld(new DriveWithThumbsticks());
-    controller.b.whileHeld(new DriveWithVision());
+    controller.b.whileHeld(new LimelightDrive(RobotMap.AutoMap.LIME_DRIVE_KP, RobotMap.AutoMap.LIME_DRIVE_SPEED));
     rightStick.right.whileHeld(new DriveWithVision());
     // TODO: tune GyroDrive (last yr kP was .04)
     // leftStick.left.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .5));
@@ -58,9 +60,9 @@ public class OI {
     // POGO
     // extends when go up on controller
     // TODO: button for auto endgame
-    controller.back.whileHeld(new PogoWithThumbstick()); // right is forward
+    // controller.back.whileHeld(new PogoWithThumbstick()); // right is forward
     // rightStick.left.whileHeld(new GyroPogo(RobotMap.PogoMap.KP, 1000, .3)); // 1000 native units should be about 10 in
-    controller.rightPress.whileHeld(new AutoEndGame());
+    // controller.rightPress.whileHeld(new AutoEndGame());
 
     // CARGO
     leftStick.middle.whileHeld(new CargoIntake());
@@ -81,6 +83,7 @@ public class OI {
     JoystickPOV cargoShip = new JoystickPOV(controller, Direction.LEFT);
     JoystickPOV cargo2 = new JoystickPOV(controller, Direction.RIGHT);
     JoystickPOV cargo3 = new JoystickPOV(controller, Direction.UP);
+    controller.rightPress.whenPressed(new EngageClutch());
 
     // C1
     cargo1.whileHeld(new ElevatorToHeight(6 + RobotMap.ElevatorMap.CARGO_OFFSET + RobotMap.ElevatorMap.OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
