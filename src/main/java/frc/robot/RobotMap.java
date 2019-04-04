@@ -21,11 +21,11 @@ public class RobotMap {
 		// TALON/VICTOR ID'S (2019 bot, testbed)
 		public static final int ID_T_LEFT_FRONT = 8; // 20, 8
 		public static final int ID_V_LEFT_MIDDLE = 4; // 9, 4
-		public static final int ID_V_LEFT_REAR = 10; // 10, 3
+		public static final int ID_V_LEFT_REAR = 3; // 10, 3
 
 		public static final int ID_T_RIGHT_FRONT = 7; // 21, 7
 		public static final int ID_V_RIGHT_MIDDLE = 1; // 11, 1
-		public static final int ID_V_RIGHT_REAR = 12; // 12, 2
+		public static final int ID_V_RIGHT_REAR = 2; // 12, 2
 
 		public static final double DIAMETER = 3.96; // wheel diameter in inches
 		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
@@ -35,13 +35,17 @@ public class RobotMap {
 
 	public static class AutoMap {
 		public static final int MARGIN_GYRO_DRIVE = 3;
-		public static final double GYRO_DRIVE_KP = .01;
+		public static final double GYRO_DRIVE_KP = .012;
+		public static final double GYRO_SPEED = 0.65;
+		public static final double SLOW_START_AREA = 4.7;
 	}
 
 	public static class JoystickMap {
 		public static final int USB_LEFT = 0;
 		public static final int USB_RIGHT = 1;
 		public static final int USB_CONTROLLER = 2;
+		// added for testing limelight
+		 public static final int USB_CONTROLLER2 = 3;
 	}
 
 	public static class PogoMap {
@@ -73,15 +77,11 @@ public class RobotMap {
 
 	public static class ElevatorMap {
 		// talon/victor ID's
-		public static final int ID_T_MASTER = 11; // 11 (was 10 -- broken) (8 for testing on testbed w/ drive wheels)
-		public static final int ID_V_SLAVE_1 = 7; // 7 (1 for testing()
-		public static final int ID_V_SLAVE_2 = 12; // 12
+		public static final int ID_T_LEFT_MASTER = 11; // 11 (was 10 -- broken) (8 for testing on testbed w/ drive wheels)
+		public static final int ID_V_RIGHT_SLAVE = 7; // 7 (1 for testing()
 
 		public static final int DIO_TOP_LIMIT = 0;
 		public static final int DIO_BOTTOM_LIMIT = 1;
-
-		public static final int SOL_FWD = 6;
-		public static final int SOL_REV = 7;
 
 		public static final double DIAMETER = 1.6; // 1.6 inches (3.96 for wheel testing)
 		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
