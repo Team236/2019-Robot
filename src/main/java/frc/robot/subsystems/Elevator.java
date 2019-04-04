@@ -26,8 +26,8 @@ import lib.pid.PIDSource;
  */
 public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
-  public TalonSRX masterElevator;
-  public VictorSPX slaveElevator1, slaveElevator2;
+  public TalonSRX masterElevator, slaveElevator2;
+  public VictorSPX slaveElevator1;
   public DoubleSolenoid pogoClutch;
 
   private DigitalInput topLimit, bottomLimit;
@@ -35,10 +35,11 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   public Elevator() {
     masterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_T_MASTER);
     slaveElevator1 = new VictorSPX(RobotMap.ElevatorMap.ID_V_SLAVE_1);
-    slaveElevator2 = new VictorSPX(RobotMap.ElevatorMap.ID_V_SLAVE_2);
+    slaveElevator2 = new TalonSRX(RobotMap.ElevatorMap.ID_T_SLAVE_2);
 
     slaveElevator1.follow(masterElevator);
-    slaveElevator2.follow(masterElevator);
+    slaveElevator2.set(ControlMode.Follower, masterElevator.getDeviceID());
+    // slaveElevator2.follow(masterElevator);
 
     masterElevator.setSensorPhase(false);
 

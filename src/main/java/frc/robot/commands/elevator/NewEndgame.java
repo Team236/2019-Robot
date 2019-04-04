@@ -24,8 +24,8 @@ public class NewEndgame extends CommandGroup {
     // addSequential(new SetElevatorSpeed(-.5));
     addParallel(new ElevatorToHeight(RobotMap.PogoMap.LV3_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
 
-    addSequential(new Roll());
+    // addSequential(new Roll());
 
-    addSequential(new ElevatorToHeight(5, 2, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    // addSequential(new ElevatorToHeight(5, 2, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
   }
 }
