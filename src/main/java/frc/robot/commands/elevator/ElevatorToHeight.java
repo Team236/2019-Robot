@@ -31,9 +31,6 @@ public class ElevatorToHeight extends Command {
     // this.up_pid = _upPid;
     up_pid = new PID(Robot.elevator, Robot.elevator, _upPid);
     down_pid = new PID(Robot.elevator, Robot.elevator, _downPid);
-
-    // TODO: troubleshooting not using the right down params, may need to move this chunk to init?
-    
   }
 
   @Override
@@ -70,16 +67,16 @@ public class ElevatorToHeight extends Command {
 
   @Override
   protected boolean isFinished() {
-    if (Math.abs(heightError) < margin) {
+   if (Math.abs(heightError) < margin) {
       return true;
     } else if ((Robot.elevator.atTop() || Robot.elevator.getHeight() >= RobotMap.ElevatorMap.TOP_HEIGHT)
         && height > Robot.elevator.getHeight()) {
       return true;
     } else if (Robot.elevator.atBottom() && height < Robot.elevator.getHeight()) {
       return true;
-    } else if (height > Robot.elevator.getHeight() && Robot.elevator.pogoRetracted() && Robot.elevator.isClutch()) {
+    } /*else if (height > Robot.elevator.getHeight() && Robot.elevator.pogoRetracted() && !Robot.elevator.isClutch()) {
       return true;
-    } else {
+    } */else {
       return false;
     }
   }
