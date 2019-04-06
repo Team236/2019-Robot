@@ -38,7 +38,7 @@ public class RobotMap {
 		public static final double GYRO_DRIVE_KP = .01;
 
 		public static final double LIME_DRIVE_KP = .012;
-		public static final double LIME_DRIVE_SPEED = .3;
+		public static final double LIME_DRIVE_SPEED = .45;
 	}
 
 	public static class JoystickMap {
@@ -56,7 +56,7 @@ public class RobotMap {
 		public static final double HEIGHT_OFFSET = 0.25;
 		public static final double LV3_START = 24;
 		public static final double LV2_START = LV3_START - 13;
-		public static final double LV3_END = LV3_START - HEIGHT_OFFSET - 20;
+		public static final double LV3_END = 4; //LV3_START - HEIGHT_OFFSET - 20
 		public static final double LV2_END = LV2_START - HEIGHT_OFFSET - 7;
 
 		public static final int DIO_LEFT_TOP_LIMIT = 7;
@@ -99,8 +99,8 @@ public class RobotMap {
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
 
 		public static final PIDParameters UP_PARAMS = new PIDParameters(0.06, 0, 0, 1 / 100.0); //.06
-		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.03, 0, 0, 1 / 100.0); // .035
-		public static final PIDParameters CLIMB_PARAMS = new PIDParameters(0.01, 0, 0, 1 / 100.0); // for climbing
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.035, 0, 0, 1 / 100.0); // .035
+		public static final PIDParameters CLIMB_PARAMS = new PIDParameters(0.1, 0, 0, 1 / 100.0); // for climbing
 		public static final double HEIGHT_MARGIN = 1;
 
 		public static final double CARGO_OFFSET = 6.75; // amount from elevator position 0 to Cargo lvl1 (inches)
