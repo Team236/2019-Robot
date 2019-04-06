@@ -62,7 +62,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public boolean pogoRetracted() {
-    return pogoLimit.get();
+    return (pogoLimit.get());
   }
 
   public int getEncoder() {
@@ -153,7 +153,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
   public void pogoRoll(double rollSpeed) {
     pogoRollLeft.set(ControlMode.PercentOutput, rollSpeed);
-    pogoRollRight.set(ControlMode.PercentOutput, rollSpeed);
+    pogoRollRight.set(ControlMode.PercentOutput, -rollSpeed);
   }
 
   @Override
