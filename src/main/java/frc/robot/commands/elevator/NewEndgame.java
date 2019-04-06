@@ -16,36 +16,31 @@ public class NewEndgame extends CommandGroup {
    * Add your docs here.
    */
   public NewEndgame(int level) {
+    double startHeight = 0;
+    double endHeight = 0;
+
+    // sets start/end height based on level
     if (level == 3) {
-      // brings elevator down to start height
-      addSequential(new ElevatorToHeight(RobotMap.PogoMap.LV3_START, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
-
-      addSequential(new EngageClutch());
-
-      // brings elevator and pogos down to lift robots
-      addSequential(new ElevatorToHeight(RobotMap.PogoMap.LV3_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
-
-      addParallel(new NewPogoRoll(1));
-
-      // continues holding robot up while it rolls forward
-      addSequential(new ElevatorToHeight(RobotMap.PogoMap.LV3_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
-
-      // addSequential(new ElevatorToHeight(5, 2, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+      startHeight = RobotMap.PogoMap.LV3_START;
+      endHeight = RobotMap.PogoMap.LV3_END;
     } else if (level == 2) {
-      // brings elevator down to start height
-      addSequential(new ElevatorToHeight(RobotMap.PogoMap.LV2_START, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
-
-      addSequential(new EngageClutch());
-
-      // brings elevator and pogos down to lift robots
-      addSequential(new ElevatorToHeight(RobotMap.PogoMap.LV2_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
-
-      addParallel(new NewPogoRoll(1));
-
-      // continues holding robot up while it rolls forward
-      addSequential(new ElevatorToHeight(RobotMap.PogoMap.LV2_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
-
-      // addSequential(new ElevatorToHeight(5, 2, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+      startHeight = RobotMap.PogoMap.LV2_START;
+      endHeight = RobotMap.PogoMap.LV2_END;
     }
+
+    // brings elevator down to start height
+    // addSequential(new ElevatorToHeight(startHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+
+    // addSequential(new EngageClutch());
+
+    // brings elevator and pogos down to lift robots
+    addSequential(new ElevatorToHeight(endHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+
+    addParallel(new NewPogoRoll(1));
+
+    // continues holding robot up while it rolls forward
+    addSequential(new ElevatorToHeight(endHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+
+    // addSequential(new ElevatorToHeight(5, 2, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
   }
 }
