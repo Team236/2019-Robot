@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.Elevator;
 import lib.pid.PID;
 import lib.pid.PIDParameters;
 
@@ -75,6 +76,8 @@ public class ElevatorToHeight extends Command {
         && height > Robot.elevator.getHeight()) {
       return true;
     } else if (Robot.elevator.atBottom() && height < Robot.elevator.getHeight()) {
+      return true;
+    } else if (height > Robot.elevator.getHeight() && Robot.elevator.pogoRetracted() && Robot.elevator.isClutch()) {
       return true;
     } else {
       return false;
