@@ -24,7 +24,9 @@ import frc.robot.commands.elevator.ElevatorToHeight;
 import frc.robot.commands.elevator.ElevatorWithThumbstick;
 import frc.robot.commands.elevator.EngageClutch;
 import frc.robot.commands.elevator.IncrementUp;
+import frc.robot.commands.elevator.ManualPogoRoll;
 import frc.robot.commands.elevator.NewEndgame;
+import frc.robot.commands.elevator.NewPogoRoll;
 import frc.robot.commands.hatch.HatchExtend;
 import frc.robot.commands.hatch.HatchExtendAndRetract;
 import frc.robot.commands.hatch.HatchRetract;
@@ -54,8 +56,8 @@ public class OI {
     // DRIVE
     TwoButton thumbDrive = new TwoButton(controller.lb, controller.rb);
     thumbDrive.whileHeld(new DriveWithThumbsticks());
-    // controller.b.whileHeld(new LimelightDrive(RobotMap.AutoMap.LIME_DRIVE_KP, RobotMap.AutoMap.LIME_DRIVE_SPEED));
-    rightStick.right.whileHeld(new DriveWithVision());
+    rightStick.right.whileHeld(new LimelightDrive(RobotMap.AutoMap.LIME_DRIVE_KP, RobotMap.AutoMap.LIME_DRIVE_SPEED));
+    // rightStick.right.whileHeld(new DriveWithVision());
     // TODO: tune GyroDrive (last yr kP was .04)
     // leftStick.left.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .5));
 
@@ -85,8 +87,12 @@ public class OI {
     JoystickPOV cargoShip = new JoystickPOV(controller, Direction.LEFT);
     JoystickPOV cargo2 = new JoystickPOV(controller, Direction.RIGHT);
     JoystickPOV cargo3 = new JoystickPOV(controller, Direction.UP);
-    controller.rightPress.whenPressed(new NewEndgame(3));
-    controller.leftPress.whenPressed(new NewEndgame(2));
+    // controller.rightPress.whenPressed(new NewEndgame(3));
+    controller.rightPress.whileHeld(new ElevatorToHeight(RobotMap.PogoMap.LV3_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+    controller.leftPress.whileHeld(new ElevatorToHeight(RobotMap.PogoMap.LV2_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+    controller.back.whileHeld(new ManualPogoRoll());
+
+    // controller.leftPress.whenPressed(new NewEndgame(2));
     controller.b.toggleWhenPressed(new ClutchToggle());
 
     // C1
