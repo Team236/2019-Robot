@@ -29,13 +29,16 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   public TalonSRX masterElevator, slaveElevator2;
   public VictorSPX slaveElevator1;
   public DoubleSolenoid pogoClutch;
+  public VictorSPX pogoRollLeft, pogoRollRight;
 
-  private DigitalInput topLimit, bottomLimit;
+  private DigitalInput topLimit, bottomLimit, pogoLimit;
 
   public Elevator() {
     masterElevator = new TalonSRX(RobotMap.ElevatorMap.ID_T_MASTER);
     slaveElevator1 = new VictorSPX(RobotMap.ElevatorMap.ID_V_SLAVE_1);
     slaveElevator2 = new TalonSRX(RobotMap.ElevatorMap.ID_T_SLAVE_2);
+    pogoRollLeft = new VictorSPX(RobotMap.PogoMap.ID_V_LEFT_ROLL_MOTOR);
+    pogoRollRight = new VictorSPX(RobotMap.PogoMap.ID_V_RIGHT_ROLL_MOTOR);
 
     slaveElevator1.follow(masterElevator);
     slaveElevator2.set(ControlMode.Follower, masterElevator.getDeviceID());
@@ -47,6 +50,7 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
     topLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_TOP_LIMIT);
     bottomLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_BOTTOM_LIMIT);
+    pogoLimit = new DigitalInput(RobotMap.ElevatorMap.DIO_POGO_LIMIT);
   }
 
   public boolean atTop() {
@@ -55,6 +59,10 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
 
   public boolean atBottom() {
     return bottomLimit.get();
+  }
+
+  public boolean pogoRetracted() {
+    return pogoLimit.get();
   }
 
   public int getEncoder() {
@@ -140,7 +148,12 @@ public class Elevator extends Subsystem implements PIDSource, PIDOutput {
   }
 
   public boolean isClutch() {
-    return pogoClutch.get() == Value.kForward;
+    return !(pogoClutch.get() == Value.kForward);
+  }
+
+  public void pogoRoll(double rollSpeed) {
+    pogoRollLeft.set(ControlMode.PercentOutput, rollSpeed);
+    pogoRollRight.set(ControlMode.PercentOutput, rollSpeed);
   }
 
   @Override

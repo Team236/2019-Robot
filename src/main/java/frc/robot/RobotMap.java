@@ -53,13 +53,13 @@ public class RobotMap {
 		public static final int ID_V_LEFT_ROLL_MOTOR = 5; // 5, 5
 		public static final int ID_V_RIGHT_ROLL_MOTOR = 6; // 6
 
-		public static final double HEIGHT_OFFSET = 1.5;
-		public static final double LV3_START = 0;
-		public static final double LV2_START = 0;
+		public static final double HEIGHT_OFFSET = 0.25;
+		public static final double LV3_START = 24;
+		public static final double LV2_START = LV3_START - 13;
 		public static final double LV3_END = LV3_START - HEIGHT_OFFSET - 20;
 		public static final double LV2_END = LV2_START - HEIGHT_OFFSET - 7;
 
-		public static final int DIO_LEFT_TOP_LIMIT = 3;
+		public static final int DIO_LEFT_TOP_LIMIT = 7;
 		public static final int DIO_RIGHT_TOP_LIMIT = 5;
 		public static final int DIO_LEFT_BOTTOM_LIMIT = 4;
 		public static final int DIO_RIGHT_BOTTOM_LIMIT = 6;
@@ -88,6 +88,7 @@ public class RobotMap {
 
 		public static final int DIO_TOP_LIMIT = 0;
 		public static final int DIO_BOTTOM_LIMIT = 1;
+		public static final int DIO_POGO_LIMIT = 3;
 
 		public static final int SOL_FWD = 6;
 		public static final int SOL_REV = 7;
@@ -97,8 +98,8 @@ public class RobotMap {
 		public static final int PULSE_PER_ROTATION = 512;
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
 
-		public static final PIDParameters UP_PARAMS = new PIDParameters(0.06, 0, 0, 1 / 100.0);
-		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.035, 0, 0, 1 / 100.0);
+		public static final PIDParameters UP_PARAMS = new PIDParameters(0.06, 0, 0, 1 / 100.0); //.06
+		public static final PIDParameters DOWN_PARAMS = new PIDParameters(0.03, 0, 0, 1 / 100.0); // .035
 		public static final PIDParameters CLIMB_PARAMS = new PIDParameters(0.01, 0, 0, 1 / 100.0); // for climbing
 		public static final double HEIGHT_MARGIN = 1;
 
@@ -128,8 +129,8 @@ public class RobotMap {
 	public static class HatchMap {
 		public static final int SOL_FWD = 2;
 		public static final int SOL_REV = 3;
-		public static final int SCORE_SOL_FWD = 4;
-		public static final int SCORE_SOL_REV = 5;
+		public static final int SCORE_SOL_FWD = 5;
+		public static final int SCORE_SOL_REV = 4;
 	}
 
 }
