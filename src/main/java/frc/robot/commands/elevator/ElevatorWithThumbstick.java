@@ -22,9 +22,9 @@ public class ElevatorWithThumbstick extends Command {
   @Override
   protected void execute() {
     double speed = -Robot.oi.controller.getLeftY();
-    if (speed < 0) {
+    /*if (speed < 0) {
       speed = 0;
-    }
+    } */
     Robot.elevator.setSpeed(speed);
   }
 
