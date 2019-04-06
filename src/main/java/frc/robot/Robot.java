@@ -27,7 +27,7 @@ import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.Pogo;
+// import frc.robot.subsystems.Pogo;
 import lib.pid.PIDParameters;
 
 public class Robot extends TimedRobot {
@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
   public static Drive drive = new Drive();
   public static Elevator elevator = new Elevator();
   public static Hatch hatch = new Hatch();
-  public static Pogo pogo = new Pogo();
+  // public static Pogo pogo = new Pogo();
   public static Limelight limelight = new Limelight();
 
   private Compressor compressor;
@@ -67,7 +67,7 @@ public class Robot extends TimedRobot {
     pdp = new PowerDistributionPanel();
 
     elevator.resetAtBottom();
-    pogo.resetEncodersAtTop();;
+    // pogo.resetEncodersAtTop();;
 
     camServo1 = new Servo(RobotMap.PWM_SERVO_CAM_1);
     camServo2 = new Servo(RobotMap.PWM_SERVO_CAM_2);
@@ -109,10 +109,10 @@ public class Robot extends TimedRobot {
     // elevatorD = (double) SmartDashboard.getNumber("Elevator D", 0.0);
     // gyroP = (double) SmartDashboard.getNumber("Gyro P", 0.0);
     if (isDebug) {
-      SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
-      SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
-      SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
-      SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
+      // SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
+      // SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
+      // SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
+      // SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
 
       SmartDashboard.putBoolean("cargo extended", cargo.isExtended());
       
@@ -120,14 +120,17 @@ public class Robot extends TimedRobot {
       SmartDashboard.putBoolean("at bottom", elevator.atBottom());  
     }
 
-    SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoEncoder());
-    SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoEncoder());
+    // SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoEncoder());
+    // SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoEncoder());
     SmartDashboard.putNumber("height", elevator.getHeight());
     SmartDashboard.putBoolean("cargo limit", cargo.haveCargo());
 
     SmartDashboard.putNumber("angle", drive.navx.getAngle());
     SmartDashboard.putNumber("left dist", drive.getLeftDist());
     SmartDashboard.putNumber("right dist", drive.getRightDist());
+
+    SmartDashboard.putBoolean("pogo isRetracted", elevator.pogoRetracted());
+    SmartDashboard.putBoolean("clutch", elevator.isClutch());
 
     double current = pdp.getCurrent(1);
     SmartDashboard.putNumber("current 1", current);
@@ -156,7 +159,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    pogo.resetEncodersAtTop();
+    // pogo.resetEncodersAtTop();
     elevator.resetAtBottom();
     drive.resetEncoders();
     // hatch.Retract();
@@ -170,10 +173,10 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     if (isDebug) {
-      SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
-      SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
-      SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
-      SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
+      // SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
+      // SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
+      // SmartDashboard.putBoolean("left at bottom", pogo.leftAtBottom());
+      // SmartDashboard.putBoolean("right at bottom", pogo.rightAtBottom());
 
       SmartDashboard.putBoolean("cargo extended", cargo.isExtended());
       
@@ -181,14 +184,17 @@ public class Robot extends TimedRobot {
       SmartDashboard.putBoolean("at bottom", elevator.atBottom());  
     }
 
-    SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoEncoder());
-    SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoEncoder());
+    // SmartDashboard.putNumber("left pogo encoder", pogo.getLeftPogoEncoder());
+    // SmartDashboard.putNumber("right pogo encoder", pogo.getRightPogoEncoder());
     SmartDashboard.putNumber("height", elevator.getHeight());
     SmartDashboard.putBoolean("cargo limit", cargo.haveCargo());
 
     SmartDashboard.putNumber("angle", drive.navx.getAngle());
     SmartDashboard.putNumber("left dist", drive.getLeftDist());
     SmartDashboard.putNumber("right dist", drive.getRightDist());
+
+    SmartDashboard.putBoolean("pogo isRetracted", elevator.pogoRetracted());
+    SmartDashboard.putBoolean("clutch", elevator.isClutch());
 
     // SmartDashboard.putNumber("match time", DriverStation.getInstance().getMatchTime());
 

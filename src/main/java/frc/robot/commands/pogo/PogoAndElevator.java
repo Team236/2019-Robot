@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class PogoAndElevator extends Command {
+/*public class PogoAndElevator extends Command {
   double leftPosition, rightPosition, elevatorPosition;
   double leftSpeed, rightSpeed, elevatorSpeed;
 
@@ -72,4 +72,4 @@ public class PogoAndElevator extends Command {
   protected void interrupted() {
     end();
   }
-}
+}*/

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class Roll extends Command {
+/*public class Roll extends Command {
   public Roll() {
     requires(Robot.pogo);
   }
@@ -42,4 +42,4 @@ public class Roll extends Command {
   protected void interrupted() {
     end();
   }
-}
+}*/

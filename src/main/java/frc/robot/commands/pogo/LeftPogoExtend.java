@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class LeftPogoExtend extends Command {
+/*public class LeftPogoExtend extends Command {
   public LeftPogoExtend() {
   }
 
@@ -40,4 +40,4 @@ public class LeftPogoExtend extends Command {
   protected void interrupted() {
     end();
   }
-}
+}*/

@@ -16,7 +16,7 @@ public class AutoEndGame extends CommandGroup {
    * Add your docs here.
    */
   public AutoEndGame() {
-    // TODO: add cargo/elevator part
+    /*// TODO: add cargo/elevator part
     // addSequential(new PogoExtend());
 
     addParallel(new PogoExtend());
@@ -43,6 +43,6 @@ public class AutoEndGame extends CommandGroup {
     // would require.
     // e.g. if Command1 requires chassis, and Command2 requires arm,
     // a CommandGroup containing them would require both the chassis and the
-    // arm.
+    // arm.*/
   }
 }

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class PogoExtend extends Command {
+/*public class PogoExtend extends Command {
   public PogoExtend() {
     requires(Robot.pogo);
   }
@@ -41,4 +41,4 @@ public class PogoExtend extends Command {
   protected void interrupted() {
     end();
   }
-}
+}*/

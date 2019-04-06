@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class RightPogoExtend extends Command {
+/*public class RightPogoExtend extends Command {
   public RightPogoExtend() {
 
   }
@@ -41,4 +41,4 @@ public class RightPogoExtend extends Command {
   protected void interrupted() {
     end();
   }
-}
+}*/

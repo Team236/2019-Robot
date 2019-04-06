@@ -18,8 +18,8 @@ import frc.robot.RobotMap;
 /**
  * Add your docs here.
  */
-public class Pogo extends Subsystem {
-  public TalonSRX leftExtendMotor, rightExtendMotor;
+/*public class Pogo extends Subsystem {
+  /*public TalonSRX leftExtendMotor, rightExtendMotor;
   public VictorSPX leftRollMotor, rightRollMotor;
   private DigitalInput leftTopLimit, rightToplimit, leftBottomLimit, rightBottomLimit;
   public DigitalInput rollSensor;
@@ -63,7 +63,7 @@ public class Pogo extends Subsystem {
 
   public boolean atBottom() {
     return leftAtBottom() && rightAtBottom();
-  }
+  } 
 
   public boolean atPlatform() {
     return rollSensor.get();
@@ -78,19 +78,19 @@ public class Pogo extends Subsystem {
     } else if (leftAtBottom() && leftSpeed > 0) {
       leftSpeed = 0;
     }
-    leftExtendMotor.set(ControlMode.PercentOutput, leftSpeed);
+    leftExtendMotor.set(ControlMode.PercentOutput, leftSpeed); 
   }
 
   public void setRightSpeed(double rightSpeed) {
     //  || getRightPogoEncoder() > 0
-    if ((rightAtTop()) && rightSpeed < 0) {
+     if ((rightAtTop()) && rightSpeed < 0) {
       rightSpeed = 0;
       resetRightEncoder();
     } else if (rightAtBottom() && rightSpeed > 0) {
       rightSpeed = 0;
     }
     System.out.println("right pogo extend: " + rightSpeed);
-    rightExtendMotor.set(ControlMode.PercentOutput, rightSpeed);
+    rightExtendMotor.set(ControlMode.PercentOutput, rightSpeed); 
   }
 
   public void setPogoSpeed(double leftSpeed, double rightSpeed) {
@@ -141,7 +141,7 @@ public class Pogo extends Subsystem {
   public void resetRightEncoder() {
     if (rightAtTop()) {
       rightExtendMotor.setSelectedSensorPosition(0);
-    }
+    } 
   }
 
   public void resetEncoders() {
@@ -200,5 +200,5 @@ public class Pogo extends Subsystem {
   @Override
   public void initDefaultCommand() {
 
-  }
-}
+  }*/
+// }*/

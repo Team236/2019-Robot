@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class GyroPogo extends Command {
-  private double kP;
+// public class GyroPogo extends Command {
+ /* private double kP;
   private double speed;
   private double dist;
   
@@ -61,5 +61,5 @@ public class GyroPogo extends Command {
   @Override
   protected void interrupted() {
     end();
-  }
-}
+  }*/
+// }
