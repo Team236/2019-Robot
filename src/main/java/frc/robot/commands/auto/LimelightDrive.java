@@ -36,8 +36,8 @@ public class LimelightDrive extends Command {
     leftSpeed += ang * kP;
     rightSpeed -= ang * kP;
 
-    Robot.drive.setLeftSpeed(leftSpeed);
-    Robot.drive.setRightSpeed(rightSpeed);
+    Robot.drive.setLeftSpeed(-leftSpeed);
+    Robot.drive.setRightSpeed(-rightSpeed);
   }
 
   @Override
