@@ -172,6 +172,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+
+    Robot.elevator.resetAtBottom();
+
     if (isDebug) {
       // SmartDashboard.putBoolean("left at top", pogo.leftAtTop());
       // SmartDashboard.putBoolean("right at top", pogo.rightAtTop());
