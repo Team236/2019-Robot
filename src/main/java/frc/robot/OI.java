@@ -19,20 +19,22 @@ import frc.robot.commands.cargo.CargoIntake;
 import frc.robot.commands.cargo.CargoRetract;
 import frc.robot.commands.drive.DriveWithThumbsticks;
 import frc.robot.commands.drive.DriveWithVision;
+import frc.robot.commands.elevator.ClutchToggle;
 import frc.robot.commands.elevator.ElevatorToHeight;
 import frc.robot.commands.elevator.ElevatorWithThumbstick;
 import frc.robot.commands.elevator.EngageClutch;
 import frc.robot.commands.elevator.IncrementUp;
+import frc.robot.commands.elevator.NewEndgame;
 import frc.robot.commands.hatch.HatchExtend;
 import frc.robot.commands.hatch.HatchExtendAndRetract;
 import frc.robot.commands.hatch.HatchRetract;
 import frc.robot.commands.hatch.HatchScore;
 import frc.robot.commands.pogo.AutoEndGame;
-import frc.robot.commands.pogo.GyroPogo;
-import frc.robot.commands.pogo.PogoExtend;
-import frc.robot.commands.pogo.PogoRetract;
-import frc.robot.commands.pogo.PogoWithThumbstick;
-import frc.robot.commands.pogo.Roll;
+// import frc.robot.commands.pogo.GyroPogo;
+// import frc.robot.commands.pogo.PogoExtend;
+// import frc.robot.commands.pogo.PogoRetract;
+// import frc.robot.commands.pogo.PogoWithThumbstick;
+// import frc.robot.commands.pogo.Roll;
 import lib.oi.LogitechF310;
 import lib.oi.Thrustmaster;
 import lib.oi.triggers.JoystickPOV;
@@ -52,7 +54,7 @@ public class OI {
     // DRIVE
     TwoButton thumbDrive = new TwoButton(controller.lb, controller.rb);
     thumbDrive.whileHeld(new DriveWithThumbsticks());
-    controller.b.whileHeld(new LimelightDrive(RobotMap.AutoMap.LIME_DRIVE_KP, RobotMap.AutoMap.LIME_DRIVE_SPEED));
+    // controller.b.whileHeld(new LimelightDrive(RobotMap.AutoMap.LIME_DRIVE_KP, RobotMap.AutoMap.LIME_DRIVE_SPEED));
     rightStick.right.whileHeld(new DriveWithVision());
     // TODO: tune GyroDrive (last yr kP was .04)
     // leftStick.left.whileHeld(new GyroDrive(RobotMap.AutoMap.GYRO_DRIVE_KP, 240, .5));
@@ -75,7 +77,7 @@ public class OI {
     controller.rb.toggleWhenPressed(new HatchExtendAndRetract());
     // rightStick.middle.toggleWhenPressed(new HatchExtendAndRetract());
     rightStick.middle.toggleWhenPressed(new HatchExtendAndRetract());
-    controller.start.toggleWhenPressed(new HatchScore());
+    // controller.start.toggleWhenPressed(new HatchScore());
 
     // ELEVATOR
     controller.start.whileHeld(new ElevatorWithThumbstick());
@@ -83,7 +85,9 @@ public class OI {
     JoystickPOV cargoShip = new JoystickPOV(controller, Direction.LEFT);
     JoystickPOV cargo2 = new JoystickPOV(controller, Direction.RIGHT);
     JoystickPOV cargo3 = new JoystickPOV(controller, Direction.UP);
-    controller.rightPress.whenPressed(new EngageClutch());
+    controller.rightPress.whenPressed(new NewEndgame(3));
+    controller.leftPress.whenPressed(new NewEndgame(2));
+    controller.b.toggleWhenPressed(new ClutchToggle());
 
     // C1
     cargo1.whileHeld(new ElevatorToHeight(6 + RobotMap.ElevatorMap.CARGO_OFFSET + RobotMap.ElevatorMap.OFFSET, RobotMap.ElevatorMap.HEIGHT_MARGIN, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
