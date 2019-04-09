@@ -10,6 +10,7 @@ package frc.robot.commands.elevator;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
 // import frc.robot.commands.pogo.Roll;
+import frc.robot.commands.cargo.CargoIntake;
 
 public class NewEndgame extends CommandGroup {
   /**
@@ -36,11 +37,14 @@ public class NewEndgame extends CommandGroup {
     // brings elevator and pogos down to lift robots
     addSequential(new ElevatorToHeight(endHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
 
-    addParallel(new NewPogoRoll(1));
+    addParallel(new CargoIntake(), 1);
+    // addParallel(new NewPogoRoll(1));
 
     // continues holding robot up while it rolls forward
     addSequential(new ElevatorToHeight(endHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
 
-    // addSequential(new ElevatorToHeight(5, 2, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    addSequential(new DisengageClutch());
+
+    addSequential(new ElevatorToHeight(endHeight + 3, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
   }
 }
