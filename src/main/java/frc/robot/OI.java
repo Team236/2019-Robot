@@ -87,12 +87,12 @@ public class OI {
     JoystickPOV cargoShip = new JoystickPOV(controller, Direction.LEFT);
     JoystickPOV cargo2 = new JoystickPOV(controller, Direction.RIGHT);
     JoystickPOV cargo3 = new JoystickPOV(controller, Direction.UP);
-    // controller.rightPress.whenPressed(new NewEndgame(3));
-    controller.rightPress.whileHeld(new ElevatorToHeight(RobotMap.PogoMap.LV3_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
-    controller.leftPress.whileHeld(new ElevatorToHeight(RobotMap.PogoMap.LV2_END, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+    // controller.rightPress.whileHeld(new NewEndgame(3));
+    controller.rightPress.whileHeld(new ElevatorToHeight(RobotMap.PogoMap.LV3_END - 2, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+    controller.leftPress.whileHeld(new ElevatorToHeight(RobotMap.PogoMap.LV2_END, 0.25, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
     controller.back.whileHeld(new ManualPogoRoll());
 
-    // controller.leftPress.whenPressed(new NewEndgame(2));
+    // controller.leftPress.whileHeld(new NewEndgame(2));
     controller.b.toggleWhenPressed(new ClutchToggle());
 
     // C1
