@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.cscore.MjpegServer;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -67,7 +68,9 @@ public class Robot extends TimedRobot {
     pdp = new PowerDistributionPanel();
 
     elevator.resetAtBottom();
-    // pogo.resetEncodersAtTop();;
+    // pogo.resetEncodersAtTop();
+
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3.0);
 
     camServo1 = new Servo(RobotMap.PWM_SERVO_CAM_1);
     camServo2 = new Servo(RobotMap.PWM_SERVO_CAM_2);
@@ -94,6 +97,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);
   }
 
   @Override
@@ -160,8 +164,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     // pogo.resetEncodersAtTop();
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1.0);
+
     elevator.resetAtBottom();
     drive.resetEncoders();
+    elevator.disengageClutch();
+
     // hatch.Retract();
 
     // double current = pdp.getCurrent(1);

@@ -7,8 +7,10 @@
 
 package frc.robot.commands.auto;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class LimelightDrive extends Command {
   private double kP;
@@ -23,6 +25,7 @@ public class LimelightDrive extends Command {
 
   @Override
   protected void initialize() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3.0);
 
   }
 
@@ -36,8 +39,20 @@ public class LimelightDrive extends Command {
     leftSpeed += ang * kP;
     rightSpeed -= ang * kP;
 
-    Robot.drive.setLeftSpeed(-leftSpeed);
-    Robot.drive.setRightSpeed(-rightSpeed);
+      Robot.drive.setLeftSpeed(-leftSpeed);
+      Robot.drive.setRightSpeed(-rightSpeed);
+    /*
+    if(Robot.limelight.getLimeLight().getTargetArea() <= RobotMap.AutoMap.LIME_CLOSE_AREA)
+    {
+      Robot.drive.setLeftSpeed(-leftSpeed);
+      Robot.drive.setRightSpeed(-rightSpeed);
+    }
+    else if(Robot.limelight.getLimeLight().getTargetArea() >= RobotMap.AutoMap.LIME_CLOSE_AREA)
+    {
+      Robot.drive.setLeftSpeed(-leftSpeed * .4);
+      Robot.drive.setRightSpeed(-rightSpeed * .4);
+    }
+    */
   }
 
   @Override
@@ -48,6 +63,8 @@ public class LimelightDrive extends Command {
   @Override
   protected void end() {
     Robot.drive.stop();
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1.0);
+
   }
 
   @Override
