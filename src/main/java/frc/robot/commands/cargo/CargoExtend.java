@@ -17,9 +17,10 @@ public class CargoExtend extends Command {
 
   @Override
   protected void initialize() {
-    if (Robot.elevator.atBottom() || Robot.oi.controller.back.get()) {
+    // if (Robot.elevator.atBottom() || Robot.oi.controller.back.get()) {
       Robot.cargo.extend();
-    }
+    // }
+    // System.out.println("cargo starting");
   }
 
   @Override
@@ -28,7 +29,7 @@ public class CargoExtend extends Command {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   @Override
