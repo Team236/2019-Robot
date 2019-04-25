@@ -31,6 +31,7 @@ public class RobotMap {
 		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
 		public static final int PULSE_PER_ROTATION = 512;
 		public static final double DISTANCE_PER_PULSE = CIRCUMFERENCE / PULSE_PER_ROTATION;
+		//public static final double PLATFORM_DIST = 20; //distance in inches to drive forward on platform
 	}
 
 	public static class AutoMap {
@@ -39,6 +40,7 @@ public class RobotMap {
 
 		public static final double LIME_DRIVE_KP = .012;
 		public static final double LIME_DRIVE_SPEED = .35;
+		//public static final double LIME_CLOSE_AREA = 2;
 	}
 
 	public static class JoystickMap {
@@ -54,10 +56,10 @@ public class RobotMap {
 		public static final int ID_V_RIGHT_ROLL_MOTOR = 6; // 6
 
 		public static final double HEIGHT_OFFSET = 0.25;
-		public static final double LV3_START = 21.4;
-		public static final double LV2_START = LV3_START - 13;
-		public static final double LV3_END = 1; //LV3_START - HEIGHT_OFFSET - 20
-		public static final double LV2_END = 1;
+		public static final double LV3_START = 31;
+		public static final double LV2_START = 14;
+		public static final double LV3_END = 0; //LV3_START - HEIGHT_OFFSET - 20
+		public static final double LV2_END = 0;
 		public static final int DIO_LEFT_TOP_LIMIT = 7;
 		public static final int DIO_RIGHT_TOP_LIMIT = 5;
 		public static final int DIO_LEFT_BOTTOM_LIMIT = 4;
@@ -89,8 +91,8 @@ public class RobotMap {
 		public static final int DIO_BOTTOM_LIMIT = 1;
 		public static final int DIO_POGO_LIMIT = 3;
 
-		public static final int SOL_FWD = 6;
-		public static final int SOL_REV = 7;
+		public static final int SOL_FWD = 7;
+		public static final int SOL_REV = 6;
 
 		public static final double DIAMETER = 1.6; // 1.6 inches (3.96 for wheel testing)
 		public static final double CIRCUMFERENCE = DIAMETER * Math.PI;
