@@ -21,21 +21,34 @@ public class ElevatorWithThumbstick extends Command {
 
   @Override
   protected void execute() {
+        // TODO: if going up w clutch engaged and pogo limit hit stop (return true)
+
     double speed = -Robot.oi.controller.getLeftY();
     /*if (speed < 0) {
       speed = 0;
     } */
-    Robot.elevator.setSpeed(speed);
+
+    if (speed > 0 && Robot.elevator.isClutch() && Robot.elevator.pogoRetracted()) {
+      Robot.elevator.stop();
+    } else {
+      Robot.elevator.setSpeed(speed);
+    }
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    if (-Robot.oi.controller.getLeftY() > 0 && Robot.elevator.isClutch() && Robot.elevator.pogoRetracted()) {
+      return true;
+    } else {
+      return false;
+    }
+    
   }
 
   @Override
   protected void end() {
     Robot.elevator.stop();
+    Robot.elevator.engageClutch();
   }
 
   @Override
