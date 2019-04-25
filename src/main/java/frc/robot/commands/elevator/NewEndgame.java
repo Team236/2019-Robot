@@ -9,8 +9,11 @@ package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.RobotMap;
+import frc.robot.commands.cargo.CargoExtend;
 // import frc.robot.commands.pogo.Roll;
 import frc.robot.commands.cargo.CargoIntake;
+import frc.robot.commands.cargo.CargoRetract;
+import frc.robot.commands.drive.SetDriveSpeed;
 
 public class NewEndgame extends CommandGroup {
   /**
@@ -22,6 +25,7 @@ public class NewEndgame extends CommandGroup {
 
     // sets start/end height based on level
     if (level == 3) {
+      // startHeight = RobotMap.PogoMap.LV3_START;
       startHeight = RobotMap.PogoMap.LV3_START;
       endHeight = RobotMap.PogoMap.LV3_END;
     } else if (level == 2) {
@@ -30,21 +34,22 @@ public class NewEndgame extends CommandGroup {
     }
 
     // brings elevator down to start height
-    // addSequential(new ElevatorToHeight(startHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    addSequential(new ElevatorToHeight(startHeight, 3, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
 
-    // addSequential(new EngageClutch());
+    addSequential(new CargoExtend());
+
+    if (level == 3) {
+      addSequential(new EngageClutch(24.25));
+    } else if (level == 2) {
+      addSequential(new EngageClutch(11.2));
+    }
 
     // brings elevator and pogos down to lift robots
-    addSequential(new ElevatorToHeight(endHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
+    addParallel(new CargoIntake(), 5);
+    addSequential(new ElevatorToHeight(endHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS), 5);
 
-    addParallel(new CargoIntake(), 1);
-    // addParallel(new NewPogoRoll(1));
+    // addSequential(new ElevatorToHeight(endHeight + 5, 3, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
+    // addSequential(new DisengageClutch());
 
-    // continues holding robot up while it rolls forward
-    addSequential(new ElevatorToHeight(endHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
-
-    addSequential(new DisengageClutch());
-
-    addSequential(new ElevatorToHeight(endHeight + 3, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS));
   }
 }
