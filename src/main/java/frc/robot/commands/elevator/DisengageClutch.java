@@ -17,16 +17,23 @@ public class DisengageClutch extends Command {
 
   @Override
   protected void initialize() {
-    Robot.elevator.disengageClutch();
   }
 
   @Override
   protected void execute() {
+    // if (Robot.elevator.getHeight() <= 24.25) {
+      Robot.elevator.disengageClutch();
+
+    // }
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    // if (Robot.elevator.isClutch()) {
+      return true;
+    // } else {
+      // return false;
+    // }
   }
 
   @Override

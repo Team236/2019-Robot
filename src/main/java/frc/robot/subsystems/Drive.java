@@ -80,6 +80,11 @@ public class Drive extends Subsystem implements PIDSource, PIDOutput {
     return getRightEncoder() * RobotMap.DriveMap.DISTANCE_PER_PULSE;
   }
 
+ //public double getAveDist() {
+ // return ((getRightEncoder() * RobotMap.DriveMap.DISTANCE_PER_PULSE) + 
+ //(getLeftEncoder() * RobotMap.DriveMap.DISTANCE_PER_PULSE))/2;
+  //}
+
   public void resetEncoders() {
     leftMaster.setSelectedSensorPosition(0);
     rightMaster.setSelectedSensorPosition(0);

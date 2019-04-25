@@ -32,6 +32,9 @@ public class CargoIntake extends Command {
   @Override
   protected boolean isFinished() {
     return Robot.cargo.haveCargo();
+    //return (Robot.cargo.haveCargo()) || 
+    //((Robot.drive.getAveDist()>=RobotMap.DriveMap.PLATFORM_DIST) &&
+    // (Robot.oi.controller.rightPress.get() || Robot.oi.controller.leftPress.get()));
   }
 
   @Override

@@ -7,6 +7,7 @@
 
 package frc.robot.commands.drive;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -18,6 +19,7 @@ public class DriveWithVision extends Command {
 
   @Override
   protected void initialize() {
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3.0);
     // establishes limelight pipeline
     Robot.limelight.getLimeLight().setPipeline(0);
     SmartDashboard.putNumber("CameraMode", Robot.limelight.getLimeLight().getPipelineLatency());
@@ -26,11 +28,14 @@ public class DriveWithVision extends Command {
 
   @Override
   protected void execute() {
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3.0);
+
     // speed to be used
     final double speed = .2;
     double angleOffset = Robot.limelight.getAngleOffset();
     double targetArea = Robot.limelight.getTargetArea();
     SmartDashboard.putNumber("vision angleOffset", angleOffset);
+
 
     // TODO: consider adding while (distance > x) do to stop robot
     // TODO: use turn pid to correct anlge
@@ -100,6 +105,8 @@ public class DriveWithVision extends Command {
   @Override
   protected void end() {
     Robot.drive.stop();
+    // NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1.0);
+
   }
 
   @Override

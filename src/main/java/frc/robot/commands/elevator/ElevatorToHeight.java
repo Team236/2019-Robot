@@ -79,6 +79,7 @@ public class ElevatorToHeight extends Command {
     } */else {
       return false;
     }
+    // TODO: if going up w clutch engaged and pogo limit hit stop (return true)
   }
 
   @Override
