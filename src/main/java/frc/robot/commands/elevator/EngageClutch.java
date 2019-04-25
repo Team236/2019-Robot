@@ -11,22 +11,33 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class EngageClutch extends Command {
-  public EngageClutch() {
+private double clutchHeight;
+  public EngageClutch(double _clutchHeight) {
     requires(Robot.elevator);
+
+    this.clutchHeight = _clutchHeight;
+
   }
 
   @Override
   protected void initialize() {
-    Robot.elevator.engageClutch();
   }
 
   @Override
   protected void execute() {
+    if (Robot.elevator.getHeight() <= clutchHeight) {
+      Robot.elevator.engageClutch();
+
+    }
   }
 
   @Override
   protected boolean isFinished() {
-    return false;
+    if (Robot.elevator.isClutch()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @Override
