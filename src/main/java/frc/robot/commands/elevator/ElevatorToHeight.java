@@ -74,9 +74,9 @@ public class ElevatorToHeight extends Command {
       return true;
     } else if (Robot.elevator.atBottom() && height < Robot.elevator.getHeight()) {
       return true;
-    } /*else if (height > Robot.elevator.getHeight() && Robot.elevator.pogoRetracted() && !Robot.elevator.isClutch()) {
+    } else if (height > Robot.elevator.getHeight() && Robot.elevator.pogoRetracted() && Robot.elevator.isClutch()) {
       return true;
-    } */else {
+    } else {
       return false;
     }
     // TODO: if going up w clutch engaged and pogo limit hit stop (return true)
