@@ -38,15 +38,18 @@ public class NewEndgame extends CommandGroup {
 
     addSequential(new CargoExtend());
 
-    if (level == 3) {
-      addSequential(new EngageClutch(24.25));
+   if (level == 3) {
+      addSequential(new EngageClutch(24.5));
     } else if (level == 2) {
-      addSequential(new EngageClutch(11.2));
+      addSequential(new EngageClutch(12));
     }
 
     // brings elevator and pogos down to lift robots
     addParallel(new CargoIntake(), 5);
     addSequential(new ElevatorToHeight(endHeight, 1, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.CLIMB_PARAMS), 5);
+
+
+
 
     // addSequential(new ElevatorToHeight(endHeight + 5, 3, RobotMap.ElevatorMap.UP_PARAMS, RobotMap.ElevatorMap.DOWN_PARAMS));
     // addSequential(new DisengageClutch());
