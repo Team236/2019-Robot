@@ -57,7 +57,7 @@ public class RobotMap {
 
 		public static final double HEIGHT_OFFSET = 0.25;
 		public static final double LV3_START = 31;
-		public static final double LV2_START = 14;
+		public static final double LV2_START = 18;
 		public static final double LV3_END = 0; //LV3_START - HEIGHT_OFFSET - 20
 		public static final double LV2_END = 0;
 		public static final int DIO_LEFT_TOP_LIMIT = 7;
